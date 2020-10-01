@@ -1,0 +1,2 @@
+class ServicesBooking < ApplicationRecord
+end
