@@ -4,7 +4,7 @@ class ArtistsController < ApplicationController
   def index
     @artists = Artist.all
   end
-  
+
   def new
     @artist = Artist.new
   end
@@ -41,5 +41,5 @@ class ArtistsController < ApplicationController
   def artist_params
     params.require(:artist).permit(:description, :qualifications, photos: [])
   end
-  
+
 end
