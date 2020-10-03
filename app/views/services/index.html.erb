@@ -1,0 +1,12 @@
+<div class="container">
+  <h1> Services Index </h1>
+
+<% @services.each do |service| %>
+<h3><%= service.name %></h3>
+<h4> <%= service.price  %></h4>
+<p><%= service.description %></p>
+<%= link_to "Edit", edit_service_path(service) %>
+<%= link_to "Delete", service_path(service), method: :delete %>
+<% end %>
+
+</div>
