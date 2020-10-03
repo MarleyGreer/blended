@@ -1,0 +1,9 @@
+<h1>Edit Service </h1>
+<%= link_to "< Back", artist_path(@service.artist)  %>
+<%= simple_form_for [@artist, @service] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :price %>
+  <%= f.input :duration %>
+  <%= f.submit %>
+<% end %>
