@@ -1,0 +1,14 @@
+<div class="container">
+<h1> Artist Show Page </h1>
+<%= link_to "< Back", artists_path  %>
+<h2><%= @artist.user.first_name %> <%= @artist.user.last_name %></h2>
+<h3><%= @artist.user.address %></h3>
+<h4> <%= @artist.user.username %></h4>
+<p><%= @artist.description %></p>
+<p><%= @artist.qualifications %></p>
+<%= link_to "View Services", artist_services_path(@artist)  %>
+
+<% @artist.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+</div>
