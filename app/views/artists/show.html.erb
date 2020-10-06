@@ -7,7 +7,6 @@
 <p><%= @artist.description %></p>
 <p><%= @artist.qualifications %></p>
 <%= link_to "View Services", artist_services_path(@artist)  %>
-
 <% @artist.photos.each do |photo| %>
   <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
 <% end %>
