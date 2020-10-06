@@ -2,9 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, :path_prefix => 'd'
   resources :users, :only => [:show]
   root to: 'pages#home'
-<<<<<<< HEAD
 
-=======
   resources :artists do
     resources :services, only: [:new, :create, :index]
     resources :bookings, only: [:new, :create]
@@ -24,6 +22,5 @@ Rails.application.routes.draw do
       patch :cancel
     end
   end
->>>>>>> 8375d19031e86b2070de1de958fab3f73746406b
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
 end
