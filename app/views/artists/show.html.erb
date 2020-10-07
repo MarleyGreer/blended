@@ -1,10 +1,50 @@
 <div class="container">
-<h1> Artist Show Page </h1>
-<%= link_to "< Back", artists_path  %>
-<h2><%= @artist.user.first_name %> <%= @artist.user.last_name %></h2>
-<h3><%= @artist.user.address %></h3>
-<h4> <%= @artist.user.username %></h4>
-<p><%= @artist.description %></p>
-<p><%= @artist.qualifications %></p>
-<%= link_to "View Services", artist_services_path(@artist)  %>
+  <%= link_to "< Back", artists_path  %>
+  <%= render 'shared/show_carousel' %>
+  <div class="d-flex justify-content-between p-3">
+    <h2><%= @artist.user.first_name %> <%= @artist.user.last_name %></h2>
+    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+  </div>
+  <p><%= @artist.user.address %></p>
+  <hr>
+
+  <h5> About Me </h5>
+  <p><%= @artist.description %></p>
+
+  <h5> Services </h5>
+
+
+<div id="accordion">
+
+  <% @artist.services.each do |service| %>
+  <div class="card">
+    <div class="card-header" id="heading<%= service.id %>">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%= service.id %>" aria-expanded="false" aria-controls="collapse<%= service.id %>">
+          <%= service.name.capitalize %>
+        </button>
+      </h5>
+    </div>
+    <div id="collapse<%= service.id %>" class="collapse" aria-labelledby="heading<%= service.id %>" data-parent="#accordion">
+      <div class="card-body">
+        <strong> Price </strong>
+        <br>
+        $<%= service.price %> AUD
+        <br><br>
+        <strong> Duration </strong>
+        <br>
+        <%= service.duration %> Minutes
+        <br><br>
+        <strong>Description </strong>
+        <br>
+        <%= service.description %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+  <br>
+  <h5> Qualifications </h5>
+  <p><%= @artist.qualifications %></p>
+
 </div>
