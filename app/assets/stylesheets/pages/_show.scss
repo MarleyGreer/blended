@@ -1,0 +1,25 @@
+
+    .shadow {
+      box-shadow: 1px 1px 10px lightgrey;
+    }
+
+    .rating{
+      font-size: 16px;
+      color: $pink;
+    }
+
+    .circle-border {
+      border-radius: 0px 0px 20px 20px;
+    }
+
+    .font {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+    }
+
+    .availability {
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      margin: 0px;
+    }

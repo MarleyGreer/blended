@@ -1,0 +1,38 @@
+.home-card {
+  box-shadow: 1px 0px 8px lightgrey;
+
+  a {
+    color: black;
+  }
+}
+
+.card-bottom {
+  a {
+    color: black;
+  }
+
+  h6 {
+    color: black;
+  }
+
+  p {
+    color: black;
+  }
+}
+
+.card-avatar {
+ position: absolute;
+ bottom: -4px;
+ right: 8px;
+
+}
+
+
+.home-page h5 {
+  text-align: center;
+  padding-top: 8px;
+}
+
+.card-bottom {
+ align-items: center;
+}
