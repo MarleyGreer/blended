@@ -2,8 +2,27 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
 
 // Define fonts for body and headers
-$body-font: "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Nunito", "Helvetica", "sans-serif";
+$body-font: 'Montserrat', sans-serif;;
+$headers-font: 'Montserrat', sans-serif;;
+$pink: #f6c3e5;
+
+
+i {
+  color: grey;
+  font-size: 24px;
+
+  &:hover {
+    color: $pink;
+  }
+}
+
+p {
+  font-size: 12px;
+}
+
+.btn-link {
+  color: $pink;
+}
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {

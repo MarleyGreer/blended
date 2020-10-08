@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :path_prefix => 'd'
+  resources :users, :only => [:show]
   root to: 'pages#home'
+
   resources :artists do
     resources :services, only: [:new, :create, :index]
     resources :bookings, only: [:create, :show]
@@ -21,5 +23,5 @@ Rails.application.routes.draw do
       patch :cancel
     end
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
 end
