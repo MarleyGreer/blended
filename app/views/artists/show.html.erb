@@ -37,8 +37,13 @@
   <h6> About Me </h6>
   <p><%= @artist.description %></p>
 
-  <h6> Services </h6>
-
+  <h6> Services
+<% if current_user == @artist.user %>
+  <%= link_to new_artist_service_path(@artist) do %>
+     <i class="far fa-plus-square ml-1 rating"></i>
+    <% end %>
+<% end %>
+  </h6>
 
 <div id="accordion">
 
@@ -48,6 +53,15 @@
       <h6 class="mb-0">
         <button class="btn collapsed font" data-toggle="collapse" data-target="#collapse<%= service.id %>" aria-expanded="false" aria-controls="collapse<%= service.id %>">
           <%= service.name.capitalize %>
+          <% if current_user == @artist.user %>
+            <%= link_to edit_service_path(service) do %>
+              <i class="fas fa-pen-square rating ml-2"></i>
+            <% end %>
+
+            <%= link_to service_path(service), method: :delete, class: "delete" do %>
+              <i class="far fa-minus-square rating ml-2"></i>
+            <% end %>
+          <% end %>
         </button>
       </h6>
     </div>
