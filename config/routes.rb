@@ -3,11 +3,12 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :artists do
     resources :services, only: [:new, :create, :index]
-    resources :bookings, only: [:new, :create]
+    resources :bookings, only: [:create, :show]
   end
 
   resources :services, only: [:destroy, :edit, :update]
-  resources :bookings, only: [:index, :show, :edit, :update, :destroy] do
+  resources :bookings, only: [:index, :edit, :update, :destroy] do
+  resources :services_bookings, only: [:create]
     collection do
       get :pending
       get :confirmed

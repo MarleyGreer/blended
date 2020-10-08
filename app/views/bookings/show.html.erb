@@ -1,0 +1,4 @@
+<%= simple_form_for [@booking, @services_booking] do |f| %>
+  <%= f.input :service, collection: @artist.services, as: :check_boxes %>
+  <%= f.submit %>
+<% end %>
