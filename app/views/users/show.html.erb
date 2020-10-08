@@ -1,8 +1,16 @@
 <div class=container style="margin-top: 16px">
 
 <h1><%= "Hello #{@user.first_name}" %></h1>
-<%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill if @user.photo.attached? %>
+<%= image_tag current_user.photo, width: '100%' %>
 <br>
-<%= link_to "Edit Page", edit_user_registration_path, class: "btn btn-primary" %>
+<br>
+<p> First Name: <%= @user.first_name %> </p>
+<p> Last Name: <%= @user.last_name %> </p>
+<p> Address: <%= @user.address %> </p>
+<%= link_to "Go to Artist page", artist_path(id: @user.artist), class: "btn btn-primary", style: "width: 100%" unless @user.artist.nil? %> 
+<%= link_to "Become an artist", new_artist_path, class: "btn btn-primary", style: "width: 100%" if @user.artist.nil? %> 
+<br>
+<br>
+<%= link_to "Edit Page", edit_user_registration_path, class: "btn btn-primary", style: "width: 100%" %>
 
 </div>
