@@ -9,7 +9,9 @@ class ArtistsController < ApplicationController
     @artist = Artist.new
   end
 
-  def show; end
+  def show; 
+  
+  end
 
   def create
     @artist = Artist.new(artist_params)
