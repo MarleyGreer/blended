@@ -5,6 +5,7 @@
 
   <h5>Browse Artists </h5>
 
+<div class="cards d-flex">
 <% @artists.each do |artist| %>
 
 <%= link_to artist_path(artist) do %>
@@ -20,7 +21,7 @@
      <h6> <%= artist.user.first_name %> <%= artist.user.last_name %> </h6>
      <p> <%= artist.user.address %> </p>
     </div>
-    <div>
+    <div class="card-rating">
       <h6>
         <i class="fas fa-star rating"></i>
         <i class="fas fa-star rating"></i>
@@ -28,11 +29,12 @@
         <i class="fas fa-star rating"></i>
         <i class="fas fa-star rating"></i>
       </h6>
+
     </div>
   </div>
 </div>
 <% end %>
 <% end %>
 
-
+</div>
 </div>
