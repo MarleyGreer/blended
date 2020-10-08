@@ -5,12 +5,21 @@ class BookingsController < ApplicationController
   end
 
   def show
-  end
-
-  def new
+    @booking = Booking.find(params[:id])
+    @artist = Artist.find(params[:artist_id])
+    @services_booking = ServicesBooking.new
   end
 
   def create
+    @booking = Booking.new
+    @artist = Artist.find(params[:artist_id])
+    @booking.status = "pending"
+    @booking.user = current_user
+    if @booking.save
+      redirect_to artist_booking_path(@artist, @booking)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def edit
@@ -47,6 +56,6 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:start_time, :end_time, :quantity)
+    params.require(:booking).permit(:start_time, :end_time)
   end
 end
