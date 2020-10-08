@@ -4,8 +4,25 @@
 // Define fonts for body and headers
 $body-font: 'Montserrat', sans-serif;;
 $headers-font: 'Montserrat', sans-serif;;
+$pink: #f6c3e5;
 
 
+i {
+  color: grey;
+  font-size: 24px;
+
+  &:hover {
+    color: $pink;
+  }
+}
+
+p {
+  font-size: 12px;
+}
+
+.btn-link {
+  color: $pink;
+}
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
