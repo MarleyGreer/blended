@@ -1,6 +1,7 @@
 .home-card {
+  position: relative;
   box-shadow: 1px 0px 8px lightgrey;
-
+  width: 320px;
   a {
     color: black;
   }
@@ -21,10 +22,9 @@
 }
 
 .card-avatar {
- position: absolute;
- bottom: -4px;
- right: 8px;
-
+  position: absolute;
+  bottom: 70px;
+  right: 10px;
 }
 
 
@@ -35,4 +35,18 @@
 
 .card-bottom {
  align-items: center;
+}
+
+.cards {
+  width: 375px;
+  overflow-x: scroll;
+}
+
+.card-rating{
+  padding-top: 24px;
+  width: 50%;
+}
+
+.card-address{
+  width: 50%;
 }
