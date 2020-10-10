@@ -4,14 +4,18 @@ class ServicesBookingsController < ApplicationController
     @booking_id = params[:booking_id].to_i
     booking_duration = 0
     booking_totalprice = 0
-    @services_selection = params[:services_booking][:service].drop(1)
-    @services_selection.each do |id|
+    @services_selected_elements = params[:services_booking][:service].reject { |service| service.empty? }
+    @services_selected = @services_selected_elements.map { |service| service.to_i }
+    @services_qty = @services_selected.map { |service| params["#{service.to_i}"].to_i }
+    @services_selected_qty = @services_selected.zip(@services_qty).map { |service, qty| [service , qty] }
+    @services_selected_qty.each do |id, qty|
       @services_booking = ServicesBooking.new
-      @services_booking.service_id = id.to_i
+      @services_booking.service_id = id
       @services_booking.booking_id = @booking_id
+      @services_booking.quantity = qty
       service = Service.find(id)
-      booking_duration += service.duration
-      booking_totalprice += service.price
+      booking_duration += (service.duration * qty)
+      booking_totalprice += (service.price * qty)
       @services_booking.save
     end
     update_booking(@booking_id, booking_duration, booking_totalprice)
