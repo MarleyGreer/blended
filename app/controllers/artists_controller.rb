@@ -9,8 +9,8 @@ class ArtistsController < ApplicationController
     @artist = Artist.new
   end
 
-  def show; 
-  
+  def show
+    @chat = Chat.where(artist: current_user.artist, user: @artist.user).or(Chat.where(artist: @artist, user: current_user)).first
   end
 
   def create
@@ -45,5 +45,4 @@ class ArtistsController < ApplicationController
   def artist_params
     params.require(:artist).permit(:description, :qualifications, photos: [])
   end
-
 end

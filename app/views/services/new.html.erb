@@ -1,15 +1,12 @@
-    <div class="d-flex justify-content-between align-items-center p-3 bg-white">
-
-    <%= link_to artist_path(@artist) do %>
-      <i class="fas fa-chevron-left"></i>
-    <% end %>
-    <h6 class="text-center"><%= @artist.user.username %></h6>
-
-
-    <div>
+<div class="d-flex justify-content-between align-items-center p-3 bg-white">
+  <%= link_to artist_path(@artist) do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+  <h6 class="text-center"><%= @artist.user.username %></h6>
+  <div>
   </div>
-  <!--  The heart will become a link to the "save to favourtes... -->
-    </div>
+</div>
+
 <div>
 <%= simple_form_for [@artist, @service] do |f| %>
   <%= f.input :name %>

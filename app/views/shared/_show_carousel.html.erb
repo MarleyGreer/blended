@@ -3,7 +3,7 @@
 
 
       <div class="carousel-item active">
-         <%= cl_image_tag @artist.photos[0].key, height: 300, width: 300, crop: :fill, class: "d-block w-100" %>
+         <%= cl_image_tag @artist.photos[0].key, height: 300, width: 300, crop: :fill, class: "d-block w-100 show-imgs" %>
       </div>
 
       <% @artist.photos[1..-1].each do |photo| %>

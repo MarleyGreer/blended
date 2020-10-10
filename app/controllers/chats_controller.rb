@@ -6,4 +6,18 @@ class ChatsController < ApplicationController
       Chat.where(user: current_user).order('created_at DESC')
     end
   end
+
+  def create
+    @chat = Chat.new
+    @chat.user = current_user
+    @chat.artist = Artist.find(params[:format])
+    if @chat.save
+     redirect_to chat_path(@chat)
+   end
+  end
+
+  def show
+    @chat = Chat.find(params[:id])
+    @message = Message.new
+  end
 end
