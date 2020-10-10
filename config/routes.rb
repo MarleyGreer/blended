@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :chats, only: [:create, :show]
 
   resources :artists do
-    resources :services, only: [:new, :create, :index]
+    resources :services, only: [:new, :create]
     resources :bookings, only: [:create, :show]
   end
 

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :artists, dependent: :destroy
+  has_one :artist, dependent: :destroy
   has_many :bookings
   has_one_attached :photo
   has_many :chats
