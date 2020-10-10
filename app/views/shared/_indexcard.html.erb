@@ -1,0 +1,20 @@
+<% @artists.each do |artist| %>
+<div class="card mb-3" style="width: 100%">
+  <div class="card-header" style="padding-left: 16px; display: flex; background-color: white">
+    <div style="display: flex; align-content: space-between">
+        <div style="padding-right: 16px">
+        <%= cl_image_tag artist.user.photo.key, style: 'height: 40px; width: auto', gravity: :face, crop: :fill, radius: :max %>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center">
+        <%= "#{artist.user.first_name} #{artist.user.last_name}"%>
+        </div>
+    </div>    
+  </div>
+  <div class="card-body" style="padding: 0px">
+    <%= cl_image_tag artist.photos[0].key, style: "height: 400px; width: 100%; object-fit: cover", crop: :fill, gravity: "faces", class: "d-block w-100" %>
+  </div>
+  <div class="card-footer bg-transparent">
+    Footer
+  </div>
+</div>
+<% end %>
