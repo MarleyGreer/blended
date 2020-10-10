@@ -1,0 +1,13 @@
+<h1>Booking Details</h1>
+
+<br>Services selected:
+<ul>
+  <% @services_names.each do |service_name| %>
+   <li><%= service_name %></li>
+  <% end %>
+</ul>
+<br>Start time: <%= @booking.start_time %>
+<br>End time: <%= @booking.end_time %>
+<br>Total duration (hr): <%= @booking.total_duration / 60 %>
+<br>Total price: $<%= @booking.total_price %>
+

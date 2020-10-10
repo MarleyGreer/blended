@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :confirm, :decline, :cancel]
+  before_action :set_booking, only: [:show, :details, :edit, :confirm, :decline, :cancel]
 
   def index
   end
@@ -15,10 +15,18 @@ class BookingsController < ApplicationController
     @artist = Artist.find(params[:artist_id])
     @booking.status = "pending"
     @booking.user = current_user
+    @booking.artist = @artist
     if @booking.save
       redirect_to artist_booking_path(@artist, @booking)
     else
       redirect_to new_user_session_path
+    end
+  end
+
+  def details
+    @services_names = @booking.services_bookings.map do |services_booking|
+      service = Service.find(services_booking.service_id)
+      service_name = service.name
     end
   end
 
