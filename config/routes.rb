@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   resources :users, :only => [:show]
   root to: 'pages#home'
 
+  resources :chats, only: [:create, :show]
+
   resources :artists do
-    resources :chats, only: [:show]
-    resources :services, only: [:new, :create, :index]
+    resources :services, only: [:new, :create]
     resources :bookings, only: [:create, :show]
   end
 
