@@ -2,17 +2,21 @@
 <% if user_signed_in? %>
 
 <h1><%= "Hello #{@user.first_name}" %></h1>
-<%= image_tag current_user.photo, width: '100%' %>
 <br>
+<div style="text-align: center">
+<%= image_tag current_user.photo, style: 'width: 64%; border-radius: 50%' , gravity: :face, crop: :fill, radius: :max  %>
+</div >
 <br>
 <p> First Name: <%= @user.first_name %> </p>
 <p> Last Name: <%= @user.last_name %> </p>
 <p> Address: <%= @user.address %> </p>
-<%= link_to "Go to Artist page", artist_path(id: @user.artist), class: "btn btn-primary", style: "width: 100%" unless @user.artist.nil? %> 
-<%= link_to "Become an artist", new_artist_path, class: "btn btn-primary", style: "width: 100%" if @user.artist.nil? %> 
+<%= link_to "Go to Artist page", artist_path(id: @user.artist), class: "btn btn-blended-primary", style: "width: 100%" unless @user.artist.nil? %> 
+<%= link_to "Become an artist", new_artist_path, class: "btn btn-blended-primary", style: "width: 100%" if @user.artist.nil? %> 
 <br>
 <br>
-<%= link_to "Edit Page", edit_user_registration_path, class: "btn btn-primary", style: "width: 100%" %>
-
+<%= link_to "Edit Page", edit_user_registration_path, class: "btn btn-blended-primary", style: "width: 100%" %>
+<br>
+<br>
+<%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-blended-primary", style: "width: 100%" %>
 <% end %>
 </div>
