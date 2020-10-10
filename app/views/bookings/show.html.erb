@@ -1,5 +1,8 @@
 <%= simple_form_for [@booking, @services_booking] do |f| %>
-  <%= f.input :service, collection: @artist.services, as: :check_boxes %>
-  <%= f.input :booking, as: :date, html5: true %>
+  <% @artist.services.each do |service| %>
+  <%= f.input :service, collection: [service], as: :check_boxes %>
+  <%= f.input :quantity, input_html: { name: service.id }, as: :integer, multiple: true %>
+  <% end %>
+  <%= f.input :booking, as: :datetime, html5: true %>
   <%= f.submit %>
 <% end %>

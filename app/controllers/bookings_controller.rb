@@ -24,9 +24,9 @@ class BookingsController < ApplicationController
   end
 
   def details
-    @services_names = @booking.services_bookings.map do |services_booking|
+    @services_names_qty = @booking.services_bookings.map do |services_booking|
       service = Service.find(services_booking.service_id)
-      service_name = service.name
+      [service.name, services_booking.quantity]
     end
   end
 
@@ -37,12 +37,21 @@ class BookingsController < ApplicationController
   end
 
   def confirm
+    @booking.status = "confirmed"
+    @booking.save
+    redirect_to details_booking_path(@booking)
   end
 
   def decline
+    @booking.status = "declined"
+    @booking.save
+    redirect_to details_booking_path(@booking)
   end
 
   def cancel
+    @booking.status = "cancelled"
+    @booking.save
+    redirect_to details_booking_path(@booking)
   end
 
   def pending
