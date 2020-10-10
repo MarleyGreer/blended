@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :artists do
+    resources :chats, only: [:show]
     resources :services, only: [:new, :create, :index]
     resources :bookings, only: [:create, :show]
   end
@@ -23,5 +24,7 @@ Rails.application.routes.draw do
       patch :cancel
     end
   end
+
+  resources :chats, only: [:index]
 
 end

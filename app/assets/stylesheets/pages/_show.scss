@@ -19,7 +19,21 @@
 
     .availability {
       position: sticky;
-      bottom: 0;
+      bottom: 59px;
       width: 100%;
       margin: 0px;
+      z-index:100;
+    }
+
+    .user-description {
+      width: 69%;
+    }
+
+
+    .show-imgs{
+      object-fit: cover;
+    }
+
+    .margin-show{
+      margin-bottom: 72px;
     }
