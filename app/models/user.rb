@@ -2,7 +2,8 @@ class User < ApplicationRecord
   has_one :artist, dependent: :destroy
   has_many :bookings
   has_one_attached :photo
-  has_many :chats
+  has_many :chats, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_many :messages, through: :chats, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

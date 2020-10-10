@@ -11,8 +11,15 @@
 <div class="container mt-3">
 
 <div class="chats">
+  <% if @chats.empty? %>
+  <div class="empty-chat-index">
+  <i class="far fa-bell"></i>
+  <h6 >you don't have any messages yet... </h6>
+  </div>
+  <% end %>
 <% @chats.each do |chat| %>
-
+<% if chat.messages.present? %>
+<%= link_to chat_path(chat, anchor: "message-#{chat.messages.last.id}") do %>
 <% if chat.user == current_user %>
 <div class="chat-box shadow d-flex justify-content-between p-2 mb-2 align-content-center">
   <div class="d-flex">
@@ -60,6 +67,8 @@
     </div>
   </div>
   <% end %>
+<% end %>
+<% end %>
 <% end %>
 </div>
 </div>

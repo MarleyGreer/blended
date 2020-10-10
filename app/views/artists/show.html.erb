@@ -1,6 +1,6 @@
     <div class="d-flex align-items-center justify-content-between p-3 bg-white">
 
-    <%= link_to artists_path do %>
+    <%= link_to :back do %>
       <i class="fas fa-chevron-left"></i>
     <% end %>
     <h6><%= @artist.user.username %></h6>
@@ -11,9 +11,20 @@
         <% end %>
         <% else %>
         <i class="far fa-heart"></i>
+        <% if @chat.present? && @chat.messages.empty? %>
+        <%= link_to chat_path(@chat) do %>
         <i class="far fa-comments"></i>
+        <% end %>
+        <% elsif @chat.present? %>
+        <%= link_to chat_path(@chat, anchor: "message-#{@chat.messages.last.id}") do %>
+        <i class="far fa-comments"></i>
+        <% end %>
+        <% else %>
+        <%= link_to chats_path(@artist), method: :post do %>
+         <i class="far fa-comments"></i>
+         <% end %>
+        <% end %>
       <% end %>
-
   </div>
   <!--  The heart will become a link to the "save to favourtes... -->
     </div>
