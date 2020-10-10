@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get :cancelled
     end
     member do
+      get :details
       patch :confirm
       patch :decline
       patch :cancel

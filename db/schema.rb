@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_03_053520) do
+ActiveRecord::Schema.define(version: 2020_10_09_074839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,12 +49,14 @@ ActiveRecord::Schema.define(version: 2020_10_03_053520) do
     t.integer "quantity"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "total_time"
     t.integer "total_price"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "status"
+    t.bigint "artist_id"
+    t.integer "total_duration"
+    t.index ["artist_id"], name: "index_bookings_on_artist_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -115,6 +117,7 @@ ActiveRecord::Schema.define(version: 2020_10_03_053520) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "artists", "users"
+  add_foreign_key "bookings", "artists"
   add_foreign_key "bookings", "users"
   add_foreign_key "bookmarks", "active_storage_blobs"
   add_foreign_key "bookmarks", "users"
