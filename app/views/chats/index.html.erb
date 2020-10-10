@@ -1,0 +1,66 @@
+  <div class="d-flex align-items-center justify-content-between p-3 bg-white">
+    <%= link_to artists_path do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+
+  <h6 class = "text-center"> messages </h6>
+  <%= link_to user_path(current_user) do %>
+  <%= cl_image_tag current_user.photo.key, height: 48, width: 48, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle" %>
+  <% end %>
+  </div>
+<div class="container mt-3">
+
+<div class="chats">
+<% @chats.each do |chat| %>
+
+<% if chat.user == current_user %>
+<div class="chat-box shadow d-flex justify-content-between p-2 mb-2 align-content-center">
+  <div class="d-flex">
+    <%= cl_image_tag chat.artist.user.photo.key, height: 64, width: 64, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mr-1" %>
+      <div class="chat-content">
+        <h6><%= chat.artist.user.username %></h6>
+        <p><%= chat.messages.last.content[0..52] %>
+         <% if chat.messages.last.content.length > 52 %>
+         ...
+         <% end %>
+      </p>
+    </div>
+      </div>
+      <div class="message-time">
+      <% if Time.now - 86400 < chat.messages.last.created_at %>
+        <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%l %M %p") %></h6>
+      <% elsif Time.now - 86400 > chat.messages.last.created_at && Time.now - 604800 < chat.messages.last.created_at %>
+        <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%a") %></h6>
+      <% else %>
+       <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%e %b %y") %></h6>
+      <% end %>
+    </div>
+  </div>
+  <% else %>
+  <div class="chat-box d-flex justify-content-between p-2 mb-2 align-content-center">
+    <div class="d-flex">
+    <%= cl_image_tag chat.user.photo.key, height: 64, width: 64, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mr-1" %>
+      <div class="chat-content">
+      <h6><%= chat.user.username %></h6>
+      <p><%= chat.messages.last.content[0..52] %>
+        <% if chat.messages.last.content.length > 52 %>
+         ...
+         <% end %>
+       </p>
+     </div>
+       </div>
+      <div class="message-time">
+      <% if Time.now - 86400 < chat.messages.last.created_at %>
+        <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%l %M %p") %></h6>
+      <% elsif Time.now - 86400 > chat.messages.last.created_at && Time.now - 604800 < chat.messages.last.created_at %>
+        <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%a") %></h6>
+      <% else %>
+       <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%e %b %y") %></h6>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+<% end %>
+</div>
+</div>
+

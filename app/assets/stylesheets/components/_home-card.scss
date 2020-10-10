@@ -38,15 +38,21 @@
 }
 
 .cards {
-  width: 375px;
+  width: 100%;
   overflow-x: scroll;
+  margin-bottom: 90px;
 }
 
 .card-rating{
   padding-top: 24px;
   width: 50%;
+  text-align: right;
 }
 
 .card-address{
   width: 50%;
+}
+
+.card-img {
+  object-fit: cover;
 }
