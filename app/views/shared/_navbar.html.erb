@@ -1,13 +1,41 @@
-<div class="navbar sticky-top navbar-expand-sm navbar-light navbar-lewagon">
-  <div style="width: 100px; text-align: left">
-  <%= link_to root_path do %>
-    <%= image_tag "logo.png", style: 'height: 4rem; width: auto', alt: "logo" %>
+<div class="navbar-main d-flex justify-content-between p-3">
+
+<!-- To Do This Will Be Our Search -->
+
+<%= link_to artists_path do %>
+  <i class="fas fa-search"></i>
+<% end %>
+
+<!-- To Do This Will Be Our Bookmarks -->
+ <% if user_signed_in? %>
+<%= link_to artists_path do %>
+  <i class="far fa-heart"></i>
+<% end %>
+<% end %>
+
+<!-- Correct Link  -->
+
+<%= link_to artists_path do %>
+  <i class="fas fa-home"></i>
+<% end %>
+
+<!-- Correct Link  -->
+ <% if user_signed_in? %>
+<%= link_to chats_path do %>
+  <i class="far fa-comments"></i>
+<% end %>
+<% end %>
+<!-- Correct Link  -->
+
+  <% if user_signed_in? %>
+    <%= link_to user_path(current_user) do %>
+    <i class="far fa-user"></i>
+    <% end %>
+    <% else %>
+    <%= link_to new_user_session_path do %>
+    <i class="far fa-user-circle"></i>
   <% end %>
-  </div>
-  <div style="width: 100px; text-align: right" id="navbarSupportedContent">
-    <div style="text-align: right; padding-right: 1rem">
-      <i class="fas fa-search"></i>
-    </div>
-  </div>
+<% end %>
+
 </div>
 

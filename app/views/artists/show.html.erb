@@ -1,20 +1,28 @@
-<div class="container bottom-padding">
-    <div class="d-flex justify-content-between pt-2 pb-2">
+    <div class="d-flex align-items-center justify-content-between p-3 bg-white">
 
     <%= link_to artists_path do %>
       <i class="fas fa-chevron-left"></i>
     <% end %>
     <h6><%= @artist.user.username %></h6>
     <div>
-    <i class="far fa-heart"></i>
+    <% if current_user == @artist.user %>
+      <%= link_to edit_artist_path(@artist) do %>
+        <i class="fas fa-pen-square"></i>
+        <% end %>
+        <% else %>
+        <i class="far fa-heart"></i>
+      <% end %>
     <i class="far fa-comments"></i>
   </div>
   <!--  The heart will become a link to the "save to favourtes... -->
     </div>
+
+<div class="container bottom-padding mt-3">
+
     <div class="shadow circle-border">
   <%= render 'shared/show_carousel' %>
   <div class="d-flex justify-content-between bg-white p-2 circle-border">
-    <div>
+    <div class="user-description">
     <h3><%= @artist.user.first_name %> <%= @artist.user.last_name %></h3>
     <h6><%= @artist.user.address %></h6>
     <h6>
@@ -33,42 +41,20 @@
   </div>
 </div>
 
-  <div class="p-3">
+  <div class="p-3 margin-show">
   <h6> About Me </h6>
   <p><%= @artist.description %></p>
 
-  <h6> Services </h6>
+  <h6> Services
+<% if current_user == @artist.user %>
+  <%= link_to new_artist_service_path(@artist) do %>
+     <i class="far fa-plus-square ml-1 rating"></i>
+    <% end %>
+<% end %>
+  </h6>
 
+<%= render 'shared/show_accordion' %>
 
-<div id="accordion">
-
-  <% @artist.services.each do |service| %>
-  <div class="card">
-    <div class="card-header" id="heading<%= service.id %>">
-      <h6 class="mb-0">
-        <button class="btn collapsed font" data-toggle="collapse" data-target="#collapse<%= service.id %>" aria-expanded="false" aria-controls="collapse<%= service.id %>">
-          <%= service.name.capitalize %>
-        </button>
-      </h6>
-    </div>
-    <div id="collapse<%= service.id %>" class="collapse" aria-labelledby="heading<%= service.id %>" data-parent="#accordion">
-      <div class="card-body">
-        <strong> Price </strong>
-        <br>
-        $<%= service.price %> AUD
-        <br><br>
-        <strong> Duration </strong>
-        <br>
-        <%= service.duration %> Minutes
-        <br><br>
-        <strong>Description </strong>
-        <br>
-        <%= service.description %>
-      </div>
-    </div>
-  </div>
-  <% end %>
-</div>
   <br>
   <h6> Qualifications & Work Experience  </h6>
   <p><%= @artist.qualifications %></p>
@@ -78,3 +64,4 @@
 <div class="availability">
   <a href="#" class="btn btn-dark btn-block">Check Availability </a>
 </div>
+

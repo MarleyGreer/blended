@@ -4,4 +4,6 @@ class Artist < ApplicationRecord
   has_many_attached :photos, dependent: :destroy
   has_many :services, dependent: :destroy
   has_many :services_bookings, through: :services, dependent: :destroy
+  has_many :chats
+  has_many :messages, through: :chats, dependent: :destroy
 end
