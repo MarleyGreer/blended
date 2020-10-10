@@ -1,12 +1,9 @@
 class ChatsController < ApplicationController
   def index
-    @chats = []
-    Chat.all.select do |chat|
-      if chat.user == current_user || chat.artist == current_user.artist
-        @chats << chat
-      end
+    @chats = if current_user.artist
+      Chat.where(artist: current_user.artist).or(Chat.where(user: current_user)).order('created_at DESC')
+    else
+      Chat.where(user: current_user).order('created_at DESC')
     end
-    @chats = Chat.order('created_at DESC')
   end
 end
-
