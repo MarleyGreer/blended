@@ -10,3 +10,28 @@
 .navbar-lewagon .navbar-brand img {
   width: 120px;
 }
+
+
+.navbar {
+  padding: 8px 8px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,.1);
+  a {
+    padding: 0px;
+  }
+}
+
+.footer {
+  padding: 12px 8px;
+  box-shadow: 0px -2px 5px rgba(0,0,0,.1);
+  margin-top: 10px;
+  a {
+    padding: 0px;
+  }
+
+.navbar-main{
+  background: white;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index:150;
+}

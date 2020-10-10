@@ -5,10 +5,6 @@ class Artist < ApplicationRecord
   has_many :services, dependent: :destroy
   has_many :services_bookings, through: :services, dependent: :destroy
   has_many :bookings
-
-  def unavailable_times
-    bookings.pluck(:start_time, :end_time).map do |range|
-      { from: range[0], to: range[1] }
-    end
-  end
+  has_many :chats
+  has_many :messages, through: :chats, dependent: :destroy
 end
