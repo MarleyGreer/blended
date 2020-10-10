@@ -15,7 +15,7 @@ class ServicesController < ApplicationController
     @service.artist = @artist
 
     if @service.save
-      redirect_to artist_services_path(@artist)
+      redirect_to artist_path(@artist)
     else
       render :new
     end

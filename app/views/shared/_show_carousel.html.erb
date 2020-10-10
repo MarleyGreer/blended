@@ -8,7 +8,7 @@
 
       <% @artist.photos[1..-1].each do |photo| %>
       <div class="carousel-item">
-        <%= cl_image_tag photo.key, height: 300, width: 300, crop: :fill, class: "d-block w-100" %>
+        <%= cl_image_tag photo.key, height: 300, width: 300, crop: :fill, class: "d-block w-100 show-imgs" %>
       </div>
       <% end %>
     </div>
