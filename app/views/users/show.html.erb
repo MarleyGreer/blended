@@ -14,6 +14,12 @@
 <%= link_to "Become an artist", new_artist_path, class: "btn btn-blended-primary", style: "width: 100%" if @user.artist.nil? %>
 <br>
 <br>
+<%= link_to "My bookings", bookings_path, class: "btn btn-blended-primary", style: "width: 100%" %>
+<br>
+<br>
+<%= link_to "My jobs", all_bookings_path, class: "btn btn-blended-primary", style: "width: 100%" if @user.artist %>
+<br>
+<br>
 <%= link_to "Edit Page", edit_user_registration_path, class: "btn btn-blended-primary", style: "width: 100%" %>
 <br>
 <br>

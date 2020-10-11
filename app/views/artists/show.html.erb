@@ -72,8 +72,41 @@
 <%= render 'shared/show_accordion' %>
 
   <br>
-  <h6> Qualifications & Work Experience  </h6>
+  <h6>Qualifications & Work Experience</h6>
   <p><%= @artist.qualifications %></p>
+
+  <br>
+  <h6>Reviews</h6>
+  <br>
+  <% @reviews.each do |review| %>
+    <div class="d-flex">
+      <%= cl_image_tag review.booking.user.photo.key, height: 60, width: 60, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mr-1" %>
+      <div style="margin-left: 10px">
+        <strong><%= review.booking.user.username %></strong>
+        <br><% (review.rating).times do %>
+          <%= content_tag(:i, "", class: "fas fa-star rating") %>
+        <% end %>
+        <br><p>Reviewed on <%= review.created_at.strftime("%d %B %Y") %></p>
+      </div>
+    </div>
+    <p><%= review.content %></p>
+    <% if review.booking.artist.user == current_user && review.reply.nil? %>
+      <%= link_to "Reply to #{review.booking.user.username}", edit_review_path(review), method: :get, class: "small" %>
+      <br>
+    <% elsif %>
+      <% review.booking.artist.user != current_user && review.reply.nil? %>
+    <% else %>
+      <div class="d-flex" style="border-left: 3px solid #e5e5e5; padding: 5px">
+        <%= cl_image_tag review.booking.artist.user.photo.key, height: 40, width: 40, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mr-1" %>
+        <div style="margin-left: 10px">
+          <strong><%= review.booking.artist.user.username %></strong>
+          <p>Replied on <%= review.updated_at.strftime("%d %B %Y") %></p>
+          <p><%= review.reply %></p>
+        </div>
+      </div>
+    <% end %>
+    <br>
+  <% end %>
 
 </div>
 </div>

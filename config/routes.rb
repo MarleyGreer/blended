@@ -24,7 +24,9 @@ Rails.application.routes.draw do
   resources :services, only: [:destroy, :edit, :update]
   resources :bookings, only: [:index, :edit, :update, :destroy] do
   resources :services_bookings, only: [:create]
+  resources :reviews, only: [:new, :create, :index]
     collection do
+      get :all
       get :pending
       get :confirmed
       get :declined
@@ -39,5 +41,5 @@ Rails.application.routes.draw do
   end
 
   resources :chats, only: [:index]
-
+  resources :reviews, only: [:edit, :update]
 end

@@ -1,14 +1,14 @@
-<h1>My bookings</h1>
+<h1>My jobs</h1>
 
 <br>
 <%= @bookings.each do |booking| %>
   <div class="booking-card">
     <div class="d-flex justify-content-between align-items-center">
       <div class="d-flex">
-        <%= cl_image_tag booking.artist.user.photo.key, height: 60, width: 60, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mr-1" %>
+        <%= cl_image_tag booking.user.photo.key, height: 60, width: 60, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mr-1" %>
         <div style="margin-left: 10px">
-          <strong><%= booking.artist.user.username %></strong><br>
-          <span style="color: grey; font-size: 9pt">Booking placed <%= booking.created_at.strftime("%d %B %Y") %></span>
+          <strong><%= booking.user.username %></strong><br>
+          <span style="color: grey; font-size: 9pt">Received <%= booking.created_at.strftime("%d %B %Y") %></span>
           <br>
           <% if booking.status == "pending" %>
             <p class="badge badge-warning" style="padding: 5px; margin-top: 8px"><%= booking.status.upcase %></p>

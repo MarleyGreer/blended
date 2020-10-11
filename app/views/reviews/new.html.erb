@@ -1,0 +1,8 @@
+<h1 class="header">New review</h1>
+<%= simple_form_for [@booking, @review] do |f| %>
+  <div class="container">
+    <%= f.input :content, label: 'Your review:' %>
+    <%= f.input :rating, :collection => [1, 2, 3, 4, 5], label: 'Rating' %>
+    <%= f.submit %>
+  <% end %>
+</div>
