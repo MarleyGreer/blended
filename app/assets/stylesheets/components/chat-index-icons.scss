@@ -12,9 +12,16 @@
   width: 30%;
 }
 
+.message-container {
+  p {
+    word-break: break-all;
+  }
+}
+
 .chats {
   p {
     color: black;
+    word-break: break-all;
   }
 
   h6 {
