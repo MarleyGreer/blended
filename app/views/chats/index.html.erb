@@ -100,11 +100,12 @@
         <%= chat.user.username %>
        </button>
        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <% if chat.artist_favourite == true %>
 
     <%= link_to chat_path(chat, anchor: "message-#{chat.messages.last.id}"), class: "dropdown-item" do %>
     <i class="fas fa-comment"></i> message
     <% end %>
+
+    <% if chat.artist_favourite == true %>
 
      <%= link_to favourites_chat_path(chat), method: :patch, class: "dropdown-item" do %>
        <i class="fas fa-star"></i> mark as not important
