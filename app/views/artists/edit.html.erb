@@ -1,6 +1,28 @@
-<%= simple_form_for(@artist) do |f| %>
-  <%= f.input :description %>
-  <%= f.input :qualifications %>
-  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-  <%= f.submit %>
-<% end %>
+<div class="d-flex align-items-center justify-content-between p-3 bg-white">
+    <%= link_to artist_path(current_user.artist) do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+
+    <h6 class = "text-center"> update your page details </h6>
+  <%= link_to user_path(current_user) do %>
+  <%= cl_image_tag current_user.photo.key, height: 48, width: 48, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle" %>
+  <% end %>
+  </div>
+
+
+
+  <div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-login">
+
+      <%= simple_form_for(@artist) do |f| %>
+        <%= f.input :description %>
+        <%= f.input :qualifications %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+        <%= f.submit class: "btn btn-warning"%>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
