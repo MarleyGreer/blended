@@ -10,7 +10,9 @@ class ArtistsController < ApplicationController
   end
 
   def show
+    if user_signed_in?
     @chat = Chat.where(artist: current_user.artist, user: @artist.user).or(Chat.where(artist: @artist, user: current_user)).first
+    end 
     @bookings = @artist.bookings
     @reviews = []
     @bookings.each do |booking|

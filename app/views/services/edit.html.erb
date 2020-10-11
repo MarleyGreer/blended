@@ -1,9 +1,26 @@
-<h1>Edit Service </h1>
-<%= link_to "< Back", artist_path(@service.artist)  %>
-<%= simple_form_for [@artist, @service] do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :price %>
-  <%= f.input :duration %>
-  <%= f.submit %>
-<% end %>
+<div class="d-flex justify-content-between align-items-center p-3 bg-white">
+  <%= link_to artist_path(@service.artist) do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+  <h6 class="text-center"> edit <%= @service.name.downcase %> </h6>
+  <%= link_to user_path(current_user) do %>
+  <%= cl_image_tag current_user.photo.key, height: 48, width: 48, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle" %>
+  <% end %>
+  </div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-login">
+        <%= simple_form_for [@artist, @service] do |f| %>
+          <%= f.input :name %>
+          <%= f.input :description %>
+          <%= f.input :price %>
+          <%= f.input :duration %>
+          <%= f.submit class: "btn btn-warning" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
