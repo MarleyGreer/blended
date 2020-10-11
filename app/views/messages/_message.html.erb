@@ -1,5 +1,5 @@
 
-<div class="message-container chat-box shadow d-flex justify-content-between p-2 mb-2 align-content-center user-<%= message.user == current_user %>" id="message-<%= message.id %>">
+<div class="message-container chat-box shadow d-flex justify-content-between p-2 mb-2 align-content-center user-false" id="message-<%= message.id %>">
 <div class="d-flex content-container">
   <% if message.user.artist.present? %>
   <%= link_to artist_path(message.user.artist) do %>

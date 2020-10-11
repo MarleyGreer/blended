@@ -4,7 +4,11 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user = current_user
     @message.chat = @chat
+    @message.chat.user_archive = false
+    @message.chat.artist_archive = false
+
     if @message.save
+      @message.chat.save
       ChatChannel.broadcast_to(
         @chat,
         render_to_string(partial: "message", locals: { message: @message })
