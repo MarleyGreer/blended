@@ -1,27 +1,23 @@
-  <!-- header -->
-
   <div class="d-flex align-items-center justify-content-between p-3 bg-white">
-    <%= link_to artists_path do %>
+    <%= link_to :back do %>
     <i class="fas fa-chevron-left"></i>
   <% end %>
 
-  <h6 class = "text-center"> messages </h6>
+  <h6 class = "text-center"> archived messages </h6>
   <%= link_to user_path(current_user) do %>
   <%= cl_image_tag current_user.photo.key, height: 48, width: 48, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle" %>
   <% end %>
   </div>
-
 <div class="container mt-3">
-  <!-- --------------------------------------- -->
-  <!-- chat empty condition -->
 
 <div class="chats">
   <% if @chats.empty? %>
   <div class="empty-chat-index">
   <i class="far fa-bell"></i>
-  <h6 >you don't have any messages yet... </h6>
+  <h6 >you don't have any archived messages... </h6>
   </div>
   <% end %>
+
   <!-- --------------------------------------- -->
 
 <% @chats.each do |chat| %>
@@ -43,25 +39,19 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-          <%= link_to chat_path(chat, anchor: "message-#{chat.messages.last.id}"), class: "dropdown-item" do %>
+           <%= link_to chat_path(chat, anchor: "message-#{chat.messages.last.id}"), class: "dropdown-item" do %>
           <i class="fas fa-comment"></i> message
           <% end %>
 
-          <% if chat.user_favourite == true %>
-            <%= link_to favourites_chat_path(chat), method: :patch, class: "dropdown-item" do %>
-           <i class="fas fa-star"></i> mark as not important
+          <%= link_to archive_chat_path(chat), method: :patch, class: "dropdown-item" do%>
+            <i class="fas fa-archive"></i> add to inbox
           <% end %>
-          <% else %>
-          <%= link_to favourites_chat_path(chat), method: :patch, class: "dropdown-item" do%>
-          <i class="far fa-star"></i> mark as important
-          <% end %>
-          <% end %>
+
           <%= link_to artist_path(chat.artist), class: "dropdown-item" do%>
           <i class="fas fa-user"></i> view profile
           <% end %>
-          <%= link_to archive_chat_path(chat), method: :patch, class: "dropdown-item" do%>
-            <i class="fas fa-archive"></i> archive
-          <% end %>
+
+
         </div>
       </div>
         <p><%= chat.messages.last.content[0..52] %>
@@ -101,30 +91,20 @@
        </button>
        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-    <%= link_to chat_path(chat, anchor: "message-#{chat.messages.last.id}"), class: "dropdown-item" do %>
-    <i class="fas fa-comment"></i> message
-    <% end %>
 
-    <% if chat.artist_favourite == true %>
+         <%= link_to chat_path(chat, anchor: "message-#{chat.messages.last.id}"), class: "dropdown-item" do %>
+         <i class="fas fa-comment"></i> message
+         <% end %>
 
-     <%= link_to favourites_chat_path(chat), method: :patch, class: "dropdown-item" do %>
-       <i class="fas fa-star"></i> mark as not important
-     <% end %>
-   <% else %>
-     <%= link_to favourites_chat_path(chat), method: :patch, class: "dropdown-item" do%>
-       <i class="far fa-star"></i> mark as important
-     <% end %>
-   <% end %>
+         <%= link_to archive_chat_path(chat), method: :patch, class: "dropdown-item" do%>
+           <i class="fas fa-archive"></i> add to inbox
+         <% end %>
 
-   <% if chat.user.artist.present? %>
-    <%= link_to artist_path(chat.artist), class: "dropdown-item" do%>
-      <i class="fas fa-user"></i> view profile
-    <% end %>
-  <% end %>
-
-        <%= link_to archive_chat_path(chat), method: :patch, class: "dropdown-item" do%>
-            <i class="fas fa-archive"></i> archive
-        <% end %>
+          <% if chat.user.artist.present? %>
+           <%= link_to artist_path(chat.artist), class: "dropdown-item" do%>
+             <i class="fas fa-user"></i> view profile
+           <% end %>
+         <% end %>
        </div>
      </div>
 
@@ -153,11 +133,9 @@
 <% end %>
 </div>
 </div>
-</div>
 
 <!-- bottom navbar -->
 
 <%= render 'chat-nav' %>
 
   <!-- --------------------------------------- -->
-
