@@ -2,7 +2,13 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :details, :edit, :confirm, :decline, :cancel]
 
   def index
+    @bookings = current_user.bookings
   end
+
+  def all
+    @bookings = Booking.where(artist: current_user)
+  end
+
 
   def show
     @booking = Booking.find(params[:id])

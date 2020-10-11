@@ -11,6 +11,15 @@ class ArtistsController < ApplicationController
 
   def show
     @chat = Chat.where(artist: current_user.artist, user: @artist.user).or(Chat.where(artist: @artist, user: current_user)).first
+    @bookings = @artist.bookings
+    @reviews = []
+    @bookings.each do |booking|
+      booking.reviews.each do |review|
+        if review.present?
+          @reviews << review
+        end
+      end
+    end
   end
 
   def create
