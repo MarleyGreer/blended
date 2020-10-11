@@ -4,6 +4,15 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :chats, only: [:create, :show] do
+    member do
+      patch :favourites
+      patch :archive
+    end
+    collection do
+      get :saved
+      get :archived
+    end
+
     resources :messages, only: [:create]
   end
 

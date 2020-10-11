@@ -14,14 +14,14 @@
 
 .message-container {
   p {
-    word-break: break-all;
+    word-break: break-word;
   }
 }
 
 .chats {
   p {
     color: black;
-    word-break: break-all;
+    word-break: break-word;
   }
 
   h6 {
