@@ -4,7 +4,7 @@
 <h1><%= "Hello #{@user.first_name}" %></h1>
 <br>
 <div style="text-align: center">
-<%=   %>
+<%= image_tag current_user.photo, style: 'width: 64%; border-radius: 50%' , gravity: :face, crop: :fill, radius: :max  %>
 </div >
 <br>
 <p> First Name: <%= @user.first_name %> </p>
