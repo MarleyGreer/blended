@@ -9,7 +9,8 @@
       <%= link_to edit_artist_path(@artist) do %>
         <i class="fas fa-pen-square"></i>
         <% end %>
-        <% else %>
+        <% elsif %>
+        <% user_signed_in? %>
         <i class="far fa-heart"></i>
         <% if @chat.present? && @chat.messages.empty? %>
         <%= link_to chat_path(@chat) do %>
@@ -24,6 +25,9 @@
          <i class="far fa-comments"></i>
          <% end %>
         <% end %>
+        <% else %>
+        <div>
+        </div>
       <% end %>
   </div>
   <!--  The heart will become a link to the "save to favourtes... -->
@@ -74,5 +78,5 @@
 </div>
 </div>
 <div class="availability">
-  <%= link_to "Book", artist_bookings_path(@artist), method: :post, class: "btn btn-dark btn-block" %>
+  <%= link_to "Book", artist_bookings_path(@artist), method: :post, class: "btn btn-danger btn-block" %>
 </div>
