@@ -1,0 +1,37 @@
+#new_message{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 250;
+  padding-top: 14px;
+  background: white;
+}
+
+.chat-header{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 250;
+}
+
+
+#messages{
+  margin-top: 88px;
+  margin-bottom: 96px;
+  background: white;
+}
+
+.user-true{
+  background: rgba(246, 195, 229, 0.2);
+  margin: 8px;
+}
+
+
+.user-false{
+  background: rgba(246, 246, 246, 0.6);
+  margin: 8px;
+}
+
+.content-container {
+  width: 95%;
+}

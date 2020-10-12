@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_10_004802) do
+ActiveRecord::Schema.define(version: 2020_10_11_001304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,16 +73,22 @@ ActiveRecord::Schema.define(version: 2020_10_10_004802) do
     t.bigint "artist_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "user_favourite", default: false
+    t.boolean "artist_favourite", default: false
+    t.boolean "user_archive", default: false
+    t.boolean "artist_archive", default: false
     t.index ["artist_id"], name: "index_chats_on_artist_id"
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "content"
+    t.string "content"
     t.bigint "chat_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -141,6 +147,7 @@ ActiveRecord::Schema.define(version: 2020_10_10_004802) do
   add_foreign_key "chats", "artists"
   add_foreign_key "chats", "users"
   add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "reviews", "bookings"
   add_foreign_key "services", "artists"
   add_foreign_key "services_bookings", "bookings"

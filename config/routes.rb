@@ -3,7 +3,18 @@ Rails.application.routes.draw do
   resources :users, :only => [:show]
   root to: 'pages#home'
 
-  resources :chats, only: [:create, :show]
+  resources :chats, only: [:create, :show] do
+    member do
+      patch :favourites
+      patch :archive
+    end
+    collection do
+      get :saved
+      get :archived
+    end
+
+    resources :messages, only: [:create]
+  end
 
   resources :artists do
     resources :services, only: [:new, :create]
@@ -13,7 +24,9 @@ Rails.application.routes.draw do
   resources :services, only: [:destroy, :edit, :update]
   resources :bookings, only: [:index, :edit, :update, :destroy] do
   resources :services_bookings, only: [:create]
+  resources :reviews, only: [:new, :create, :index]
     collection do
+      get :all
       get :pending
       get :confirmed
       get :declined
@@ -28,5 +41,5 @@ Rails.application.routes.draw do
   end
 
   resources :chats, only: [:index]
-
+  resources :reviews, only: [:edit, :update]
 end

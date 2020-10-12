@@ -24,7 +24,7 @@ class ServicesBookingsController < ApplicationController
   def update_booking(booking_id, booking_duration, booking_totalprice)
     @booking = Booking.find(booking_id)
     @booking.start_time = params[:services_booking][:booking]
-    @booking.end_time = @booking.start_time + booking_duration
+    @booking.end_time = @booking.start_time + (booking_duration * 60)
     @booking.total_duration = booking_duration
     @booking.total_price = booking_totalprice
     @booking.save

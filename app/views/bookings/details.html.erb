@@ -1,34 +1,46 @@
 <h1>Booking Details</h1>
 
-<% if @booking.status == "pending" %>
-<p class="badge badge-warning" style="padding: 5px"><%= @booking.status.upcase %></p>
-<% elsif %>
-<% @booking.status == "confirmed" %>
-<p class="badge badge-success" style="padding: 5px"><%= @booking.status.upcase %></p>
-<% elsif %>
-<% @booking.status == "declined" %>
-<p class="badge badge-dark" style="padding: 5px"><%= @booking.status.upcase %></p>
-<% elsif %>
-<% @booking.status == "cancelled" %>
-<p class="badge badge-danger" style="padding: 5px"><%= @booking.status.upcase %></p>
-<% end %>
-
-<br>Services selected:
-<ul>
-  <% @services_names_qty.each do |service| %>
-   <li><%= service[0] %> x <%= service[1] %> people</li>
-  <% end %>
-</ul>
-<br>Start time: <%= @booking.start_time %>
-<br>End time: <%= @booking.end_time %>
-<br>Total duration (hr): <%= @booking.total_duration / 60 %>
-<br>Total price: $<%= @booking.total_price %>
-
-<br><br>
-<% if @booking.artist.user == current_user && @booking.status == "pending" then %>
-  <%= link_to "Confirm booking", confirm_booking_path(@booking), method: :patch, class: "btn btn-outline-dark light-font" %>
-  <%= link_to "Decline booking", decline_booking_path(@booking), method: :patch, class: "btn btn-outline-dark light-font" %>
-<% elsif @booking.artist.user == current_user && @booking.status == "confirmed" then %>
-  <%= link_to "Cancel booking", cancel_booking_path(@booking), method: :patch, class: "btn btn-outline-dark light-font" %>
+<% if @booking.user == current_user %>
+  <%= link_to "<< My bookings", bookings_path %>
 <% else %>
+  <%= link_to "<< My jobs", all_bookings_path %>
 <% end %>
+
+<div class="booking-card">
+  <% if @booking.status == "pending" %>
+    <p class="badge badge-warning" style="padding: 5px"><%= @booking.status.upcase %></p>
+  <% elsif %>
+    <% @booking.status == "confirmed" %>
+  <p class="badge badge-success" style="padding: 5px"><%= @booking.status.upcase %></p>
+  <% elsif %>
+    <% @booking.status == "declined" %>
+    <p class="badge badge-dark" style="padding: 5px"><%= @booking.status.upcase %></p>
+  <% elsif %>
+    <% @booking.status == "cancelled" %>
+    <p class="badge badge-danger" style="padding: 5px"><%= @booking.status.upcase %></p>
+  <% end %>
+
+  <br>Services selected:
+  <ul>
+    <% @services_names_qty.each do |service| %>
+     <li><%= service[0] %> x <%= service[1] %> people</li>
+    <% end %>
+  </ul>
+  <br>Start time: <%= @booking.start_time.strftime("%d %B %Y, %-l:%M%P") %>
+  <br>End time: <%= @booking.end_time.strftime("%d %B %Y, %-l:%M%P") %>
+  <br>Total duration (hr): <%= @booking.total_duration / 60 %>
+  <br>Total price: $<%= @booking.total_price %>
+
+  <br><br>
+  <% if @booking.artist.user == current_user && @booking.status == "pending" then %>
+    <%= link_to "Confirm booking", confirm_booking_path(@booking), method: :patch, class: "btn btn-outline-dark light-font" %>
+    <%= link_to "Decline booking", decline_booking_path(@booking), method: :patch, class: "btn btn-outline-dark light-font" %>
+  <% elsif @booking.artist.user == current_user && @booking.status == "confirmed" then %>
+    <%= link_to "Cancel booking", cancel_booking_path(@booking), method: :patch, class: "btn btn-outline-dark light-font" %>
+  <% else %>
+  <% end %>
+
+  <% if Time.now > @booking.end_time && @booking.reviews.count == 0 && @booking.user == current_user && @booking.status == "confirmed" %>
+  <%= link_to "Leave review", new_booking_review_path(@booking), class: "btn btn-outline-dark light-font", style: "width: 100%; margin-top: 16px" %>
+  <% end %>
+</div>

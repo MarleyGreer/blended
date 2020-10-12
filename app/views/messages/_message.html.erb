@@ -1,0 +1,25 @@
+
+<div class="message-container chat-box shadow d-flex justify-content-between p-2 mb-2 align-content-center user-false" id="message-<%= message.id %>">
+<div class="d-flex content-container">
+  <% if message.user.artist.present? %>
+  <%= link_to artist_path(message.user.artist) do %>
+  <%= cl_image_tag message.user.photo.key, height: 48, width: 48, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mr-3" %>
+  <% end %>
+  <% else %>
+  <%= cl_image_tag message.user.photo.key, height: 48, width: 48, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mr-3" %>
+  <% end %>
+<div class="chat-content">
+<h6><%= message.user.username%></h6>
+<p><%= message.content %></p>
+</div>
+</div>
+  <div class="message-time">
+  <% if Time.now - 86400 < message.created_at %>
+    <h6 class="text-right"><%= message.created_at.strftime("%l %M %p") %></h6>
+  <% elsif Time.now - 86400 > message.created_at && Time.now - 604800 < message.created_at %>
+    <h6 class="text-right"><%= message.created_at.strftime("%a") %></h6>
+  <% else %>
+   <h6 class="text-right"><%= message.created_at.strftime("%e %b %y") %></h6>
+  <% end %>
+</div>
+</div>
