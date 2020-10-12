@@ -28,5 +28,10 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
+import { togglesearch } from '../components/search';
+
 document.addEventListener('turbolinks:load', () => {
+    togglesearch();
 });
+
+
