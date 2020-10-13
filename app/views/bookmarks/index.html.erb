@@ -14,6 +14,7 @@
   <div class="row">
     <% @bookmarks.each do |bookmark| %>
       <div class="col-sm-6 col-lg-4 mb-3 bg-white m-2 p-3">
+
         <div>
         <%= cl_image_tag bookmark.blob.key,  width: 400, height: 400, crop: :fill, class: "d-block w-100 bookmark-img" %>
           <% if current_user.has_bookmark?(bookmark.blob) %>
@@ -25,7 +26,7 @@
               <i class="far fa-heart ml-2 mt-2 love-icon"></i>
             <% end %>
           <% end %>
-
+          <%= ActiveStorage::Attachment.find_by(blob:bookmark.blob).record.user.username %>
       </div>
       </div>
     <% end %>
