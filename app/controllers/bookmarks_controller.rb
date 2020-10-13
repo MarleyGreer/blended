@@ -1,4 +1,8 @@
 class BookmarksController < ApplicationController
+  def index
+    @bookmarks = current_user.bookmarks
+  end
+
   def create
     blob = ActiveStorage::Blob.find(params[:blob])
     bookmark = Bookmark.new(user: current_user, active_storage_blob: blob)
