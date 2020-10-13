@@ -1,15 +1,15 @@
-<div class="navbar-main d-flex justify-content-between p-3">
+<div class="navbar-main d-flex justify-content-between p-3" style="height: 4rem">
 
 <!-- To Do This Will Be Our Search -->
 
-<%= link_to artists_path do %>
-  <i class="fas fa-search"></i>
-<% end %>
+<div >
+<i id="searchbutton" class="fas fa-search"></i>
+</div>
 
 <!-- To Do This Will Be Our Bookmarks -->
  <% if user_signed_in? %>
 <%= link_to artists_path do %>
-  <i class="far fa-heart"></i>
+  <i  class="far fa-heart"></i>
 <% end %>
 <% end %>
 
