@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users, :only => [:show]
   root to: 'pages#home'
 
-  resources :chats, only: [:create, :show] do
+  resources :chats, only: [:create, :show, :index] do
     member do
       patch :favourites
       patch :archive
@@ -40,6 +40,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :chats, only: [:index]
   resources :reviews, only: [:edit, :update]
+  resources :bookmarks, only: [:index, :create, :destroy]
 end

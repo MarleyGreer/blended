@@ -1,0 +1,35 @@
+<div class="d-flex align-items-center justify-content-between p-3 bg-white">
+    <%= link_to user_path(current_user) do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+
+  <h6 class = "text-center"> liked images  </h6>
+  <%= link_to user_path(current_user) do %>
+  <%= cl_image_tag current_user.photo.key, height: 48, width: 48, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle" %>
+  <% end %>
+  </div>
+
+<div class="container">
+
+  <div class="row">
+    <% @bookmarks.each do |bookmark| %>
+      <div class="col-sm-6 col-lg-4 mb-3 bg-white m-2 p-3">
+        <div>
+        <%= cl_image_tag bookmark.blob.key,  width: 400, height: 400, crop: :fill, class: "d-block w-100 bookmark-img" %>
+          <% if current_user.has_bookmark?(bookmark.blob) %>
+            <%= link_to bookmark_path(bookmark), method: :delete do %>
+              <i class="fas fa-heart ml-2 mt-2 love-icon"></i>
+            <% end %>
+          <% else %>
+            <%= link_to bookmarks_path(blob: bookmark.blob), method: :post do %>
+              <i class="far fa-heart ml-2 mt-2 love-icon"></i>
+            <% end %>
+          <% end %>
+
+      </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+

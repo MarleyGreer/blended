@@ -13,7 +13,7 @@
 <div class="chats">
   <% if @chats.empty? %>
   <div class="empty-chat-index">
-  <i class="far fa-bell"></i>
+  <i class="fas fa-star"></i>
   <h6 >you don't have any messages marked as important... </h6>
   </div>
   <% end %>
@@ -111,7 +111,7 @@
    <% end %>
 
    <% if chat.user.artist.present? %>
-    <%= link_to artist_path(chat.artist), class: "dropdown-item" do%>
+    <%= link_to artist_path(chat.user.artist), class: "dropdown-item" do%>
       <i class="fas fa-user"></i> view profile
     <% end %>
   <% end %>

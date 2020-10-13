@@ -1,7 +1,8 @@
 <h1>My jobs</h1>
 
 <br>
-<%= @bookings.each do |booking| %>
+<% @bookings.each do |booking| %>
+  <% unless booking.total_price.nil? %>
   <div class="booking-card">
     <div class="d-flex justify-content-between align-items-center">
       <div class="d-flex">
@@ -30,4 +31,5 @@
       </div>
     </div>
   </div>
+  <% end %>
 <% end %>
