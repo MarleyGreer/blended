@@ -12,7 +12,7 @@ class ArtistsController < ApplicationController
   def show
     if user_signed_in?
     @chat = Chat.where(artist: current_user.artist, user: @artist.user).or(Chat.where(artist: @artist, user: current_user)).first
-    end 
+    end
     @bookings = @artist.bookings
     @reviews = []
     @bookings.each do |booking|
@@ -22,6 +22,10 @@ class ArtistsController < ApplicationController
         end
       end
     end
+
+    @rating_sum = 0
+    @reviews.each { |review| @rating_sum += review.rating }
+    @rating_sum == 0 ? @average_rating = 0 : @average_rating = @rating_sum / @reviews.count
   end
 
   def create

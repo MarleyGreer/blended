@@ -1,0 +1,13 @@
+.panel-title {
+  position: relative;
+}
+
+.panel-title::after {
+  content: "+";
+  margin-left:auto;
+  margin-right:0;
+}
+
+.panel-title[aria-expanded="true"]::after {
+  content: "-";
+}
