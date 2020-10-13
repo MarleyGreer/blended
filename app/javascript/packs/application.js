@@ -29,7 +29,13 @@ import "bootstrap";
 import { initChatCable } from '../channels/chat_channel';
 
 
+import { togglesearch } from '../components/search';
+
 document.addEventListener('turbolinks:load', () => {
-  initChatCable();
+
+    togglesearch();
+
+    initChatCable();
 });
+
 
