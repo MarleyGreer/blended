@@ -56,7 +56,7 @@
           <i class="far fa-star"></i> mark as important
           <% end %>
           <% end %>
-          <%= link_to artist_path(chat.artist.user), class: "dropdown-item" do%>
+          <%= link_to artist_path(chat.artist), class: "dropdown-item" do%>
           <i class="fas fa-user"></i> view profile
           <% end %>
           <%= link_to archive_chat_path(chat), method: :patch, class: "dropdown-item" do%>

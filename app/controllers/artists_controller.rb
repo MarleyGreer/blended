@@ -11,7 +11,7 @@ class ArtistsController < ApplicationController
 
   def show
     if user_signed_in?
-    @chat = Chat.where(artist: current_user.artist, user: @artist.user).or(Chat.where(artist: @artist, user: current_user)).first
+      @chat = Chat.where(artist: current_user.artist, user: @artist.user).or(Chat.where(artist: @artist, user: current_user)).first
     end
     @bookings = @artist.bookings
     @reviews = []
@@ -49,6 +49,14 @@ class ArtistsController < ApplicationController
   def destroy
     @artist.destroy
     redirect_to artists_path
+  end
+
+  def top
+    @blobs = Bookmark.group(:active_storage_blob_id)
+    .select(:active_storage_blob_id)
+    .count # Gives an array of hashes, each one containing asb_id and count
+    .sort_by { |_k, v| - v } # Sorts by count
+    .map { |k, v|  { blob: ActiveStorage::Blob.find(k) , count: v }} # Transforms them into a nicer hash to be used on the view with the full blob instead of just the id and it's count
   end
 
   private
