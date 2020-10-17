@@ -27,15 +27,14 @@ import "bootstrap";
 
 // Internal imports, e.g:
 import { initChatCable } from '../channels/chat_channel';
-
-
+import { initMapbox } from '../plugins/init_mapbox';
+import { initAutocomplete } from '../plugins/init_autocomplete';
 import { togglesearch } from '../components/search';
 
 document.addEventListener('turbolinks:load', () => {
-
     togglesearch();
-
     initChatCable();
+    initMapbox();
+    initAutocomplete();
 });
-
 
