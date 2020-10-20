@@ -24,17 +24,32 @@ require("channels")
 
 // External imports
 import "bootstrap";
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css'
 
 // Internal imports, e.g:
 import { initChatCable } from '../channels/chat_channel';
+
+import { datepicker } from "../components/calender";
+import { addDuration} from "../components/service_bookings"
+
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
+
 import { togglesearch } from '../components/search';
 
 document.addEventListener('turbolinks:load', () => {
     togglesearch();
+
+    addDuration();
+    initChatCable();
+    datepicker();
+
     initChatCable();
     initMapbox();
     initAutocomplete();
+
 });
 
+
+import "controllers"

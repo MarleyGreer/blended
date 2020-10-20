@@ -2,23 +2,39 @@ class ArtistsController < ApplicationController
   before_action :set_artist, only: [:show, :edit, :destroy]
 
   def index
+    # Search by artist location.
     if params[:query].present?
       # Can only use Geocoder near method on User class.
       @users = User.near(params[:query])
       @artists = @users.each.map { |user| user.artist if user.artist.present? }
-      @artist_users = @users.each.map { |user| user if user.artist.present? }
+      @artist_users = @users.each.map do |user|
+        if user.artist.present? && user.latitude.present? && user.longitude.present?
+          user
+        end
+      end
       @markers = @artist_users.map do |user|
       {
         lat: user.latitude,
         lng: user.longitude,
       }
       end
+    # Search by artist information.
+    elsif
+      params[:query_artist].present?
+      sql_query = " \
+        artists.description @@ :query \
+        OR artists.qualifications @@ :query \
+        OR users.username @@ :query \
+        OR users.first_name @@ :query \
+        OR users.last_name @@ :query \
+      "
+      @artists = Artist.joins(:user).where(sql_query, query: "%#{params[:query_artist]}%")
+    # No search.
     else
       @artists = Artist.all
-      @artist_users = []
-      Artist.all.each do |artist|
+      @artist_users = Artist.all.map do |artist|
         if artist.user.latitude.present? && artist.user.longitude.present?
-          @artist_users << artist.user
+          artist.user
         end
       end
       @markers = @artist_users.map do |user|

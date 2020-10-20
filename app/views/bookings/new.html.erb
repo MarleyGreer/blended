@@ -1,1 +1,29 @@
+<br>
+<%= form_with(model: @booking, url: {action: 'selectdate', id: @booking.artist_id}, html: {method: 'get'}, local: true) do |f| %>
+  <div style="display: block">
+  <h1> Select Services </h1>
+  <br>
+  <%= f.hidden_field :artist_id %>
+  <br>
+  <%= f.fields_for :services_bookings do |s| %>
+    <div style="display: flex">
+    <%= s.label s.object.service.name, class: 'quantity' %>
+    <%= s.hidden_field :service_id %>
+    <%= s.number_field :quantity, placeholder: 'Quantity', data: {duration: s.object.service.duration}, class: 'quantity input' %>
+    </div>
+    <br>
+  <% end %>
+  <br>
+  <h3> Duration <h3>
+  <br>
+  <p id='duration' data-totalduration> Please select Services <p>
+  <br>
+  
+  </div>
+  
 
+
+  <br>
+  <%= f.submit "Select Date" %>
+
+<% end %>

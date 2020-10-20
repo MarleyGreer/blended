@@ -1,8 +1,11 @@
-<%= simple_form_for [@booking, @services_booking] do |f| %>
-  <% @artist.services.each do |service| %>
-  <%= f.input :service, collection: [service], as: :check_boxes %>
-  <%= f.input :quantity, input_html: { name: service.id }, as: :integer, multiple: true %>
-  <% end %>
-  <%= f.input :booking, as: :datetime, html5: true %>
-  <%= f.submit %>
-<% end %>
+
+
+<br>
+
+
+<br>
+<h1 style="text-align: center"> Select Services </h1>
+<br>
+<p style="text-align: center"> Artist - <%= @artist.user.first_name %> <%= @artist.user.last_name %>
+<br>
+<br>

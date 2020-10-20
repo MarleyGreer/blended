@@ -1,0 +1,16 @@
+.nav-tile {
+  display: block;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  padding: 16px;
+  margin: 8px 0;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  a {
+    color: #a278b5;
+    text-decoration: none;
+    font-weight: strong;
+  }
+}
