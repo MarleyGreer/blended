@@ -18,11 +18,23 @@ Rails.application.routes.draw do
 
   resources :artists do
     resources :services, only: [:new, :create]
-    resources :bookings, only: [:create, :show]
+    resources :bookings, only: [:new, :show] 
+
+  end
+
+  resources :bookings do
+    resources :services_bookings, only: [:new]
+  end
+ 
+  resources :bookings do 
+    member do
+      get :selectdate
+      get :selecttime
+    end
   end
 
   resources :services, only: [:destroy, :edit, :update]
-  resources :bookings, only: [:index, :edit, :update, :destroy] do
+  resources :bookings, only: [:index, :edit, :update, :create, :destroy ] do
   resources :services_bookings, only: [:create]
   resources :reviews, only: [:new, :create, :index]
     collection do
