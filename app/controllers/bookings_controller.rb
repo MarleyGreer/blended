@@ -76,7 +76,7 @@ class BookingsController < ApplicationController
     end
     @times2 = []
     @times.each {|time| @times2 << [time[1],(time[1]+@total_duration*60)]}
-    @a = Booking.booking_date(params[:booking][:start_time].to_date)
+    @a = Booking.where(artist_id: params[:booking][:artist_id]).booking_date(params[:booking][:start_time].to_date)
     @range = []
     @a.each {|booking| @range << [booking.start_time,booking.end_time]}
     @disabled = []
