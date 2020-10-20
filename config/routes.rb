@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   end
 
   resources :artists do
+    collection do
+      get :top
+    end
     resources :services, only: [:new, :create]
     resources :bookings, only: [:new, :show] 
 

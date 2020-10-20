@@ -6,8 +6,11 @@ class BookingsController < ApplicationController
   end
 
   def all
-    @bookings = Booking.where(artist: current_user)
+    if user_signed_in? && current_user.artist
+    @bookings = Booking.where(artist: current_user.artist)
+    end
   end
+
 
   def new
     @booking = Booking.new
@@ -18,7 +21,6 @@ class BookingsController < ApplicationController
       @booking.services_bookings.build(service_id: s.id)
     end
   end
-  
 
   def show
     @services_names_qty = @booking.services_bookings.map do |services_booking|
