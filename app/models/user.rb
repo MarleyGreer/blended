@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_one :artist, dependent: :destroy
-  has_many :bookings
-  has_many :bookmarks
+  has_many :bookings, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   has_one_attached :photo
   has_many :chats, dependent: :destroy
   has_many :messages, dependent: :destroy
@@ -22,5 +22,9 @@ class User < ApplicationRecord
 
   def bookmark_of(blob)
     bookmarks.find_by(active_storage_blob: blob)
+  end
+
+  def received_messages
+    Message.joins(:chat).where(chats: {artist: self.artist}).or(Message.joins(:chat).where(chats: {user: self})).where.not(messages: {user: self})
   end
 end
