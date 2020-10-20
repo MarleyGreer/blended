@@ -21,7 +21,10 @@
 
 
 <div id="messages" data-chat-id="<%= @chat.id %>">
+
 <% @messages.each do |message| %>
+<% @chat.messages.order('created_at').each do |message| %>
+
 <div class="message-container chat-box shadow d-flex justify-content-between p-2 mb-2 align-content-center user-<%= message.user == current_user %>" id="message-<%= message.id %>">
 <div class="d-flex content-container">
   <% if message.user.artist.present? %>

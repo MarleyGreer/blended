@@ -5,11 +5,12 @@
       <div class="carousel-item active">
          <%= cl_image_tag @artist.photos[0].key, height: 300, width: 300, crop: :fill, class: "d-block w-100" %>
       </div>
-
+      <% if @artist.photos[1].present? %>
       <% @artist.photos[1..-1].each do |photo| %>
       <div class="carousel-item">
         <%= cl_image_tag photo.key, height: 300, width: 300, crop: :fill, class: "d-block w-100 show-imgs" %>
       </div>
+      <% end %>
       <% end %>
     </div>
     <a class="carousel-control-prev" href="#show_carousel" role="button" data-slide="prev">

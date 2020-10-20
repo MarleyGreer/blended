@@ -1,3 +1,5 @@
+
+<% unless controller_name == "chats" %>
 <div class="navbar-main d-flex justify-content-between p-3" style="height: 4rem">
 
 <!-- To Do This Will Be Our Search -->
@@ -20,11 +22,14 @@
 <% end %>
 
 <!-- Correct Link  -->
+<div data-controller="notification">
  <% if user_signed_in? %>
 <%= link_to chats_path do %>
   <i class="far fa-comments"></i>
+  <p data-target="notification.notify" class="badge badge-warning" style="padding: 3px; position: absolute; visibility: hidden;"><%= 0 %></p>
 <% end %>
 <% end %>
+</div>
 <!-- Correct Link  -->
 
   <% if user_signed_in? %>
@@ -38,4 +43,6 @@
 <% end %>
 
 </div>
+
+<% end %>
 

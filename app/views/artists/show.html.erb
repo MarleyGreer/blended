@@ -136,6 +136,5 @@
 <% end %>
 
 <div class="book">
-  <%= link_to "Book now", artist_bookings_path(@artist), method: :post, class: "btn btn-primary btn-lg btn-block", style: "padding: 10.5px" %>
+  <%= link_to "Book", new_booking_path(artist_id: @artist), artist: @artist, method: :get, class: "btn btn-primary btn-lg btn-block", style: "padding: 10.5px" %>
 </div>
-
