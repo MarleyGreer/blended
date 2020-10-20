@@ -1,0 +1,16 @@
+#booking_qty {
+    width: auto;
+    border-radius: 0px;
+    margin-left: 16px;
+    align-self: center;
+}
+
+.quantity {
+    width: 25%;
+    align-self: center;
+}
+
+select option:disabled {
+    color: red;
+    background-color: red;
+}

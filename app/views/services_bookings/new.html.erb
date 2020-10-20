@@ -1,0 +1,14 @@
+<br>
+<%= form_for @service_booking do |f| %>
+  <% @artist.services.each do |service| %>
+    <div>
+    <%= f.label service.name, class: 'quantity' %>
+    <%= f.text_field :qty, placeholder: 'Quantity' %>
+    </div>
+    <br>
+  <% end %>
+  <div>
+  <br>
+  <%= f.submit %>
+  </div>
+<% end %>
