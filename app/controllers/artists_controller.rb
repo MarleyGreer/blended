@@ -34,7 +34,7 @@ class ArtistsController < ApplicationController
     else
       @artists = Artist.all
       @artist_users = []
-      Artist.all.each do |artist|
+      @artists.each do |artist|
         if artist.user.latitude.present? && artist.user.longitude.present?
           @artist_users << artist.user
         end
