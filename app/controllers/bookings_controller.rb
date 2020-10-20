@@ -65,9 +65,12 @@ class BookingsController < ApplicationController
     @booking.total_duration = @total_duration
     @booking.start_time = Date.strptime(params[:booking][:start_time], '%d-%m-%Y').to_datetime
     @times = []
+    #starttime needs to be updated to reflect artist_start time currently its 9.00am
     @starttime = @booking.start_time + 540*60
     @slottime = @starttime
+    #finalbooking needs to be updated to reflect artist_finish time currently its 6.00pm
     @finalbooking = @starttime + 720*60
+
     @endtime = @slottime + @total_duration * 60 
     while @endtime <= @finalbooking do
       @times << ["#{@slottime.strftime('%H:%M')} - #{@endtime.strftime('%H:%M')}", @slottime]
@@ -76,7 +79,7 @@ class BookingsController < ApplicationController
     end
     @times2 = []
     @times.each {|time| @times2 << [time[1],(time[1]+@total_duration*60)]}
-    @a = Booking.booking_date(params[:booking][:start_time].to_date)
+    @a = Booking.where(artist_id: params[:booking][:artist_id]).booking_date(params[:booking][:start_time].to_date)
     @range = []
     @a.each {|booking| @range << [booking.start_time,booking.end_time]}
     @disabled = []
