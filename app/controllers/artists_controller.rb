@@ -15,9 +15,10 @@ class ArtistsController < ApplicationController
       end
     else
       @artists = Artist.all
-      @artist_users = Artist.all.map do |artist|
-        unless artist.user.latitude.nil? && artist.user.longitude.nil?
-          artist.user
+      @artist_users = []
+      Artist.all.each do |artist|
+        if artist.user.latitude.present? && artist.user.longitude.present?
+          @artist_users << artist.user
         end
       end
       @markers = @artist_users.map do |user|
