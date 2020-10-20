@@ -1,4 +1,19 @@
 // Specific CSS for your home-page
+.home-banner {
+  background-image: asset-url('home.jpeg');
+  background-size: cover;
+  height: 375px;
+  width: 100%;
+  h1 {
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 24pt;
+    text-align: center;
+    padding: 24px;
+  }
+}
+
 .logo-home {
   display: block;
   margin-left: auto;
@@ -15,5 +30,4 @@
 .home-photo{
   width: 100%;
   height: auto;
-
 }
