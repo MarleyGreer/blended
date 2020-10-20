@@ -40,14 +40,12 @@ import { togglesearch } from '../components/search';
 
 document.addEventListener('turbolinks:load', () => {
     togglesearch();
-
     addDuration();
     initChatCable();
     datepicker();
-
     initChatCable();
     initMapbox();
     initAutocomplete();
-
 });
 
+import "controllers"

@@ -18,7 +18,10 @@ class ChatsController < ApplicationController
 
   def show
     @chat = Chat.find(params[:id])
+    @messages = @chat.messages.order('created_at')
     @message = Message.new
+    @messages_received = @chat.messages.where.not(user: current_user)
+    @messages_received.update_all(read: true)
   end
 
   def archived

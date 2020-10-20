@@ -4,9 +4,12 @@
   <i class="fas fa-star"></i>
   <% end %>
 
+  <div data-controller="notification">
   <%= link_to chats_path do %>
-  <i class="fas fa-comment"></i>
+  <i class="far fa-comments"></i>
   <% end %>
+  <p data-target="notification.notify" class="badge badge-warning" style="padding: 3px; position: absolute; visibility: hidden;"><%= 0 %></p>
+ </div>
 
   <%= link_to archived_chats_path do %>
   <i class="fas fa-archive"></i>
