@@ -1,6 +1,6 @@
 <div class="home-page">
   <div class="home-banner">
-    <h1>Browse over 2000+ makeup artists</h1>
+    <h1>Browse over <%= @artists.length %> makeup artists</h1>
     <div class="home-search">
       <%= form_tag artists_path, method: :get, class: "in-line" do %>
       <%= text_field_tag :query,

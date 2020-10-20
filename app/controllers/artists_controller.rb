@@ -12,6 +12,7 @@ class ArtistsController < ApplicationController
           user
         end
       end
+
       @markers = @artist_users.map do |user|
       {
         lat: user.latitude,
@@ -32,9 +33,10 @@ class ArtistsController < ApplicationController
     # No search.
     else
       @artists = Artist.all
-      @artist_users = Artist.all.map do |artist|
+      @artist_users = []
+      Artist.all.each do |artist|
         if artist.user.latitude.present? && artist.user.longitude.present?
-          artist.user
+          @artist_users <<artist.user
         end
       end
       @markers = @artist_users.map do |user|
