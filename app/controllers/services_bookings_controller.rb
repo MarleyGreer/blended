@@ -1,5 +1,15 @@
 class ServicesBookingsController < ApplicationController
 
+  def new
+    @booking = Booking.new
+    @artist = Artist.find(params[:artist_id])
+    @booking.status = "pending"
+    @booking.user = current_user
+    @booking.artist = @artist
+    @service_booking = ServicesBooking.new
+  end
+  
+
   def create
     @booking_id = params[:booking_id].to_i
     booking_duration = 0
@@ -19,6 +29,7 @@ class ServicesBookingsController < ApplicationController
       @services_booking.save
     end
     update_booking(@booking_id, booking_duration, booking_totalprice)
+    raise
   end
 
   def update_booking(booking_id, booking_duration, booking_totalprice)
