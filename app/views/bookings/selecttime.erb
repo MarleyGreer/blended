@@ -1,0 +1,28 @@
+<br>
+<%= simple_form_for @booking, url: {action: 'create'}, method: :post do |f| %>
+  <div style="display: block">
+  <h1> Services Selected </h1>
+    <% @booking.services_bookings.each do |f| %>
+        <ul> <%= "#{f.service.name} (qty: #{f.quantity})"  %> </ul>
+    <% end %>
+  <%= f.fields_for :services_bookings do |s| %>
+    <div style="display: flex">
+    <%= s.hidden_field :service_id %>
+    <%= s.hidden_field :quantity, placeholder: 'Quantity', data: {duration: s.object.service.duration}, class: 'quantity input' %>
+    </div>
+    <br>
+  <% end %>
+  <br>
+  <ul> <%= "Duration - #{@booking.total_duration} minutes " %> </ul>
+  <br>
+  <h5> Select Time </h5>
+  <br>
+    <%= f.hidden_field :artist_id %>
+    <%= f.hidden_field :total_duration %>
+    <p><%= @booking.start_time.strftime('%d-%m-%Y') %></p>
+ 
+  <%= f.input :start_time, collection: @timestest, disabled: @disabled %>
+  </div>
+  <br>
+  <%= f.submit "Book" %>
+<% end %>

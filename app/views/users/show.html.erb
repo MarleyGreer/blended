@@ -1,28 +1,62 @@
-<div class=container style="margin-top: 16px">
 <% if user_signed_in? %>
+  <div class="container bg-white p-4">
+    <br>
+    <h3><%= "Hello #{@user.first_name}" %></h3>
+    <br>
+    <div style="text-align: center">
+      <%= image_tag current_user.photo, height: 60, width: 60, gravity: :face, crop: :fill, style: "border-radius: 50%"  %>
+    </div >
+    <br>
+    <br><strong><%= @user.first_name %> <%= @user.last_name %></strong>
+    <br><i class="fas fa-map-marker-alt fa-lg"></i> <%= @user.address %>
+    <br>Member since <%= @user.created_at.strftime("%d %B %Y") %>
 
-<h1><%= "Hello #{@user.first_name}" %></h1>
-<br>
-<div style="text-align: center">
-<%= image_tag current_user.photo, style: 'width: 64%; border-radius: 50%' , gravity: :face, crop: :fill, radius: :max  %>
-</div >
-<br>
-<p> First Name: <%= @user.first_name %> </p>
-<p> Last Name: <%= @user.last_name %> </p>
-<p> Address: <%= @user.address %> </p>
-<%= link_to "Go to Artist page", artist_path(id: @user.artist), class: "btn btn-blended-primary", style: "width: 100%" unless @user.artist.nil? %>
-<%= link_to "Become an artist", new_artist_path, class: "btn btn-blended-primary", style: "width: 100%" if @user.artist.nil? %>
-<br>
-<br>
-<%= link_to "My bookings", bookings_path, class: "btn btn-blended-primary", style: "width: 100%" %>
-<br>
-<br>
-<%= link_to "My jobs", all_bookings_path, class: "btn btn-blended-primary", style: "width: 100%" if @user.artist %>
-<br>
-<br>
-<%= link_to "Edit Page", edit_user_registration_path, class: "btn btn-blended-primary", style: "width: 100%" %>
-<br>
-<br>
-<%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-blended-primary", style: "width: 100%" %>
+    <hr></hr>
+
+    <% if @user.artist.nil? %>
+      <div class="nav-tile">
+        <i class="fas fa-portrait"></i>
+        <br>
+        <%= link_to "Become an artist", new_artist_path %>
+      </div>
+    <% end %>
+
+    <% unless @user.artist.nil? %>
+      <div class="nav-tile">
+        <i class="fas fa-portrait"></i>
+        <br>
+        <%= link_to "My artist page", artist_path(id: @user.artist) %>
+      </div>
+    <% end %>
+
+    <div class="nav-tile">
+      <i class="far fa-calendar-alt"></i>
+      <br>
+      <%= link_to "My bookings", bookings_path %>
+    </div>
+
+    <% unless @user.artist.nil? %>
+      <div class="nav-tile">
+        <i class="fas fa-people-arrows"></i>
+        <br>
+        <%= link_to "My jobs", all_bookings_path %>
+      </div>
+    <% end %>
+
+    <div class="nav-tile">
+      <i class="fas fa-cog"></i>
+      <br>
+      <%= link_to "Edit Account", edit_user_registration_path %>
+    </div>
+
+    <div class="nav-tile">
+      <i class="fas fa-sign-out-alt"></i>
+      <br>
+      <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+    </div>
+
+    <br><br>
+
+  </div>
 <% end %>
-</div>
+

@@ -1,21 +1,15 @@
-.home-card {
+.card {
   position: relative;
-  box-shadow: 1px 0px 8px lightgrey;
-  width: 320px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
+  width: 310px;
   a {
     color: black;
+    text-decoration: none;
   }
-}
-
-.card-bottom {
-  a {
-    color: black;
-  }
-
   h6 {
     color: black;
   }
-
   p {
     color: black;
   }
@@ -27,30 +21,21 @@
   right: 10px;
 }
 
-
 .home-page h5 {
   text-align: center;
   padding-top: 8px;
 }
 
-.card-bottom {
- align-items: center;
-}
-
 .cards {
   width: 100%;
   overflow-x: scroll;
-  margin-bottom: 90px;
+  margin-bottom: 30px;
 }
 
 .card-rating{
   padding-top: 24px;
   width: 50%;
   text-align: right;
-}
-
-.card-address{
-  width: 50%;
 }
 
 .card-img {
@@ -62,5 +47,6 @@
   padding: 15px;
   margin: 20px auto;
   background-color: #ffffff;
-  box-shadow: 1px 1px 1px 0px lightgrey;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
 }
