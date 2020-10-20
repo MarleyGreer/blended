@@ -1,10 +1,10 @@
 <% if user_signed_in? %>
-  <div class="container bg-white">
+  <div class="container bg-white p-4">
     <br>
     <h3><%= "Hello #{@user.first_name}" %></h3>
     <br>
     <div style="text-align: center">
-      <%= image_tag current_user.photo, height: 60, width: 60, radius: :max, gravity: :face, crop: :fill  %>
+      <%= image_tag current_user.photo, height: 60, width: 60, gravity: :face, crop: :fill, style: "border-radius: 50%"  %>
     </div >
     <br>
     <br><strong><%= @user.first_name %> <%= @user.last_name %></strong>
@@ -35,11 +35,13 @@
       <%= link_to "My bookings", bookings_path %>
     </div>
 
-    <div class="nav-tile">
-      <i class="fas fa-people-arrows"></i>
-      <br>
-      <%= link_to "My jobs", all_bookings_path if @user.artist %>
-    </div>
+    <% unless @user.artist.nil? %>
+      <div class="nav-tile">
+        <i class="fas fa-people-arrows"></i>
+        <br>
+        <%= link_to "My jobs", all_bookings_path %>
+      </div>
+    <% end %>
 
     <div class="nav-tile">
       <i class="fas fa-cog"></i>
@@ -52,6 +54,8 @@
       <br>
       <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
     </div>
+
+    <br><br>
 
   </div>
 <% end %>
