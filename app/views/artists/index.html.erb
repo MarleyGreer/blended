@@ -1,3 +1,6 @@
+<%= form_tag artists_path, method: :get do %>
+<%= collection_select(:artist, :category, @artists, :category, :category, @categoryselect, html_options = { class: "custom-select", id: "category-selector", onchange: "this.form.submit()" }) %>
+<% end %>
 
 <% @artists.each do |artist| %>
   <%= link_to artist_path(artist) do %>

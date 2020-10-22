@@ -4,6 +4,7 @@ class ArtistsController < ApplicationController
   def index
     # Search by artist location.
     if params[:query].present?
+      @categoryselect = { prompt: true }
       # Can only use Geocoder near method on User class.
       @users = User.near(params[:query])
       @artists = @users.each.map { |user| user.artist if user.artist.present? }
@@ -13,13 +14,16 @@ class ArtistsController < ApplicationController
       end
 
       @markers = @artist_users.map do |user|
-        {
-          lat: user.latitude,
-          lng: user.longitude
-        }
+      {
+        lat: user.latitude,
+        lng: user.longitude,
+      }
+      category_selection
       end
     # Search by artist information.
-    elsif params[:query_artist].present?
+    elsif
+      @categoryselect = { prompt: true }
+      params[:query_artist].present?
       sql_query = " \
         artists.description @@ :query \
         OR artists.qualifications @@ :query \
@@ -28,8 +32,10 @@ class ArtistsController < ApplicationController
         OR users.last_name @@ :query \
       "
       @artists = Artist.joins(:user).where(sql_query, query: "%#{params[:query_artist]}%")
+      category_selection
     # No search.
     else
+      @categoryselect = { prompt: true }
       @artists = Artist.all
       @artist_users = []
       @artists.each do |artist|
@@ -44,7 +50,11 @@ class ArtistsController < ApplicationController
           infoWindow: render_to_string(partial: "info_window", locals: { user: user }),
         }
       end
+      category_selection
     end
+  end
+
+  def category_selection
   end
 
   def new
@@ -106,6 +116,6 @@ class ArtistsController < ApplicationController
   end
 
   def artist_params
-    params.require(:artist).permit(:description, :qualifications, photos: [])
+    params.require(:artist).permit(:description, :qualifications, :category, photos: [])
   end
 end
