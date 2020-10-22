@@ -2,6 +2,7 @@ class MessagesController < ApplicationController
   def create
     @chat = Chat.find(params[:chat_id])
     @message = Message.new(message_params)
+
     @message.user = current_user
     @message.chat = @chat
     @message.chat.user_archive = false

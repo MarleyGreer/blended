@@ -22,14 +22,16 @@
 <% end %>
 
 <!-- Correct Link  -->
-<div data-controller="notification">
+
  <% if user_signed_in? %>
+ <div data-controller="notification">
 <%= link_to chats_path do %>
   <i class="far fa-comments"></i>
   <p data-target="notification.notify" class="badge badge-warning" style="padding: 3px; position: absolute; visibility: hidden;"><%= 0 %></p>
 <% end %>
+  </div>
 <% end %>
-</div>
+
 <!-- Correct Link  -->
 
   <% if user_signed_in? %>

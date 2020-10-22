@@ -27,6 +27,6 @@ class User < ApplicationRecord
   end
 
   def received_messages
-    Message.joins(:chat).where(chats: {artist: self.artist}).or(Message.joins(:chat).where(chats: {user: self})).where.not(messages: {user: self})
+    Message.joins(:chat).where(chats: { artist: self.artist}).or(Message.joins(:chat).where(chats: { user: self })).where.not(messages: { user: self })
   end
 end

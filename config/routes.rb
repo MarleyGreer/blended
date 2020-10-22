@@ -19,28 +19,8 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-  resources :artists do
-    collection do
-      get :top
-    end
-    resources :services, only: [:new, :create]
-    resources :bookings, only: [:new, :show] 
-
-  end
-
-  resources :bookings do
-    resources :services_bookings, only: [:new]
-  end
- 
-  resources :bookings do 
-    member do
-      get :selectdate
-      get :selecttime
-    end
-  end
-
   resources :services, only: [:destroy, :edit, :update]
-  resources :bookings, only: [:index, :edit, :update, :create, :destroy ] do
+  resources :bookings, only: [:edit, :update, :create, :destroy, :index ] do
   resources :services_bookings, only: [:create]
   resources :reviews, only: [:new, :create, :index]
     collection do
@@ -58,6 +38,29 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :artists do
+    collection do
+      get :top
+    end
+    resources :services, only: [:new, :create]
+    resources :bookings, only: [:new, :show]
+
+  end
+
+  resources :bookings do
+    resources :services_bookings, only: [:new]
+  end
+
+  resources :bookings do
+    member do
+      get :selectdate
+      get :selecttime
+    end
+  end
+
+
   resources :reviews, only: [:edit, :update]
-  resources :bookmarks, only: [:index, :create, :destroy]
+  resources :bookmarks, only: [:index, :create, :destroy] do
+    collection { post :sort }
+  end
 end
