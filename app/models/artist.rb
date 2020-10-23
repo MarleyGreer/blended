@@ -7,4 +7,5 @@ class Artist < ApplicationRecord
   has_many :bookings
   has_many :chats
   has_many :messages, through: :chats, dependent: :destroy
+  scope :filter_by_category, -> (category) { where category: category }
 end

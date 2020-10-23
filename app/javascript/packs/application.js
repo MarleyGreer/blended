@@ -35,18 +35,16 @@ import { addDuration} from "../components/service_bookings"
 import { initSortable } from '../plugins/init_sortable';
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
-
 import { togglesearch } from '../components/search';
 
 document.addEventListener('turbolinks:load', () => {
-    initSortable();
     addDuration();
     initChatCable();
     datepicker();
     initMapbox();
     initAutocomplete();
     togglesearch();
-
+    initSortable();
 });
 
 import "controllers"

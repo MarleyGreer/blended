@@ -7,19 +7,14 @@ class ArtistsController < ApplicationController
       # Can only use Geocoder near method on User class.
       @users = User.near(params[:query])
       @artists = @users.each.map { |user| user.artist if user.artist.present? }
-      @artist_users = @users.each.map do |user|
-        user.artist.present? && user.latitude.present? && user.longitude.present?
-        user
-      end
-
-      @markers = @artist_users.map do |user|
-        {
-          lat: user.latitude,
-          lng: user.longitude
-        }
-      end
+      category_filter(@artists) if params[:artist].present?
+      artist_users(@artists)
+      markers(@artist_users)
+      @categoryselect = { prompt: true }
+      # raise
     # Search by artist information.
-    elsif params[:query_artist].present?
+    elsif
+      params[:query_artist].present?
       sql_query = " \
         artists.description @@ :query \
         OR artists.qualifications @@ :query \
@@ -28,23 +23,44 @@ class ArtistsController < ApplicationController
         OR users.last_name @@ :query \
       "
       @artists = Artist.joins(:user).where(sql_query, query: "%#{params[:query_artist]}%")
+      artist_users(@artists)
+      markers(@artist_users)
+      @categoryselect = { prompt: true }
     # No search.
     else
       @artists = Artist.all
-      @artist_users = []
-      @artists.each do |artist|
-        artist.user.latitude.present? && artist.user.longitude.present?
-        @artist_users << artist.user
-      end
-
-      @markers = @artist_users.map do |user|
-        {
-          lat: user.latitude,
-          lng: user.longitude,
-          infoWindow: render_to_string(partial: "info_window", locals: { user: user }),
-        }
-      end
+      category_filter(@artists) if params[:artist].present?
+      artist_users(@artists)
+      markers(@artist_users)
+      @categoryselect = { prompt: true }
     end
+  end
+
+  def artist_users(artists)
+    @artist_users = []
+    @artists.each do |artist|
+      artist.user.latitude.present? && artist.user.longitude.present?
+      @artist_users << artist.user
+    end
+    @artist_users
+  end
+
+  def markers(artist_users)
+    @markers = @artist_users.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { user: user }),
+      }
+    end
+    @markers
+  end
+
+  def category_filter(artists)
+    if params[:artist][:category] != ""
+      @artists = @artists.where(category: params[:artist][:category])
+    end
+    @artists
   end
 
   def new
@@ -106,6 +122,6 @@ class ArtistsController < ApplicationController
   end
 
   def artist_params
-    params.require(:artist).permit(:description, :qualifications, photos: [])
+    params.require(:artist).permit(:description, :qualifications, :category, photos: [])
   end
 end
