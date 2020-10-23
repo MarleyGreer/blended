@@ -36,12 +36,12 @@
 <div class="container bottom-padding mt-3">
   <%= render 'shared/show_carousel' %>
   <div class="d-flex justify-content-between bg-white p-2">
-    <div class="user-description">
-      <h3><%= @artist.user.first_name %> <%= @artist.user.last_name %></h3>
-      <h6><i class="fas fa-map-marker-alt fa-lg"></i> <%= @artist.user.address %></h6>
+    <div class="user-description ml-2 mt-4">
+      <h4><%= @artist.user.first_name %> <%= @artist.user.last_name %></h4>
+      <h6><i class="fas fa-map-marker-alt fa-lg pr-1"></i> <%= @artist.user.address %></h6>
       <h6>
       <% if @average_rating == 0 %>
-      No reviews
+
       <% else %>
         <% @average_rating.times do %>
          <%= content_tag(:i, "", class: "fas fa-star rating") %>
@@ -49,12 +49,12 @@
       <% end %>
       </h6>
     </div>
-    <%= cl_image_tag @artist.user.photo.key, height: 60, width: 60, gravity: :face, crop: :fill, radius: :max %>
+    <%= cl_image_tag @artist.user.photo.key, height: 60, width: 60, gravity: :face, crop: :fill, radius: :max, class: "mt-3 mr-3" %>
   </div>
 
   <div class="p-3 margin-show bg-white">
     <hr></hr>
-    <h6>About Me</h6>
+    <h6>About <%= @artist.user.first_name %></h6>
     <p><%= @artist.description %></p>
     <hr></hr>
     <h6>Services</h6>
@@ -70,7 +70,7 @@
     <% end %>
     <br>
     <hr></hr>
-    <h6>Qualifications & Work Experience</h6>
+    <h6>Qualifications & Experience</h6>
     <p><%= @artist.qualifications %></p>
     <hr></hr>
     <h6>Reviews</h6>
@@ -136,5 +136,5 @@
 <% end %>
 
 <div class="book">
-  <%= link_to "Book", new_booking_path(artist_id: @artist), artist: @artist, method: :get, class: "btn btn-primary btn-lg btn-block", style: "padding: 10.5px" %>
+  <%= link_to "Book #{@artist.user.first_name}", new_booking_path(artist_id: @artist), artist: @artist, method: :get, class: "btn btn-primary btn-lg btn-block", style: "padding: 10.5px" %>
 </div>
