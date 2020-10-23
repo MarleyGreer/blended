@@ -17,6 +17,7 @@
         <%= simple_form_for(@artist) do |f| %>
           <%= f.input :description %>
           <%= f.input :qualifications %>
+          <%= f.input :category, collection: ["Makeup Artist", "Makeup & Hair Stylist", "Hair Stylist", "Nail Technician", "Waxing", "Tanning", "Skin & Beauty Treatments", "Multi Service"] %>
           <%= f.input :photos, as: :file, input_html: { multiple: true } %>
           <%= f.submit class: "btn btn-warning"%>
         <% end %>

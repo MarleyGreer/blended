@@ -1,5 +1,12 @@
-<h2><%= user.first_name %></h2>
-<p><%= user.address %></p>
-
+<div class="info-window">
+  <%= link_to artist_path(user.artist) do %>
+  <%= cl_image_tag user.photo.key, height: 60, width: 60, gravity: :face, crop: :fill, style: "border-radius: 100%" %>
+  <div style="text-align: left">
+    <br><h6><%= user.username %></h6>
+    <strong><%= user.artist.category %></strong>
+    <br><%= user.address %>
+  </div>
+  <% end %>
+</div>
 
 
