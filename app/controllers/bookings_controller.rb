@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
   end
 
   def all
-    if user_signed_in? && current_user.artist
+    if user_signed_in?
     @bookings = Booking.where(artist: current_user.artist)
     end
   end
@@ -156,7 +156,11 @@ class BookingsController < ApplicationController
   private
 
   def set_booking
-    @booking = Booking.find(params[:id])
+    if params[:id] = "all"
+      @booking = Booking.all 
+    else
+      @booking = Booking.find(params[:id])
+    end
   end
 
   def booking_params
