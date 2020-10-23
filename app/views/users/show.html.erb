@@ -7,10 +7,9 @@
       <%= image_tag current_user.photo, height: 60, width: 60, gravity: :face, crop: :fill, style: "border-radius: 50%; object-fit: cover;"  %>
     </div >
     <br>
-    <p><strong><%= @user.first_name %> <%= @user.last_name %></strong></p>
-    <p><%= @user.email %></p>
-    <p><i class="fas fa-map-marker-alt fa-lg"></i> <%= @user.address %></p>
-    <p>Member since <%= @user.created_at.strftime("%d %B %Y") %></p>
+    <br><strong><%= @user.first_name %> <%= @user.last_name %></strong>
+    <br><i class="fas fa-map-marker-alt fa-lg"></i> <%= @user.address %>
+    <br>Member since <%= @user.created_at.strftime("%d %B %Y") %>
 
     <hr></hr>
 
