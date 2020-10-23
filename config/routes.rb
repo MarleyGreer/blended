@@ -24,21 +24,21 @@ Rails.application.routes.draw do
       get :top
     end
     resources :services, only: [:new, :create]
-    resources :bookings, only: [:new, :show] 
+    resources :bookings, only: [:new] 
 
   end
 
   resources :bookings do
-    resources :services_bookings, only: [:new]
-  end
- 
-  resources :bookings do 
+    collection do
+      get :all
+    end
     member do
       get :selectdate
       get :selecttime
     end
+    resources :services_bookings, only: [:new]
   end
-
+ 
   resources :services, only: [:destroy, :edit, :update]
   resources :bookings, only: [:index, :edit, :update, :create, :destroy ] do
   resources :services_bookings, only: [:create]
