@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class BookmarksReflex < ApplicationReflex
+  def sort
+    bookmarks = JSON.parse(element.dataset.bookmarks)
+    bookmarks.each do |bookmark|
+      bookmark_record = Bookmark.find(bookmark['id'])
+      bookmark_record.update(position: bookmark['position'])
+    end
+  end
   # Add Reflex methods in this file.
   #
   # All Reflex instances expose the following properties:
@@ -21,5 +28,4 @@ class BookmarksReflex < ApplicationReflex
   #   end
   #
   # Learn more at: https://docs.stimulusreflex.com
-
 end

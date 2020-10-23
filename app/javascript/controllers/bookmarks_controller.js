@@ -15,12 +15,21 @@ export default class extends ApplicationController {
    * By default, StimulusReflex overrides the -connect- method so make sure you
    * call super if you intend to do anything else when this controller connects.
   */
-  sort(event) {
-    console.log("here!!!!!");
-  }
+    sort(event) {
+      let element = document.getElementById('bookmarks-list')
+      let bookmark_elements = document.getElementsByClassName('bookmark-item')
+      let bookmarks = Array.from(bookmark_elements).map((bookmark, index) => {
+        return { id: bookmark.dataset.bookmarkId, position: (index + 1) }
+      })
+      element.dataset.bookmarks = JSON.stringify(bookmarks)
+      this.stimulate('BookmarksReflex#sort', element)
+    }
 
+  }
   // connect () {
-  // //   super.connect()
+
+
+  //   // super.connect()
 
   // }
 
@@ -65,4 +74,3 @@ export default class extends ApplicationController {
   //   console.error('danceError', error);
   //   element.innerText = "Couldn't dance!"
   // }
-}
