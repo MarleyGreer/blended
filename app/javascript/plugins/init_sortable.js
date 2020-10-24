@@ -8,8 +8,7 @@ const initSortable = (element) => {
     ghostClass: "ghost",
      animation: 150,
     onSort: function(event) {
-      console.log('sorted');
-      // list.dispatchEvent(new Event("drop"));
+      list.dispatchEvent(new Event("drop"));
 
     }
   });

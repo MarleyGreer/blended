@@ -1,24 +1,32 @@
-  <div id="show_carousel" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
+
+      <div class="cards d-flex ">
+        <% @artist.photos.order("position").each do |photo| %>
+            <%= cl_image_tag photo.key, height: 400, width: 400, crop: :fill, class: "d-block bookmark-img w-100 show-imgs" %>
+
+          <% end %>
+        </div>
 
 
-      <div class="carousel-item active">
-         <%= cl_image_tag @artist.photos[0].key, height: 300, width: 300, crop: :fill, class: "d-block w-100" %>
+
+<div class="container">
+
+  <div class="row">
+    <% @artist.photos.each do |photo| %>
+      <div class="col-sm-4 my-3">
+        <div class="col-12" style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.3)), url(<%= cl_image_path photo.blob.key %>); height: 300px; background-position: center; background-size: cover; position: relative;">
+        </div>
+        <% if user_signed_in? %>
+        <% if current_user.has_bookmark?(photo.blob) %>
+          <%= link_to bookmark_path(current_user.bookmark_of(photo.blob)), method: :delete do %>
+            <i class="fas fa-heart" style="color: red; position: absolute; top: 4px; right: 24px; font-size: 22px"></i>
+          <% end %>
+        <% else %>
+          <%= link_to bookmarks_path(blob: photo.blob), method: :post do %>
+            <i class="far fa-heart" style="color: red; position: absolute; top: 4px; right: 24px; font-size: 22px"></i>
+          <% end %>
+        <% end %>
       </div>
-      <% if @artist.photos[1].present? %>
-      <% @artist.photos[1..-1].each do |photo| %>
-      <div class="carousel-item">
-        <%= cl_image_tag photo.key, height: 300, width: 300, crop: :fill, class: "d-block w-100 show-imgs" %>
-      </div>
-      <% end %>
-      <% end %>
-    </div>
-    <a class="carousel-control-prev" href="#show_carousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#show_carousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+    <% end %>
   </div>
+</div>
+<% end %>
