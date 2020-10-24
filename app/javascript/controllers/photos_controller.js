@@ -1,9 +1,21 @@
 import ApplicationController from './application_controller'
 
-/* This is the custom StimulusReflex controller for the Bookmarks Reflex.
+/* This is the custom StimulusReflex controller for the Photos Reflex.
  * Learn more at: https://docs.stimulusreflex.com
  */
 export default class extends ApplicationController {
+
+      sort(event) {
+
+        let element = document.getElementById('photos-list')
+        let photo_elements = document.getElementsByClassName('photo-item')
+        let photos = Array.from(photo_elements).map((photo, index) => {
+          return { id: photo.dataset.photoId, position: (index + 1) }
+        })
+        element.dataset.photos = JSON.stringify(photos)
+        this.stimulate('PhotosReflex#sort', element)
+      }
+  }
   /*
    * Regular Stimulus lifecycle methods
    * Learn more at: https://stimulusjs.org/reference/lifecycle-callbacks
@@ -15,23 +27,10 @@ export default class extends ApplicationController {
    * By default, StimulusReflex overrides the -connect- method so make sure you
    * call super if you intend to do anything else when this controller connects.
   */
-    sort(event) {
 
-      let element = document.getElementById('bookmarks-list')
-      let bookmark_elements = document.getElementsByClassName('bookmark-item')
-      let bookmarks = Array.from(bookmark_elements).map((bookmark, index) => {
-        return { id: bookmark.dataset.bookmarkId, position: (index + 1) }
-      })
-      element.dataset.bookmarks = JSON.stringify(bookmarks)
-      this.stimulate('BookmarksReflex#sort', element)
-    }
-
-  }
   // connect () {
-
-
-  //   // super.connect()
-
+  //   super.connect()
+  //   // add your code here, if applicable
   // }
 
   /* Reflex specific lifecycle methods.
@@ -41,26 +40,26 @@ export default class extends ApplicationController {
    * need them.
    *
    * Important:
-   * Make sure to add data-controller="bookmarks" to your markup alongside
-   * data-reflex="Bookmarks#dance" for the lifecycle methods to fire properly.
+   * Make sure to add data-controller="photos" to your markup alongside
+   * data-reflex="Photos#dance" for the lifecycle methods to fire properly.
    *
    * Example:
    *
-   *   <a href="#" data-reflex="click->Bookmarks#dance" data-controller="bookmarks">Dance!</a>
+   *   <a href="#" data-reflex="click->Photos#dance" data-controller="photos">Dance!</a>
    *
    * Arguments:
    *
    *   element - the element that triggered the reflex
    *             may be different than the Stimulus controller's this.element
    *
-   *   reflex - the name of the reflex e.g. "Bookmarks#dance"
+   *   reflex - the name of the reflex e.g. "Photos#dance"
    *
    *   error/noop - the error message (for reflexError), otherwise null
    *
    *   reflexId - a UUID4 or developer-provided unique identifier for each Reflex
    */
 
-  // Assuming you create a "Bookmarks#dance" action in your Reflex class
+  // Assuming you create a "Photos#dance" action in your Reflex class
   // you'll be able to use the following lifecycle methods:
 
   // beforeDance(element, reflex, noop, reflexId) {
@@ -75,3 +74,4 @@ export default class extends ApplicationController {
   //   console.error('danceError', error);
   //   element.innerText = "Couldn't dance!"
   // }
+

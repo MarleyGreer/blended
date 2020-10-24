@@ -46,7 +46,10 @@ document.addEventListener('turbolinks:load', () => {
     datepicker();
     initAutocomplete();
     togglesearch();
-    initSortable();
+    initSortable('#bookmarks-list');
+    initSortable('#photos-list');
+
+
 });
 
 import "controllers"

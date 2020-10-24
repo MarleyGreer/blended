@@ -27,3 +27,18 @@
     </div>
   </div>
 </div>
+
+
+<div class="container ">
+  <div data-controller="photos">
+    <ul id="photos-list" class=" photo-grid grid-list" data-action="drop->photos#sort">
+    <% @artist.photos.order("position").each do |photo| %>
+      <li class="photo-item grid-item" data-photo-id="<%= photo.id %>">
+
+        <%= cl_image_tag photo.key,  width: 400, height: 400, crop: :fill, class: "w-100 bookmark-img" %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+

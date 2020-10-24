@@ -1,15 +1,18 @@
 import Sortable from 'sortablejs';
 import "controllers"
 
-const initSortable = () => {
-  const list = document.querySelector('#bookmarks-list');
+const initSortable = (element) => {
+  const list = document.querySelector(element);
+  if (list) {
   Sortable.create(list, {
     ghostClass: "ghost",
-    animation: 150,
+     animation: 150,
     onSort: function(event) {
-      list.dispatchEvent(new Event("drop"));
+      console.log('sorted');
+      // list.dispatchEvent(new Event("drop"));
+
     }
   });
-};
-
+ };
+}
 export { initSortable };
