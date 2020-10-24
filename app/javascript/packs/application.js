@@ -36,12 +36,14 @@ import { initSortable } from '../plugins/init_sortable';
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
 import { togglesearch } from '../components/search';
+import { bindButton } from '../plugins/init_bindbutton';
 
 document.addEventListener('turbolinks:load', () => {
+    initMapbox();
+    bindButton();
     addDuration();
     initChatCable();
     datepicker();
-    initMapbox();
     initAutocomplete();
     togglesearch();
     initSortable();
