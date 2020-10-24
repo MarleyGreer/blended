@@ -37,7 +37,12 @@ class ArtistsController < ApplicationController
   end
 
   def artist_users(artists)
-    @artists.select { |artist| artist.user.latitude && artist.user.longitude }
+    @artist_users = []
+    @artists.select do |artist|
+      artist.user.latitude.present? && artist.user.longitude.present?
+      @artist_users << artist.user
+    end
+    @artist_users
   end
 
   def markers(artist_users)
