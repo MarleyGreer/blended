@@ -3,11 +3,15 @@
   max-height: 100%;
 }
 
+.bookmark-img{
+  height: auto;
+}
+
 #bookmarks-list {
-  margin: 0;
   padding: 0;
-  display: inline;
   list-style-type: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 // .bookmark-item {
@@ -29,6 +33,21 @@
 }
 
 .bookmark-item {
-  width: 31%;
   height: auto;
+}
+
+
+.list-inline-item {
+  margin: 0;
+}
+
+.list-inline-item:not(:last-child) {
+  margin-right: 0!important;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2px;
+
 }
