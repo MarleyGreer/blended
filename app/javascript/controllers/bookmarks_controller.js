@@ -16,7 +16,9 @@ export default class extends ApplicationController {
    * call super if you intend to do anything else when this controller connects.
   */
     sort(event) {
+
       let element = document.getElementById('bookmarks-list')
+      console.log(event);
       let bookmark_elements = document.getElementsByClassName('bookmark-item')
       let bookmarks = Array.from(bookmark_elements).map((bookmark, index) => {
         return { id: bookmark.dataset.bookmarkId, position: (index + 1) }

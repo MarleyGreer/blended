@@ -1,4 +1,4 @@
-<div class="d-flex align-items-center justify-content-between p-3 bg-white">
+<div class="d-flex align-items-center justify-content-between p-3 mb-2 bg-white">
     <%= link_to user_path(current_user) do %>
     <i class="fas fa-chevron-left"></i>
   <% end %>
@@ -11,13 +11,13 @@
 
 <div class="container ">
   <div data-controller="bookmarks">
-    <ul id="bookmarks-list" class="list-inline" data-action="drop->bookmarks#sort">
+    <ul id="bookmarks-list" class=" photo-grid" data-action="drop->bookmarks#sort">
     <% @bookmarks.each do |bookmark| %>
-    <li class="bookmark-item list-inline-item" data-bookmark-id="<%= bookmark.id %>">
-    <%= cl_image_tag bookmark.blob.key,  width: 400, height: 400, crop: :fill, class: "mt-1 w-100 bookmark-img" %>
-
-
-    </li>
+      <li class="bookmark-item" data-bookmark-id="<%= bookmark.id %>">
+        <%= link_to artist_path(ActiveStorage::Attachment.find_by(blob:bookmark.blob).record.user.artist) do  %>
+        <%= cl_image_tag bookmark.blob.key,  width: 400, height: 400, crop: :fill, class: "w-100 bookmark-img" %>
+        <% end %>
+      </li>
     <% end %>
     </ul>
   </div>
