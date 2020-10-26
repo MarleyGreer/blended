@@ -1,4 +1,12 @@
-<h1>My jobs</h1>
+<div class="d-flex align-items-center justify-content-between p-3 bg-white">
+  <%= link_to user_path(current_user) do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+  <%= form_tag all_bookings_path, method: :get do %>
+    <%= collection_select(:booking, :status, @bookings.uniq { |booking| booking.status }, :status, :status, @statusselect, html_options = { class: "category-filter", id: "status-selector", onchange: "this.form.submit()" }) %>
+      <%= link_to "Clear", all_bookings_path, class: "btn btn-clear-filter" %>
+  <% end %>
+</div>
 
 <br>
 <% @bookings.each do |booking| %>
@@ -26,7 +34,7 @@
         </div>
       </div>
       <div>
-        <%= link_to "View details", details_booking_path(booking), method: :get, class: "btn btn-outline-dark" %>
+        <%= link_to "View", details_booking_path(booking), method: :get, class: "btn btn-details" %>
       </div>
     </div>
   </div>

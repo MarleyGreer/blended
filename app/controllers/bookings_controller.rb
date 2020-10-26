@@ -3,14 +3,24 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = current_user.bookings
+    @statusselect = { prompt: true, prompt: "Status" }
+    status_filter(@bookings) if params[:booking].present?
   end
 
   def all
     if user_signed_in?
-    @bookings = Booking.where(artist: current_user.artist)
+      @bookings = Booking.where(artist: current_user.artist)
     end
+    @statusselect = { prompt: true, prompt: "Status" }
+    status_filter(@bookings) if params[:booking].present?
   end
 
+  def status_filter(bookings)
+    if params[:booking][:status] != ""
+      @bookings = @bookings.select { |booking| booking.status == params[:booking][:status] }
+    end
+    @bookings
+  end
 
   def new
     @booking = Booking.new
@@ -44,7 +54,7 @@ class BookingsController < ApplicationController
     @booking.services_bookings.each do |s|
       @duration = s.service.duration * s.quantity
       @total_duration = @total_duration + @duration
-    end  
+    end
     @booking.total_duration = @total_duration
     @times = []
   end
@@ -61,7 +71,7 @@ class BookingsController < ApplicationController
     @booking.services_bookings.each do |s|
       @duration = s.service.duration * s.quantity
       @total_duration = @total_duration + @duration
-    end  
+    end
     @booking.total_duration = @total_duration
     @booking.start_time = Date.strptime(params[:booking][:start_time], '%d-%m-%Y').to_datetime
     @times = []
@@ -71,7 +81,7 @@ class BookingsController < ApplicationController
     #finalbooking needs to be updated to reflect artist_finish time currently its 6.00pm
     @finalbooking = @starttime + 720*60
 
-    @endtime = @slottime + @total_duration * 60 
+    @endtime = @slottime + @total_duration * 60
     while @endtime <= @finalbooking do
       @times << ["#{@slottime.strftime('%H:%M')} - #{@endtime.strftime('%H:%M')}", @slottime]
       @slottime = @slottime + 30*60
@@ -157,7 +167,7 @@ class BookingsController < ApplicationController
 
   def set_booking
     if params[:id] = "all"
-      @booking = Booking.all 
+      @booking = Booking.all
     else
       @booking = Booking.find(params[:id])
     end
