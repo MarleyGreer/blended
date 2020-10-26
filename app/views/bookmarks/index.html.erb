@@ -13,11 +13,13 @@
   <div data-controller="bookmarks">
     <ul id="bookmarks-list" class=" photo-grid grid-list" data-action="drop->bookmarks#sort">
     <% @bookmarks.each do |bookmark| %>
+    <% if ActiveStorage::Attachment.find_by(blob:bookmark.blob).present? %>
       <li class="bookmark-item grid-item" data-bookmark-id="<%= bookmark.id %>">
         <%= link_to artist_path(ActiveStorage::Attachment.find_by(blob:bookmark.blob).record.user.artist) do  %>
-        <%= cl_image_tag bookmark.blob.key,  width: 400, height: 400, crop: :fill, class: "w-100 bookmark-img" %>
+        <%= cl_image_tag bookmark.blob.key,  width: 400, height: 400, crop: :fill, class: "w-100 bookmark-img", style: "border-radius: 20px;" %>
         <% end %>
       </li>
+    <% end %>
     <% end %>
     </ul>
   </div>

@@ -53,8 +53,11 @@
 </div>
 
 
-<div >
+
 <%= simple_form_for [@chat, @message], remote: true do |f| %>
   <%= f.input :content, label: false, placeholder: "Message..." %>
+  <%= button_tag type: 'submit', class: "btn btn-warning send-radius" do %>
+      <i class="fa fa-paper-plane" aria-hidden="true"></i>
+  <% end %>
 <% end %>
-</div>
+

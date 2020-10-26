@@ -20,7 +20,7 @@
     <% @artists.each do |artist| %>
       <%= link_to artist_path(artist) do %>
         <div class="card ml-3">
-          <%= cl_image_tag artist.photos[0].key, height: 200, width: 400, gravity: :face, crop: :fill, class: "card-img-top", style: "border-top-left-radius: 8px; border-top-right-radius: 8px;" %>
+          <%= cl_image_tag artist.photos.order("position")[0].key, height: 200, width: 400, gravity: :face, crop: :fill, class: "card-img-top fill-photo", style: "border-top-left-radius: 8px; border-top-right-radius: 8px;" %>
           <div class="d-flex justify-content-between">
             <div class="pl-3 pt-3">
              <h6><%= artist.user.first_name %> <%= artist.user.last_name %></h6>
@@ -49,7 +49,7 @@
     <% @recently_added.each do |artist| %>
       <%= link_to artist_path(artist) do %>
         <div class="card ml-3">
-          <%= cl_image_tag artist.photos[0].key, height: 200, width: 400, gravity: :face, crop: :fill, class: "card-img-top", style: "border-top-left-radius: 8px; border-top-right-radius: 8px;" %>
+          <%= cl_image_tag artist.photos.order("position")[0].key, height: 200, width: 400, gravity: :face, crop: :fill, class: "card-img-top fill-photo", style: "border-top-left-radius: 8px; border-top-right-radius: 8px;" %>
           <div class="d-flex justify-content-between">
             <div class="p-3">
              <h6><%= artist.user.first_name %> <%= artist.user.last_name %></h6>

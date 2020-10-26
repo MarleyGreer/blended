@@ -10,3 +10,13 @@ i:active {
     color: #a278b5
 }
 
+.delete-icon-edit{
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  z-index: 1000;
+  background: pink;
+  padding: 5px 6px;
+  font-size: 12px;
+  border-radius: 50%;
+}
