@@ -10,6 +10,17 @@
   color: white;
 }
 
+.btn-clear-filter {
+  border-color: #f39cd1;
+  background-color: none;
+  color: #f39cd1;
+  border-radius: 20px;
+  &:hover {
+    border-color: #f6c3e5;
+    color: #f6c3e5;
+  }
+}
+
 .map-btn-position {
   text-align: center;
   position: sticky;
