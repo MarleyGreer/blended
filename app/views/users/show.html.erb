@@ -12,6 +12,7 @@
     <br><i class="fas fa-map-marker-alt fa-lg pr-1"></i> <%= @user.address %>
     <br>Member since <%= @user.created_at.strftime("%d %B %Y") %>
 
+    <br><br>
     <% if @user.artist.nil? %>
       <div class="nav-tile">
         <i class="fas fa-portrait"></i>

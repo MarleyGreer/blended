@@ -1,6 +1,7 @@
 <br>
+
 <%= simple_form_for @booking, url: {action: 'selecttime'}, method: :get do |f| %>
-  <div style="display: block">
+  <div style="display: block" id="working_hours" data-working-hours="<%= @working_hours.to_json %>"
   <h1> Services Selected </h1>
     <% @booking.services_bookings.each do |f| %>
         <ul> <%= "#{f.service.name} (qty: #{f.quantity})"  %> </ul>
