@@ -44,15 +44,16 @@ import { bindButton } from '../plugins/init_bindbutton';
 
 
 document.addEventListener('turbolinks:load', () => {
+    initSortable('#bookmarks-list');
+    initSortable('#photos-list');
     initMapbox();
     bindButton();
     addDuration();
     initChatCable();
     initAutocomplete();
     togglesearch();
-    initSortable('#bookmarks-list');
-    initSortable('#photos-list');
     datepicker();
+    disablehours();
 });
 
 import "controllers"
