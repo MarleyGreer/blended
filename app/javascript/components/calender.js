@@ -23,10 +23,10 @@ function datepicker() {
     // Usage
     var dates = getDates(startDate, endDate);
     var workinghours = document.getElementById('working_hours');
+    var unavailable_days = [];
     if (workinghours != null) {
         var workinghours = JSON.parse(workinghours.dataset.workingHours);
         console.log(workinghours);
-        var unavailable_days = [];
         if (workinghours.mondaystart_time === null) { unavailable_days.push(1) };
         if (workinghours.tuesdaystart_time === null) { unavailable_days.push(2) };
         if (workinghours.wednesdaystart_time === null) { unavailable_days.push(3) };
