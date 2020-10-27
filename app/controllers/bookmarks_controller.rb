@@ -16,8 +16,4 @@ class BookmarksController < ApplicationController
     bookmark.destroy
     redirect_to request.referrer
   end
-
-  def sort
-  render nothing: true
-  end
 end

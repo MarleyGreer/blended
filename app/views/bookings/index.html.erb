@@ -1,6 +1,20 @@
-<h1>My bookings</h1>
+<div class="d-flex align-items-center justify-content-between p-3 bg-white">
+  <%= link_to user_path(current_user) do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+  <%= form_tag bookings_path, method: :get do %>
+    <%= collection_select(:booking, :status, @bookings.uniq { |booking| booking.status }, :status, :status, @statusselect, html_options = { class: "category-filter", id: "status-selector", onchange: "this.form.submit()" }) %>
+      <%= link_to "Clear", bookings_path, class: "btn btn-clear-filter" %>
+  <% end %>
+</div>
 
 <br>
+<% if @bookings.count == 0 %>
+  <div style="margin-top: 250px; text-align: center">
+    You have no bookings yet...
+  </div>
+<% end %>
+
 <% @bookings.each do |booking| %>
   <div class="booking-card">
     <div class="d-flex justify-content-between align-items-center">
@@ -26,7 +40,7 @@
         </div>
       </div>
       <div>
-        <%= link_to "View details", details_booking_path(booking), method: :get, class: "btn btn-outline-dark" %>
+        <%= link_to "View", details_booking_path(booking), method: :get, class: "btn btn-details" %>
       </div>
     </div>
   </div>

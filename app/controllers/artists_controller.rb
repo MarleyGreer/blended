@@ -1,5 +1,5 @@
 class ArtistsController < ApplicationController
-  before_action :set_artist, only: [:show, :edit, :destroy]
+  before_action :set_artist, only: [:show, :edit, :rating, :update, :destroy]
 
   def index
     # Search by artist location.
@@ -10,7 +10,7 @@ class ArtistsController < ApplicationController
       category_filter(@artists) if params[:artist].present?
       artist_users(@artists)
       markers(@artist_users)
-      @categoryselect = { prompt: true }
+      @categoryselect = { prompt: true, prompt: "Category" }
       # raise
     # Search by artist information.
     elsif
@@ -23,22 +23,23 @@ class ArtistsController < ApplicationController
         OR users.last_name @@ :query \
       "
       @artists = Artist.joins(:user).where(sql_query, query: "%#{params[:query_artist]}%")
+      category_filter(@artists) if params[:artist].present?
       artist_users(@artists)
       markers(@artist_users)
-      @categoryselect = { prompt: true }
+      @categoryselect = { prompt: true, prompt: "Category" }
     # No search.
     else
       @artists = Artist.all
       category_filter(@artists) if params[:artist].present?
       artist_users(@artists)
       markers(@artist_users)
-      @categoryselect = { prompt: true }
+      @categoryselect = { prompt: true, prompt: "Category" }
     end
   end
 
   def artist_users(artists)
     @artist_users = []
-    @artists.each do |artist|
+    @artists.select do |artist|
       artist.user.latitude.present? && artist.user.longitude.present?
       @artist_users << artist.user
     end
@@ -58,7 +59,7 @@ class ArtistsController < ApplicationController
 
   def category_filter(artists)
     if params[:artist][:category] != ""
-      @artists = @artists.where(category: params[:artist][:category])
+      @artists = @artists.select { |artist| artist.category == params[:artist][:category] }
     end
     @artists
   end

@@ -34,6 +34,8 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'cloudinary', '~> 1.16.0'
 gem 'geocoder'
 gem 'pg_search', '~> 2.3.0'
+gem 'letter_opener', group: :development
+gem 'postmark-rails'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'

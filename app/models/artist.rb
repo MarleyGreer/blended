@@ -9,4 +9,19 @@ class Artist < ApplicationRecord
   has_many :messages, through: :chats, dependent: :destroy
   has_one :working_hour
   scope :filter_by_category, -> (category) { where category: category }
+
+  def rating
+    reviews = []
+    bookings.each do |booking|
+      booking.reviews.each do |review|
+        review.present?
+        reviews << review
+      end
+    end
+
+    rating_sum = 0
+    reviews.each { |review| rating_sum += review.rating }
+    rating_sum.zero? ? average_rating = 0 : average_rating = rating_sum / reviews.count
+    average_rating
+  end
 end

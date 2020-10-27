@@ -10,15 +10,40 @@
   color: white;
 }
 
+.btn-clear-filter {
+  border-color: #f39cd1;
+  background-color: none;
+  color: #f39cd1;
+  border-radius: 5px;
+  &:hover {
+    border-color: #f6c3e5;
+    color: #f6c3e5;
+  }
+}
+
+.btn-details {
+  border-color: #f39cd1;
+  background-color: none;
+  color: #f39cd1;
+  border-radius: 5px;
+  &:hover {
+    border-color: #f6c3e5;
+    color: #f6c3e5;
+  }
+}
+
+.map-btn-position {
+  text-align: center;
+  position: sticky;
+  bottom: 80px;
+  z-index:100;
+}
+
 .map-btn {
-  position: fixed;
   background-color: #f39cd1;
   color: white;
-  font-size: 8pt;
   height: 60px;
   width: 60px;
   border-radius: 100%;
-  bottom: 80px;
-  z-index:100;
   border: 0px;
 }

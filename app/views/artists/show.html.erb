@@ -45,7 +45,8 @@
       <% else %>
         <% @average_rating.times do %>
          <%= content_tag(:i, "", class: "fas fa-star rating") %>
-        <% end %><%= @average_rating %> (<%= @reviews.count %>)
+        <% end %>
+        <%= @average_rating %> (<%= @reviews.count %>)
       <% end %>
       </h6>
     </div>

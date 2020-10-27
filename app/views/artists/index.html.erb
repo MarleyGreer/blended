@@ -3,9 +3,17 @@
     <i class="fas fa-chevron-left"></i>
   <% end %>
 
-  <%= form_tag artists_path, method: :get, class: "in-line" do %>
-    <%= collection_select(:artist, :category, @artists, :category, :category, @categoryselect, html_options = { class: "form-control", id: "category-selector", onchange: "this.form.submit()" }) %>
-    <%= link_to "Clear filters", artists_path, class: "btn btn-outline-dark selectbutton" %>
+  <%= form_tag artists_path, method: :get do %>
+    <%= collection_select(:artist, :category, @artists.uniq { |artist| artist.category }, :category, :category, @categoryselect, html_options = { class: "category-filter", id: "category-selector", onchange: "this.form.submit()" }) %>
+    <% if params[:query].present? %>
+      <%= link_to "Clear", artists_path(params: { query: params[:query] }), class: "btn btn-clear-filter" %>
+    <% elsif params[:query_artist].present? %>
+      <%= link_to "Clear", artists_path(params: { query_artist: params[:query_artist] }), class: "btn btn-clear-filter" %>
+    <% else %>
+      <%= link_to "Clear", artists_path, class: "btn btn-clear-filter" %>
+    <% end %>
+    <%= hidden_field_tag :query, params[:query] %>
+    <%= hidden_field_tag :query_artist, params[:query_artist] %>
   <% end %>
 </div>
 
@@ -18,24 +26,23 @@
         <div class="pt-3 pl-3">
          <h6><%= artist.user.first_name %> <%= artist.user.last_name %></h6>
          <p><%= artist.category if artist.category %></p>
-         <p><i class="fas fa-map-marker-alt fa-lg pr-1"></i>  <%= artist.user.address %></p>
         </div>
         <div class="card-rating">
-          <h6>
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star rating"></i>
-            <i class="fas fa-star rating"></i>
-          </h6>
+          <% artist.rating.times do %>
+           <%= content_tag(:i, "", class: "fas fa-star rating") %>
+          <% end %>
         </div>
+      </div>
+      <div class="pl-3">
+        <p><i class="fas fa-map-marker-alt fa-lg pr-1"></i> <%= artist.user.address %></p>
       </div>
     </div>
   <% end %>
   <br>
 <% end %>
 
-<div style="text-align: center">
+<div class="map-btn-position">
   <button type="button" class="map-btn" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="far fa-map"></i></button>
-  <%= render 'artists/map_modal' %>
 </div>
+
+<%= render 'artists/map_modal' %>

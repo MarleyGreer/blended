@@ -1,24 +1,53 @@
 .bookmark-images {
-  list-style-type: none;
   max-width: 100%;
   max-height: 100%;
 }
 
-#bookmarks {
-  margin: 0;
+.bookmark-img{
+  height: auto;
+}
+
+#bookmarks-list {
   padding: 0;
+  list-style-type: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+// .bookmark-item {
+//   list-style: none;
+// }
 
-#bookmarks li {
-  cursor: grab;
-}
 
-#bookmarks li:active {
-  cursor: grabbing;
-}
+// #bookmarks-list li {
+//   cursor: grab;
+// }
 
-#bookmarks li.ghost {
+// #bookmarks-list li:active {
+//   cursor: grabbing;
+// }
+
+#bookmarks-list li.ghost {
   filter: grayscale(1);
   opacity: 0.5;
+}
+
+.bookmark-item {
+  height: auto;
+}
+
+
+.list-inline-item {
+  margin: 0;
+}
+
+.list-inline-item:not(:last-child) {
+  margin-right: 0!important;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2px;
+
 }
