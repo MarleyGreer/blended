@@ -1,24 +1,19 @@
-  <div id="show_carousel" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
 
-
-      <div class="carousel-item active">
-         <%= cl_image_tag @artist.photos[0].key, height: 300, width: 300, crop: :fill, class: "d-block w-100" %>
-      </div>
-      <% if @artist.photos[1].present? %>
-      <% @artist.photos[1..-1].each do |photo| %>
-      <div class="carousel-item">
-        <%= cl_image_tag photo.key, height: 300, width: 300, crop: :fill, class: "d-block w-100 show-imgs" %>
-      </div>
-      <% end %>
-      <% end %>
-    </div>
-    <a class="carousel-control-prev" href="#show_carousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#show_carousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
+      <div class="cards d-flex ">
+        <% @artist.photos.order("position").each do |photo| %>
+        <div class="d-block bookmark-img w-100 show-imgs margin-right position-div">
+            <%= cl_image_tag photo.key, height: 328, width: 328, crop: :fill, id: "photo-#{photo.id}", class: "h-100", style:'border-radius: 22px;' %>
+            <% if user_signed_in? %>
+            <% if current_user.has_bookmark?(photo.blob) %>
+              <%= link_to bookmark_path(current_user.bookmark_of(photo.blob), anchor: "photo-#{photo.id}"), method: :delete, remote: true do %>
+                <i class="fas fa-heart" class="heart" style="background-color: #f6c3e5;position: absolute;bottom: 8px;left: 8px;font-size: 16px;padding: 8px;border-radius: 50%; color: grey;"></i>
+              <% end %>
+            <% else %>
+              <%= link_to bookmarks_path(blob: photo.blob, anchor: "photo-#{photo.id}"), method: :post, remote: true do %>
+                <i class="far fa-heart" class="heart" style="background-color: #f6c3e5; position: absolute;bottom: 8px;left: 8px;font-size: 16px;padding: 8px;border-radius: 50%; color: grey;"></i>
+              <% end %>
+            <% end %>
+            <% end %>
+        </div>
+          <% end %>
+        </div>

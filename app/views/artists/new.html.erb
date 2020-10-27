@@ -13,12 +13,20 @@
   <div class="row">
     <div class="col-12">
       <div class="form-login">
-
         <%= simple_form_for(@artist) do |f| %>
-          <%= f.input :description %>
-          <%= f.input :qualifications %>
-          <%= f.input :category, collection: ["Makeup Artist", "Makeup & Hair Stylist", "Hair Stylist", "Nail Technician", "Waxing", "Tanning", "Skin & Beauty Treatments", "Multi Service"] %>
-          <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+          <%= f.input :description, :label => "Tell Us About Yourself" %>
+          <%= f.input :qualifications, :label => "List any career highlights, qualifications & work experience..." %>
+          <%= f.input :category, collection: ["Makeup Artist", "Makeup & Hair Stylist", "Hair Stylist", "Nail Technician", "Waxing", "Tanning", "Skin & Beauty Treatments", "Multi Service"], :label => "What field are you in?" %>
+
+         <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="8">
+            <%= f.input :photos, as: :file, label: false, input_html: { multiple: true, direct_upload: true, data: { target: "dropzone.input" } } %>
+            <div class="dropzone-msg dz-message needsclick">
+              <h5 class="dropzone-msg-title" style="color: grey;"><i class="fas fa-plus" style="color: grey; font-size: 16px;"></i> Upload Photos </h5>
+              <%= image_tag "home1.jpeg", alt: "alttext", class: "dropzone-msg-desc drop-img"%>
+
+            </div>
+          </div>
+          <br>
           <%= f.submit class: "btn btn-warning"%>
         <% end %>
 

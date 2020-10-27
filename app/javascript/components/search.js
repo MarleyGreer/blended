@@ -1,5 +1,6 @@
 function togglesearch() {
     const searchbutton = document.getElementById('searchbutton');
+    if (searchbutton) {
     searchbutton.addEventListener("click", (event) => {
         var searchbar = document.querySelector('#searchbar').style.display;
         if (searchbar == "none") {
@@ -9,6 +10,7 @@ function togglesearch() {
                 document.querySelector('#searchbar').style.display = "none"
             }
     });
+  }
 }
 
 export {togglesearch}

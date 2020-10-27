@@ -17,13 +17,46 @@
       <div class="form-login">
 
       <%= simple_form_for(@artist) do |f| %>
-        <%= f.input :description %>
-        <%= f.input :qualifications %>
-        <%= f.input :category, collection: ["Makeup Artist", "Makeup & Hair Stylist", "Hair Stylist", "Nail Technician", "Waxing", "Tanning", "Skin & Beauty Treatments", "Multi Service"] %>
-        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-        <%= f.submit class: "btn btn-warning"%>
+        <%= f.input :description, :label => "Tell Us About Yourself" %>
+        <%= f.input :qualifications, :label => "List any career highlights, qualifications & work experience..." %>
+        <%= f.input :category, collection: ["Makeup Artist", "Makeup & Hair Stylist", "Hair Stylist", "Nail Technician", "Waxing", "Tanning", "Skin & Beauty Treatments", "Multi Service"], :label => "What field are you in?" %>
+
+       <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="8">
+          <%= f.input :photos, as: :file, label: false, input_html: { multiple: true, direct_upload: true, data: { target: "dropzone.input" } } %>
+          <div class="dropzone-msg dz-message needsclick">
+            <h5 class="dropzone-msg-title" style="color: grey;"><i class="fas fa-plus" style="color: grey; font-size: 16px;"></i> Upload Photos </h5>
+            <%= image_tag "home1.jpeg", alt: "alttext", class: "dropzone-msg-desc drop-img"%>
+
+          </div>
+        </div>
+
+
+
+        <br>
+        <h6> Order your photos by dragging & dropping them into position </h6><br>
+        <div data-controller="photos">
+          <ul id="photos-list" class=" photo-grid grid-list" data-action="drop->photos#sort">
+          <% @artist.photos.order("position").each do |photo| %>
+            <li class="photo-item grid-item" data-photo-id="<%= photo.id %>">
+              <div id="photos-div" class="position-div">
+              <%= cl_image_tag photo.key,  width: 400, height: 400, crop: :fill, class: "w-100 bookmark-img", style: "border-radius: 20px;" %>
+                <%= link_to delete_image_attachment_artist_url(photo.id),
+                method: :delete,
+                remote: true,
+                data: { confirm: 'Please confirm you wish to remove this photo from your profile' }  do %>
+                <i class="fas fa-trash delete-icon-edit"></i>
+              <% end %>
+              </div>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+        <%= f.button :submit, 'Update Profile', class: 'btn btn-warning' %>
       <% end %>
       </div>
     </div>
   </div>
 </div>
+
+
+

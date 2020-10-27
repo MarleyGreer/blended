@@ -1,5 +1,7 @@
 class ArtistsController < ApplicationController
-  before_action :set_artist, only: [:show, :edit, :rating, :update, :destroy]
+
+  before_action :set_artist, only: [:show, :edit, :update, :destroy]
+
 
   def index
     # Search by artist location.
@@ -70,7 +72,6 @@ class ArtistsController < ApplicationController
 
   def show
     @chat = Chat.where(artist: current_user.artist, user: @artist.user).or(Chat.where(artist: @artist, user: current_user)).first if user_signed_in?
-
     @bookings = @artist.bookings
     @reviews = []
     @bookings.each do |booking|
@@ -100,7 +101,7 @@ class ArtistsController < ApplicationController
 
   def update
     @artist.update(artist_params)
-    redirect_to artist_path(@artist)
+    redirect_to edit_artist_path(@artist)
   end
 
   def destroy
@@ -115,6 +116,12 @@ class ArtistsController < ApplicationController
       .sort_by { |_k, v| - v } # Sorts by count
       .map { |k, v| { blob: ActiveStorage::Blob.find(k), count: v } } # Transforms them into a nicer hash to be used on the view with the full blob instead of just the id and it's count
   end
+
+  def delete_image_attachment
+  @image = ActiveStorage::Attachment.find(params[:id])
+  @image.purge
+  redirect_to edit_artist_path(current_user.artist, anchor: "photos-div")
+end
 
   private
 

@@ -23,9 +23,16 @@ Rails.application.routes.draw do
     collection do
       get :top
     end
+    member do
+    delete :delete_image_attachment
+
+    end
     resources :services, only: [:new, :create]
     resources :bookings, only: [:new]
+
+
     resources :working_hours, only: [:new, :create]
+
 
   end
 
@@ -39,7 +46,7 @@ Rails.application.routes.draw do
     end
     resources :services_bookings, only: [:new]
   end
- 
+
   resources :services, only: [:destroy, :edit, :update]
   resources :working_hours, only: [:destroy, :edit, :update]
   resources :bookings, only: [:edit, :update, :create, :destroy, :index ] do

@@ -48,3 +48,25 @@ h6{
 #file-upload-button {
   background: $pink;
 }
+
+
+.new_message {
+  display: flex;
+  align-items: self-end;
+  justify-content: center;
+  width: 100%;
+}
+
+.message_content {
+  width: 80%;
+}
+
+
+.send-radius {
+  border-radius: 0px 20px 20px 0px;
+  padding-left: 6px;
+}
+
+#message_content {
+  border-radius: 20px 0px 0px 20px;
+}
