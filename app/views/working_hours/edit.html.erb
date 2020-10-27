@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-between align-items-center p-3 bg-white">
+  <%= link_to artist_path(@working_hours.artist) do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+  <h6 class="text-center"> edit working hours </h6>
+  <%= link_to user_path(current_user) do %>
+  <%= cl_image_tag current_user.photo.key, height: 48, width: 48, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle" %>
+  <% end %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-login">
+        <%= simple_form_for @working_hours do |f| %>
+        <h5> Monday </h5>
+        <div style="display: flex; width: 100%; justify-content: space-between">
+        <%= f.input :mondaystart_time, label: false, include_blank: true, disabled: (@working_hours.mondaystart_time.nil? ), input_html: {value: ""}, wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        <p style="align-self: center">-</p>
+        <%= f.input :mondayend_time, label: false, include_blank: true, disabled: (@working_hours.mondaystart_time.nil? ), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        </div>
+        <%= f.input :not_working, label: "Don't work", as: :boolean, input_html: {checked:  (@working_hours.mondaystart_time.nil? ), id: "monday", class: "disable" }, wrapper_html: {style: "align-self: center"} %>
+        <h5> Tuesday </h5>
+        <div style="display: flex; width: 100%; justify-content: space-between">
+        <%= f.input :tuesdaystart_time, label: false, include_blank: true, disabled: (@working_hours.tuesdaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        <%= f.input :tuesdayend_time, label: false, include_blank: true, disabled: (@working_hours.tuesdaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        </div>
+        <%= f.input :not_working, label: "Don't work", as: :boolean, input_html: {checked:  (@working_hours.tuesdaystart_time.nil? ), id: "tuesday", class: "disable" }, wrapper_html: {style: "align-self: center"} %>
+        <h5> Wednesday </h5>
+        <div style="display: flex; width: 100%; justify-content: space-between">
+        <%= f.input :wednesdaystart_time, label: false, include_blank: true, disabled: (@working_hours.wednesdaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        <%= f.input :wednesdayend_time, label: false, include_blank: true, disabled: (@working_hours.wednesdaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        </div>
+        <%= f.input :not_working, label: "Don't work", as: :boolean, input_html: {checked:  (@working_hours.wednesdaystart_time.nil? ), id: "wednesday", class: "disable" }, wrapper_html: {style: "align-self: center"} %>
+        <h5> Thursday </h5>
+        <div style="display: flex; width: 100%; justify-content: space-between">
+        <%= f.input :thursdaystart_time, label: false, include_blank: true, disabled: (@working_hours.thursdaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        <%= f.input :thursdayend_time, label: false, include_blank: true, disabled: (@working_hours.thursdaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        </div>
+        <%= f.input :not_working, label: "Don't work", as: :boolean, input_html: {checked:  (@working_hours.thursdaystart_time.nil? ), id: "thursday", class: "disable" }, wrapper_html: {style: "align-self: center"} %>
+        <h5> Friday </h5>
+        <div style="display: flex; width: 100%; justify-content: space-between">
+        <%= f.input :fridaystart_time, label: false, include_blank: true, disabled: (@working_hours.fridaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        <%= f.input :fridayend_time, label: false, include_blank: true, disabled: (@working_hours.fridaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        </div>
+        <%= f.input :not_working, label: "Don't work", as: :boolean, input_html: {checked:  (@working_hours.fridaystart_time.nil? ), id: "friday", class: "disable" }, wrapper_html: {style: "align-self: center"} %>
+        <h5> Saturday </h5>
+        <div style="display: flex; width: 100%; justify-content: space-between">
+        <%= f.input :saturdaystart_time, label: false, include_blank: true, disabled: (@working_hours.saturdaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        <%= f.input :saturdayend_time, label: false, include_blank: true, disabled: (@working_hours.saturdaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        </div>
+        <%= f.input :not_working, label: "Don't work", as: :boolean, input_html: {checked:  (@working_hours.saturdaystart_time.nil? ), id: "saturday", class: "disable" }, wrapper_html: {style: "align-self: center"} %>
+        <h5> Sunday </h5>
+        <div style="display: flex; width: 100%; justify-content: space-between">
+        <%= f.input :sundaystart_time, label: false, include_blank: true, disabled: (@working_hours.sundaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        <%= f.input :sundayend_time, label: false, include_blank: true, disabled: (@working_hours.sundaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        </div>
+        <%= f.input :not_working, label: "Don't work", as: :boolean, input_html: {checked:  (@working_hours.sundaystart_time.nil? ), id: "sunday", class: "disable" }, wrapper_html: {style: "align-self: center"} %>
+        <%= f.submit class: "btn btn-warning"%>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -74,6 +74,33 @@
     <h6>Qualifications & Experience</h6>
     <p><%= @artist.qualifications %></p>
     <hr></hr>
+    <h6>Standard Working Hours</h6>
+    <% if @artist.working_hour.nil? && current_user == @artist.user %>
+      <div style="float: right; margin-top: 7px">
+      <%= link_to new_artist_working_hour_path(@artist) do %>
+         <i class="far fa-plus-square ml-1 rating"></i> <small>Add Working Hours</small>
+      <% end %>
+      <% end %>
+      <% if @artist.working_hour.present? %>
+      <% first_day = Date.today.at_beginning_of_week %>
+      <% days = 7.times.map {|x| first_day + x.days} %>
+      <% days.each do |day| %>
+        <% a = "#{day.strftime("%A").downcase}start_time" %>
+        <% b = "#{day.strftime("%A").downcase}end_time" %>
+        <p> <%= day.strftime("%A") %> - <%= "Does not Work" if @artist.working_hour[a].nil? %><%= "#{@artist.working_hour[a].strftime("%l:%M%P")} -" if @artist.working_hour[a].present? %><%= @artist.working_hour[b].strftime("%l:%M%P") if @artist.working_hour[b].present? %></p>
+      <% end %>
+      <% end %>
+      <% if current_user == @artist.user && @artist.working_hour.present? %>
+        <%= link_to edit_working_hour_path(@artist.working_hour) do %>
+          <i class="fas fa-pen-square rating ml-2"></i>
+        <% end %>
+        <%= link_to working_hour_path(@artist.working_hour), method: :delete, class: "delete" do %>
+          <i class="fas fa-trash rating ml-2"></i>
+        <% end %>
+      <% end %>    
+    </div>
+    <br>
+    <hr></hr>
     <h6>Reviews</h6>
     <br>
     <% if @reviews.empty? %>
@@ -121,7 +148,7 @@
       <div class="col-sm-4 my-3">
         <div class="col-12" style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.3)), url(<%= cl_image_path photo.blob.key %>); height: 300px; background-position: center; background-size: cover; position: relative;">
         </div>
-        <% if current_user.has_bookmark?(photo.blob) %>
+        <% if @artist.user.has_bookmark?(photo.blob) %>
           <%= link_to bookmark_path(current_user.bookmark_of(photo.blob)), method: :delete do %>
             <i class="fas fa-heart" style="color: red; position: absolute; top: 4px; right: 24px; font-size: 22px"></i>
           <% end %>

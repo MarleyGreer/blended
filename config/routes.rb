@@ -24,7 +24,8 @@ Rails.application.routes.draw do
       get :top
     end
     resources :services, only: [:new, :create]
-    resources :bookings, only: [:new] 
+    resources :bookings, only: [:new]
+    resources :working_hours, only: [:new, :create]
 
   end
 
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
   end
  
   resources :services, only: [:destroy, :edit, :update]
+  resources :working_hours, only: [:destroy, :edit, :update]
   resources :bookings, only: [:edit, :update, :create, :destroy, :index ] do
   resources :services_bookings, only: [:create]
   resources :reviews, only: [:new, :create, :index]
