@@ -113,16 +113,11 @@ class BookingsController < ApplicationController
     @range = []
     @a.each {|booking| @range << [booking.start_time,booking.end_time]}
     @disabled = []
-    @range.each { |range| @times.each {|time| @disabled << time[1] if ((range[0]..range[1]).cover?(time[0]) || (range[0]..range[1]).cover?(time[1]))}}
+    @range.each { |range| @times.each {|time| @disabled << time[1] if ((range[0]..range[1]).cover?(time[1]) || (range[0]..range[1]).cover?(time[1]))}}
     @disabled = @disabled.sort
     @disabled2 = []
-
-    # @disabled.each {|disabled| @disabled2 << ["#{disabled.min.strftime('%H:%M')} - #{disabled.max.strftime('%H:%M')}"]}
-    
-
-    
     @timestest = @times
-    raise
+    
   end
 
   def create
