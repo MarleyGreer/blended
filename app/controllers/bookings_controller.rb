@@ -122,7 +122,7 @@ class BookingsController < ApplicationController
 
     
     @timestest = @times
-    
+    raise
   end
 
   def create
