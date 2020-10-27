@@ -52,8 +52,9 @@ document.addEventListener('turbolinks:load', () => {
     initChatCable();
     initAutocomplete();
     togglesearch();
-    disablehours();
     datepicker();
+    disablehours();
+
 });
 
 import "controllers"
