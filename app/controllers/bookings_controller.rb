@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :details, :edit, :confirm, :decline, :cancel]
+  before_action :set_booking, only: [:details, :edit, :confirm, :decline, :cancel]
 
   def index
     @bookings = current_user.bookings
@@ -23,18 +23,14 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @services_names_qty = @booking.services_bookings.map do |services_booking|
-      service = Service.find(services_booking.service_id)
-      [service.name, services_booking.quantity]
-    end
     @booking = Booking.find(params[:id])
-    @artist = Artist.find(params[:artist_id])
-    @services_booking = ServicesBooking.new
+    @artist = @booking.artist
   end
 
   def selectdate
     @booking = Booking.new
     @artist = Artist.find(params[:booking][:artist_id])
+    @working_hours = @artist.working_hour
     @booking.user = current_user
     @booking.artist = @artist
     @total_duration = 0
@@ -47,11 +43,32 @@ class BookingsController < ApplicationController
     end  
     @booking.total_duration = @total_duration
     @times = []
+    
   end
 
   def selecttime
     @booking = Booking.new
     @artist = Artist.find(params[:booking][:artist_id])
+    @starttimes = {
+      0 => @artist.working_hour.sundaystart_time,
+      1 => @artist.working_hour.mondaystart_time,
+      2 => @artist.working_hour.tuesdaystart_time,
+      3 => @artist.working_hour.wednesdaystart_time,
+      4 => @artist.working_hour.thursdaystart_time,
+      5 => @artist.working_hour.fridaystart_time,
+      6 => @artist.working_hour.saturdaystart_time,
+      7 => @artist.working_hour.sundaystart_time
+    }
+    @endtimes = {
+      0 => @artist.working_hour.sundayend_time,
+      1 => @artist.working_hour.mondayend_time,
+      2 => @artist.working_hour.tuesdayend_time,
+      3 => @artist.working_hour.wednesdayend_time,
+      4 => @artist.working_hour.thursdayend_time,
+      5 => @artist.working_hour.fridayend_time,
+      6 => @artist.working_hour.saturdayend_time,
+      7 => @artist.working_hour.sundayend_time
+    }
     @booking.user = current_user
     @booking.artist = @artist
     @total_duration = 0
@@ -64,31 +81,37 @@ class BookingsController < ApplicationController
     end  
     @booking.total_duration = @total_duration
     @booking.start_time = Date.strptime(params[:booking][:start_time], '%d-%m-%Y').to_datetime
+    
     @times = []
     #starttime needs to be updated to reflect artist_start time currently its 9.00am
-    @starttime = @booking.start_time + 540*60
-    @slottime = @starttime
+    @startday = @booking.start_time.wday
+    @slottime = DateTime.new(@booking.start_time.year,@booking.start_time.month,@booking.start_time.day, @starttimes[@startday].hour, @starttimes[@startday].min)
     #finalbooking needs to be updated to reflect artist_finish time currently its 6.00pm
-    @finalbooking = @starttime + 720*60
-
-    @endtime = @slottime + @total_duration * 60 
+    @finalbooking = DateTime.new(@booking.start_time.year,@booking.start_time.month,@booking.start_time.day, @endtimes[@startday].hour, @endtimes[@startday].min)
+    @endtime = @slottime + @total_duration.minutes 
+    
     while @endtime <= @finalbooking do
       @times << ["#{@slottime.strftime('%H:%M')} - #{@endtime.strftime('%H:%M')}", @slottime]
-      @slottime = @slottime + 30*60
-      @endtime = @slottime + @total_duration * 60
+      @slottime = @slottime + 30.minutes
+      @endtime = @slottime + @total_duration.minutes
     end
+
     @times2 = []
-    @times.each {|time| @times2 << [time[1],(time[1]+@total_duration*60)]}
+    @times.each {|time| @times2 << [time[1],(time[1] + @total_duration.minutes )]}
     @a = Booking.where(artist_id: params[:booking][:artist_id]).booking_date(params[:booking][:start_time].to_date)
     @range = []
     @a.each {|booking| @range << [booking.start_time,booking.end_time]}
     @disabled = []
-    @range.each { |range| @times2.each {|time| @disabled << time if ((range[0]..range[1]).cover?(time[0]) || (range[0]..range[1]).cover?(time[1]))}}
+    @range.each { |range| @times.each {|time| @disabled << time[1] if ((range[0]..range[1]).cover?(time[0]) || (range[0]..range[1]).cover?(time[1]))}}
     @disabled = @disabled.sort
     @disabled2 = []
-    @disabled.each {|disabled| @disabled2 << ["#{disabled.min.strftime('%H:%M')} - #{disabled.max.strftime('%H:%M')}", disabled[0]]}
-    @disabled = @disabled2
-    @timestest = @times - @disabled
+
+    # @disabled.each {|disabled| @disabled2 << ["#{disabled.min.strftime('%H:%M')} - #{disabled.max.strftime('%H:%M')}"]}
+    
+
+    
+    @timestest = @times
+    
   end
 
   def create
@@ -103,8 +126,9 @@ class BookingsController < ApplicationController
     params[:booking][:services_bookings_attributes].each do |s|
       @booking.services_bookings.build(service_id: s[1][:service_id], quantity: s[1][:quantity])
     end
+    
     if @booking.save
-      redirect_to artist_booking_path(@artist, @booking)
+      redirect_to booking_path(@booking.id)
     else
       redirect_to new_user_session_path
     end
@@ -156,7 +180,7 @@ class BookingsController < ApplicationController
   private
 
   def set_booking
-    if params[:id] = "all"
+    if params[:id] == "all"
       @booking = Booking.all 
     else
       @booking = Booking.find(params[:id])

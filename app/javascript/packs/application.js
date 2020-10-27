@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require('jquery')
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -36,6 +37,7 @@ import { initSortable } from '../plugins/init_sortable';
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
 import { togglesearch } from '../components/search';
+import { disablehours } from '../components/workinghours'
 
 document.addEventListener('turbolinks:load', () => {
     addDuration();
@@ -45,6 +47,7 @@ document.addEventListener('turbolinks:load', () => {
     initAutocomplete();
     togglesearch();
     initSortable();
+    disablehours();
 });
 
 import "controllers"

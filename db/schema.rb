@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2020_10_22_013523) do
-
-
+ActiveRecord::Schema.define(version: 2020_10_25_100956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +152,28 @@ ActiveRecord::Schema.define(version: 2020_10_22_013523) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "working_hours", force: :cascade do |t|
+    t.time "mondaystart_time"
+    t.time "mondayend_time"
+    t.time "tuesdaystart_time"
+    t.time "tuesdayend_time"
+    t.time "wednesdaystart_time"
+    t.time "wednesdayend_time"
+    t.time "thursdaystart_time"
+    t.time "thursdayend_time"
+    t.time "fridaystart_time"
+    t.time "fridayend_time"
+    t.time "saturdaystart_time"
+    t.time "saturdayend_time"
+    t.time "sundaystart_time"
+    t.time "sundayend_time"
+    t.string "holidays", array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "artist_id", null: false
+    t.index ["artist_id"], name: "index_working_hours_on_artist_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "artists", "users"
   add_foreign_key "bookings", "artists"
@@ -169,4 +188,5 @@ ActiveRecord::Schema.define(version: 2020_10_22_013523) do
   add_foreign_key "services", "artists"
   add_foreign_key "services_bookings", "bookings"
   add_foreign_key "services_bookings", "services"
+  add_foreign_key "working_hours", "artists"
 end
