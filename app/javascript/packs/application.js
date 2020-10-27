@@ -48,11 +48,11 @@ document.addEventListener('turbolinks:load', () => {
     bindButton();
     addDuration();
     initChatCable();
-    datepicker();
     initAutocomplete();
     togglesearch();
     initSortable('#bookmarks-list');
     initSortable('#photos-list');
+    datepicker();
 });
 
 import "controllers"
