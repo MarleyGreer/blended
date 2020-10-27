@@ -53,7 +53,6 @@ document.addEventListener('turbolinks:load', () => {
     togglesearch();
     initSortable('#bookmarks-list');
     initSortable('#photos-list');
-    disablehours();
 });
 
 import "controllers"
