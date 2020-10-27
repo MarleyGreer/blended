@@ -117,7 +117,7 @@ class ArtistsController < ApplicationController
   def delete_image_attachment
   @image = ActiveStorage::Attachment.find(params[:id])
   @image.purge
-  redirect_to edit_artist_path(current_user.artist)
+  redirect_to edit_artist_path(current_user.artist, anchor: "photos-div")
 end
 
   private

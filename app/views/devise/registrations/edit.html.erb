@@ -34,8 +34,14 @@
            <%= f.input :last_name,
                        required: true,
                        autofocus: true %>
+            <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
+               <%= f.input :photo, as: :file, label: false, input_html: { direct_upload: true, data: { target: "dropzone.input" } } %>
+               <div class="dropzone-msg dz-message needsclick">
+                 <h5 class="dropzone-msg-title" style="color: grey;"><i class="fas fa-plus" style="color: grey; font-size: 16px;"></i> Add A Profile Picture  </h5>
+                 <%= image_tag "home1.jpeg", alt: "alttext", class: "dropzone-msg-desc drop-img"%>
+               </div>
+             </div>
 
-           <%= f.input :photo, as: :file %>
 
            <%= f.input :password,
                        hint: "leave it blank if you don't want to change it",

@@ -2,14 +2,14 @@
       <div class="cards d-flex ">
         <% @artist.photos.order("position").each do |photo| %>
         <div class="d-block bookmark-img w-100 show-imgs margin-right position-div">
-            <%= cl_image_tag photo.key, height: 328, width: 328, crop: :fill, class: "h-100", style:'border-radius: 22px;' %>
+            <%= cl_image_tag photo.key, height: 328, width: 328, crop: :fill, id: "photo-#{photo.id}", class: "h-100", style:'border-radius: 22px;' %>
             <% if user_signed_in? %>
             <% if current_user.has_bookmark?(photo.blob) %>
-              <%= link_to bookmark_path(current_user.bookmark_of(photo.blob)), method: :delete do %>
+              <%= link_to bookmark_path(current_user.bookmark_of(photo.blob), anchor: "photo-#{photo.id}"), method: :delete, remote: true do %>
                 <i class="fas fa-heart" class="heart" style="background-color: #f6c3e5;position: absolute;bottom: 8px;left: 8px;font-size: 16px;padding: 8px;border-radius: 50%; color: grey;"></i>
               <% end %>
             <% else %>
-              <%= link_to bookmarks_path(blob: photo.blob), method: :post do %>
+              <%= link_to bookmarks_path(blob: photo.blob, anchor: "photo-#{photo.id}"), method: :post, remote: true do %>
                 <i class="far fa-heart" class="heart" style="background-color: #f6c3e5; position: absolute;bottom: 8px;left: 8px;font-size: 16px;padding: 8px;border-radius: 50%; color: grey;"></i>
               <% end %>
             <% end %>
