@@ -2,6 +2,7 @@
   position: relative;
   background-color: white;
   width: 310px;
+  height: 340px;
   margin-right: 4px;
   border-radius: 8px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
@@ -16,6 +17,8 @@
   }
   p {
     color: #484848;
+    margin-top: 5px;
+    margin-bottom: 7px;
   }
 }
 
@@ -57,13 +60,6 @@
   width: 100%;
   overflow-x: scroll;
   padding-bottom: 30px;
-}
-
-.card-rating{
-  padding-top: 15px;
-  padding-right: 10px;
-  width: 50%;
-  text-align: right;
 }
 
 .card-img {
