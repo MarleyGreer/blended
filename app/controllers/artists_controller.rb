@@ -8,9 +8,9 @@ class ArtistsController < ApplicationController
     if params[:query].present?
       # Can only use Geocoder near method on User class.
       @users = User.near(params[:query])
-      @artists = @users.each.map { |user| user.artist if user.artist.present? }
+      @artist_users = @users.each.map { |user| user if user.artist.present? }
+      @artists = @artist_users.each.map { |user| user.artist }
       category_filter(@artists) if params[:artist].present?
-      artist_users(@artists)
       markers(@artist_users)
       @categoryselect = { prompt: true, prompt: "Category" }
       # raise
