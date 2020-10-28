@@ -44,6 +44,7 @@ import { bindButton } from '../plugins/init_bindbutton';
 
 
 document.addEventListener('turbolinks:load', () => {
+    togglesearch();
     initSortable('#bookmarks-list');
     initSortable('#photos-list');
     initMapbox();
@@ -51,7 +52,6 @@ document.addEventListener('turbolinks:load', () => {
     addDuration();
     initChatCable();
     initAutocomplete();
-    togglesearch();
     datepicker();
     disablehours();
 });

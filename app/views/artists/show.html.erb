@@ -54,9 +54,12 @@
 
   <div class="p-3 margin-show bg-white">
     <hr></hr>
+    <br>
     <h6>About <%= @artist.user.first_name %></h6>
     <p><%= @artist.description %></p>
+    <br>
     <hr></hr>
+    <br>
     <h6>Services</h6>
 
     <%= render 'shared/show_accordion' %>
@@ -70,9 +73,12 @@
     <% end %>
     <br>
     <hr></hr>
+    <br>
     <h6>Qualifications & Experience</h6>
     <p><%= @artist.qualifications %></p>
+    <br>
     <hr></hr>
+    <br>
     <h6>Standard Working Hours</h6>
     <% if @artist.working_hour.nil? && current_user == @artist.user %>
       <div style="float: right; margin-top: 7px">
@@ -96,8 +102,8 @@
         <%= link_to working_hour_path(@artist.working_hour), method: :delete, class: "delete" do %>
           <i class="fas fa-trash rating ml-2"></i>
         <% end %>
-      <% end %>    
-    </div>
+      <% end %>
+
     <br>
     <hr></hr>
     <h6>Reviews</h6>
