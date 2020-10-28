@@ -2,10 +2,14 @@
   <div class="home-banner">
     <h1>Browse over <%= @artists.length %> makeup artists</h1>
     <div class="home-search">
-      <%= form_tag artists_path, method: :get, class: "in-line" do %>
+      <%= form_tag artists_path,
+      method: :get,
+      class: "in-line",
+      style: "background: white; border-radius: 6px; padding: 5px;" do %>
       <%= text_field_tag :query,
       params[:query],
       class: "location-form",
+      style: "border: none",
       placeholder: "Search by location"
       %>
       <%= submit_tag "Search", class: "btn btn-primary" %>
