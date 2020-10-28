@@ -8,10 +8,10 @@ class ArtistsController < ApplicationController
     if params[:query].present?
       # Can only use Geocoder near method on User class.
       @users = User.near(params[:query])
-      @artist_users = @users.each.map { |user| user if user.artist.present? }
-      @artists = @artist_users.each.map { |user| user.artist }
-      category_filter(@artists) if params[:artist].present?
+      @artists = @users.map { |user| user.artist if user.artist.present? }
+      @artist_users = @users.map { |user| user if user.artist.present? }
       markers(@artist_users)
+      category_filter(@artists) if params[:artist].present?
       @categoryselect = { prompt: true, prompt: "Category" }
       # raise
     # Search by artist information.
@@ -25,16 +25,16 @@ class ArtistsController < ApplicationController
         OR users.last_name @@ :query \
       "
       @artists = Artist.joins(:user).where(sql_query, query: "%#{params[:query_artist]}%")
-      category_filter(@artists) if params[:artist].present?
       artist_users(@artists)
       markers(@artist_users)
+      category_filter(@artists) if params[:artist].present?
       @categoryselect = { prompt: true, prompt: "Category" }
     # No search.
     else
       @artists = Artist.all
-      category_filter(@artists) if params[:artist].present?
       artist_users(@artists)
       markers(@artist_users)
+      category_filter(@artists) if params[:artist].present?
       @categoryselect = { prompt: true, prompt: "Category" }
     end
   end
