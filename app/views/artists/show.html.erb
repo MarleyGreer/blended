@@ -68,22 +68,10 @@
       <h6 style="margin-bottom: 16px;">Experience</h6>
       <p><%= @artist.qualifications %></p>
       <hr></hr>
+      <div style="display: flex; justify-content: space-between">
       <h6 style="margin-bottom: 16px;">Working Hours</h6>
-      <% if @artist.working_hour.nil? && current_user == @artist.user %>
-        <div style="margin-top: 12px;">
-          <%= link_to new_artist_working_hour_path(@artist) do %>
-            <i class="far fa-plus-square ml-1 rating"></i> <small>Add working hours</small>
-          <% end %>
-      <% end %>
+      <div>
       <% if @artist.working_hour.present? %>
-        <% first_day = Date.today.at_beginning_of_week %>
-        <% days = 7.times.map {|x| first_day + x.days} %>
-        <% days.each do |day| %>
-          <% a = "#{day.strftime("%A").downcase}start_time" %>
-          <% b = "#{day.strftime("%A").downcase}end_time" %>
-          <p> <%= day.strftime("%A") %> - <%= "Unavailable" if @artist.working_hour[a].nil? %><%= "#{@artist.working_hour[a].strftime("%l:%M%P")} to " if @artist.working_hour[a].present? %><%= @artist.working_hour[b].strftime("%l:%M%P") if @artist.working_hour[b].present? %></p>
-        <% end %>
-      <% end %>
       <% if current_user == @artist.user && @artist.working_hour.present? %>
         <%= link_to edit_working_hour_path(@artist.working_hour) do %>
           <i class="fas fa-pen-square rating ml-2"></i>
@@ -92,6 +80,36 @@
           <i class="fas fa-trash rating ml-2"></i>
         <% end %>
       <% end %>
+      </div>
+      </div>
+      <% if @artist.working_hour.nil? && current_user == @artist.user %>
+        <div style="margin-top: 12px;">
+          <%= link_to new_artist_working_hour_path(@artist) do %>
+            <i class="far fa-plus-square ml-1 rating"></i> <small>Add working hours</small>
+          <% end %>
+      <% end %>
+      <table class="table table-borderless" style="width: 100%">
+      <thead>
+        <tr>
+          <td scope="col">Day</th>
+          <td scope="col"class="tdright">Start Time</th>
+          <td scope="col" class="tdright">End Time </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% first_day = Date.today.at_beginning_of_week %>
+        <% days = 7.times.map {|x| first_day + x.days} %>
+        <% days.each do |day| %>
+        <tr>
+          <td scope="row"><%= day.strftime("%A") %></th>
+          <td class="tdright"><%= "-" if @artist.working_hour["#{day.strftime("%A").downcase}start_time"].nil? %><%= @artist.working_hour["#{day.strftime("%A").downcase}start_time"].strftime("%l:%M%P") if @artist.working_hour["#{day.strftime("%A").downcase}start_time"].present? %></td>
+          <td class="tdright"><%= "-" if @artist.working_hour["#{day.strftime("%A").downcase}start_time"].nil? %><%= @artist.working_hour["#{day.strftime("%A").downcase}end_time"].strftime("%l:%M%P") if @artist.working_hour["#{day.strftime("%A").downcase}end_time"].present? %></td>
+        </tr>
+        <% end %>
+      </tbody>   
+      </table>
+      <% end %>    
+
       <hr></hr>
       <h6 style="margin-bottom: 16px;">Reviews</h6>
       <% if @reviews.empty? %>

@@ -33,7 +33,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 import { initChatCable } from '../channels/chat_channel';
 
 import { datepicker } from "../components/calender";
-import { addDuration, enablebutton} from "../components/service_bookings"
+import { addDuration, enablebutton, confirmbtn} from "../components/service_bookings"
 import { initSortable } from '../plugins/init_sortable';
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
@@ -53,6 +53,7 @@ document.addEventListener('turbolinks:load', () => {
     initAutocomplete();
     datepicker();
     enablebutton();
+    confirmbtn();
 });
 
 import "controllers"

@@ -116,7 +116,6 @@ class BookingsController < ApplicationController
     @disabled = @disabled.sort
     @disabled2 = []
     @timestest = @times
-    
   end
 
   def create
@@ -131,7 +130,6 @@ class BookingsController < ApplicationController
     params[:booking][:services_bookings_attributes].each do |s|
       @booking.services_bookings.build(service_id: s[1][:service_id], quantity: s[1][:quantity])
     end
-    
     if @booking.save
       redirect_to booking_path(@booking.id)
     else

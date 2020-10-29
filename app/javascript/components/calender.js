@@ -28,13 +28,14 @@ function datepicker() {
     if (workinghours != null) {
         var workinghours = JSON.parse(workinghours.dataset.workingHours);
         var holidaysunavailable = []
+        if (workinghours.holidays != null) {
         workinghours.holidays.forEach(item => {
             var a = new Date(item);
             var aday = a.getUTCDate();
             var amonth = a.getUTCMonth();
             var ayear = a.getUTCFullYear();
             holidaysunavailable.push(`${aday}-${amonth}-${ayear}`);
-        });
+        })};
         if (workinghours.mondaystart_time === null) { unavailable_days.push(1) };
         if (workinghours.tuesdaystart_time === null) { unavailable_days.push(2) };
         if (workinghours.wednesdaystart_time === null) { unavailable_days.push(3) };
