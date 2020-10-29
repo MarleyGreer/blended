@@ -19,3 +19,16 @@
 .unavailabledate {
     background-color: black !important
 }
+
+td {
+    font-size: 13px;
+}
+
+.table th, .table td {
+    padding: 0px;
+    padding-bottom: 8px;
+}
+
+.tdright {
+    text-align: right;
+}

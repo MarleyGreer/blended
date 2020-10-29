@@ -8,6 +8,14 @@
 .quantity {
     width: 50%;
     align-self: center;
+    padding: 10px;
+}
+
+.quantity-input {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    text-align: center;
+    background-color: white;
 }
 
 select option:disabled {

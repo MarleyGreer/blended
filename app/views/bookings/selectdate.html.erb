@@ -13,30 +13,30 @@
 <%= simple_form_for @booking, url: {action: 'selecttime'}, html: {method: :get, style: 'width: 100%'} do |f| %>
   <div style="display: block" id="working_hours" data-working-hours="<%= @working_hours.to_json %>">
   <br>
-  <h4> Services Selected </h4>
+  <h6> Services Selected </h6>
   <br>
   <% @booking.services_bookings.each do |f| %>
-      <ul> <%= "#{f.service.name} (qty: #{f.quantity})" %> </ul>
+      <p class="quantity" style="width: 100%"> <%= "#{f.service.name} (qty: #{f.quantity})" %> </p>
   <% end %>
   <%= f.fields_for :services_bookings do |s| %>
     <div style="display: flex">
     <%= s.hidden_field :service_id %>
     <%= s.hidden_field :quantity, placeholder: 'Quantity', data: {duration: s.object.service.duration}, class: 'quantity input' %>
     </div>
-    <br>
+
   <% end %>
+
+  <p class="quantity" style="width: 100%"> <%= "Duration - #{@booking.total_duration} minutes " %> </p>
   <br>
-  <p> <%= "Duration - #{@booking.total_duration} minutes " %> </p>
-  <br>
-  <h5> Select Date </h5>
+  <h6> Select Date </h6>
   <br>
     <%= f.hidden_field :artist_id %>
     <%= f.hidden_field :total_duration %>
-  <%= f.input :start_time, label: false, as: :string, input_html: {autocomplete: false, class: 'flatpickrdate'} %>
+  <%= f.input :start_time, label: false, as: :string, input_html: {autocomplete: false, class: 'quantity-input flatpickrdate'} %>
 
   </div>
   <br>
-  <%= f.submit "Choose Time", disabled: 'disabled', id: 'timesubmit', class: "btn btn-primary btn-lg btn-block", style: "width: 100%; padding: 10.5px" %>
+  <%= f.submit "Choose Time", disabled: 'disabled', id: 'timesubmit', class: "btn book-btn", style: "width: 100%; padding: 10.5px" %>
 <% end %>
 </div>
 </div>
