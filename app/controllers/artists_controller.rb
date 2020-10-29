@@ -9,6 +9,7 @@ class ArtistsController < ApplicationController
       # Can only use Geocoder near method on User class.
       @users = User.near(params[:query])
       @artists = @users.map { |user| user.artist if user.artist.present? }
+      @artists.delete(nil)
       category_filter(@artists) if params[:artist].present?
       artist_users(@artists)
       markers(@artist_users)
