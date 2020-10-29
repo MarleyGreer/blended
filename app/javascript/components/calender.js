@@ -24,9 +24,17 @@ function datepicker() {
     var dates = getDates(startDate, endDate);
     var workinghours = document.getElementById('working_hours');
     var unavailable_days = [];
+    
     if (workinghours != null) {
         var workinghours = JSON.parse(workinghours.dataset.workingHours);
-        console.log(workinghours);
+        var holidaysunavailable = []
+        workinghours.holidays.forEach(item => {
+            var a = new Date(item);
+            var aday = a.getUTCDate();
+            var amonth = a.getUTCMonth();
+            var ayear = a.getUTCFullYear();
+            holidaysunavailable.push(`${aday}-${amonth}-${ayear}`);
+        });
         if (workinghours.mondaystart_time === null) { unavailable_days.push(1) };
         if (workinghours.tuesdaystart_time === null) { unavailable_days.push(2) };
         if (workinghours.wednesdaystart_time === null) { unavailable_days.push(3) };
@@ -43,7 +51,11 @@ function datepicker() {
         disableMobile: "true",
         disable: [
             function(date) {
-                return unavailable_days.includes(date.getDay());
+                var dateday = date.getUTCDate();
+                var datemonth = date.getUTCMonth();
+                var dateyear = date.getUTCFullYear();
+                var dmy = `${dateday}-${datemonth}-${dateyear}`;
+                return (unavailable_days.includes(date.getDay()) || holidaysunavailable.includes(dmy));
             }
         ],
         // onDayCreate: function(dObj, dStr, fp, dayElem) {

@@ -1,5 +1,16 @@
+<div class="d-flex align-items-center justify-content-between p-3 bg-white">
+
+    <%= link_to :back do %>
+      <i class="fas fa-chevron-left"></i>
+    <% end %>
+    <h6>select time</h6>
 <br>
-<%= simple_form_for @booking, url: {action: 'create'}, method: :post do |f| %>
+</div>
+<br>
+
+<div class="container bottom-padding mt-3">
+<div class="d-flex justify-content-between bg-white p-2" style="border-radius: 20px 20px 0px 0px;">
+<%= simple_form_for @booking, url: {action: 'create'},  html: {method: :post, style: 'width: 100%'} do |f| %>
   <div style="display: block">
   <h1> Services Selected </h1>
     <% @booking.services_bookings.each do |f| %>
@@ -24,5 +35,7 @@
   <%= f.input :start_time, collection: @timestest, disabled: @disabled %>
   </div>
   <br>
-  <%= f.submit "Book" %>
+  <%= f.submit "Book", disabled: 'disabled', id: 'timesubmit', class: "btn btn-primary btn-lg btn-block", style: "width: 100%; padding: 10.5px" %>
 <% end %>
+</div>
+</div>
