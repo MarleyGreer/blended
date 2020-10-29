@@ -1,11 +1,23 @@
+<div class="d-flex align-items-center justify-content-between p-3 bg-white">
+
+    <%= link_to :back do %>
+      <i class="fas fa-chevron-left"></i>
+    <% end %>
+    <h6>select date</h6>
+<br>
+</div>
 <br>
 
-<%= simple_form_for @booking, url: {action: 'selecttime'}, method: :get do |f| %>
-  <div style="display: block" id="working_hours" data-working-hours="<%= @working_hours.to_json %>"
-  <h1> Services Selected </h1>
-    <% @booking.services_bookings.each do |f| %>
-        <ul> <%= "#{f.service.name} (qty: #{f.quantity})"  %> </ul>
-    <% end %>
+<div class="container bottom-padding mt-3">
+<div class="d-flex justify-content-between bg-white p-2" style="border-radius: 20px 20px 0px 0px;">
+<%= simple_form_for @booking, url: {action: 'selecttime'}, html: {method: :get, style: 'width: 100%'} do |f| %>
+  <div style="display: block" id="working_hours" data-working-hours="<%= @working_hours.to_json %>">
+  <br>
+  <h4> Services Selected </h4>
+  <br>
+  <% @booking.services_bookings.each do |f| %>
+      <ul> <%= "#{f.service.name} (qty: #{f.quantity})" %> </ul>
+  <% end %>
   <%= f.fields_for :services_bookings do |s| %>
     <div style="display: flex">
     <%= s.hidden_field :service_id %>
@@ -14,15 +26,17 @@
     <br>
   <% end %>
   <br>
-  <ul> <%= "Duration - #{@booking.total_duration} minutes " %> </ul>
+  <p> <%= "Duration - #{@booking.total_duration} minutes " %> </p>
   <br>
   <h5> Select Date </h5>
   <br>
     <%= f.hidden_field :artist_id %>
     <%= f.hidden_field :total_duration %>
-  <%= f.input :start_time, as: :string, input_html: {autocomplete: false, class: 'flatpickrdate'} %>
+  <%= f.input :start_time, label: false, as: :string, input_html: {autocomplete: false, class: 'flatpickrdate'} %>
 
   </div>
   <br>
-  <%= f.submit "Choose Time" %>
+  <%= f.submit "Choose Time", disabled: 'disabled', id: 'timesubmit', class: "btn btn-primary btn-lg btn-block", style: "width: 100%; padding: 10.5px" %>
 <% end %>
+</div>
+</div>

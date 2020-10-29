@@ -53,7 +53,6 @@ class BookingsController < ApplicationController
     end
     @booking.total_duration = @total_duration
     @times = []
-    
   end
 
   def selecttime
