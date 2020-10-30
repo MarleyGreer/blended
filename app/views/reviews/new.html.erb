@@ -14,7 +14,7 @@
         <%= simple_form_for [@booking, @review] do |f| %>
           <%= f.input :content, label: 'Your review:' %>
           <%= f.input :rating, :collection => [1, 2, 3, 4, 5], label: 'Rating' %>
-          <%= f.submit class: "btn btn-details", style: "width: 100%; margin-top: 10px" %>
+          <%= f.submit "Submit review", class: "btn btn-details", style: "width: 100%; margin-top: 10px" %>
         <% end %>
     </div>
 </div>
