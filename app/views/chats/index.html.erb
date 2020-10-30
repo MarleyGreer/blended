@@ -64,8 +64,8 @@
           <% end %>
         </div>
       </div>
-        <p><%= chat.messages.last.content[0..52] %>
-         <% if chat.messages.last.content.length > 52 %>
+        <p><%= chat.messages.last.content[0..40] %>
+         <% if chat.messages.last.content.length > 40 %>
          ...
          <% end %>
       </p>
@@ -129,8 +129,8 @@
      </div>
 
 
-      <p><%= chat.messages.last.content[0..52] %>
-        <% if chat.messages.last.content.length > 52 %>
+      <p><%= chat.messages.last.content[0..40] %>
+        <% if chat.messages.last.content.length > 40 %>
          ...
          <% end %>
        </p>
