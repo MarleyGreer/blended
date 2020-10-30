@@ -81,14 +81,18 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.artist = @artist
     @total_duration = 0
+    @total_price = 0
     params[:booking][:services_bookings_attributes].each do |s|
       @booking.services_bookings.build(service_id: s[1][:service_id], quantity: s[1][:quantity].to_i)  if s[1][:quantity].to_i > 0
     end
     @booking.services_bookings.each do |s|
       @duration = s.service.duration * s.quantity
+      @price = s.service.price * s.quantity
       @total_duration = @total_duration + @duration
+      @total_price = @total_price + @price
     end
     @booking.total_duration = @total_duration
+    @booking.total_price = @total_price
     @booking.start_time = Date.strptime(params[:booking][:start_time], '%d-%m-%Y').to_datetime
 
     @times = []
@@ -126,6 +130,7 @@ class BookingsController < ApplicationController
     @booking.artist = @artist
     @booking.start_time = params[:booking][:start_time]
     @booking.total_duration = params[:booking][:total_duration].to_i
+    @booking.total_price = params[:booking][:total_price].to_i
     @booking.end_time = @booking.start_time + @booking.total_duration * 60
     params[:booking][:services_bookings_attributes].each do |s|
       @booking.services_bookings.build(service_id: s[1][:service_id], quantity: s[1][:quantity])
