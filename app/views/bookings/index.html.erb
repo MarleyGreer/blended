@@ -30,13 +30,13 @@
             <p class="badge badge-warning" style="padding: 5px; margin-top: 8px"><%= booking.status.upcase %></p>
           <% elsif %>
             <% booking.status == "confirmed" %>
-            <p class="badge badge-warning" style="padding: 5px; margin-top: 8px"><%= booking.status.upcase %></p>
+            <p class="badge badge-success" style="padding: 5px; margin-top: 8px"><%= booking.status.upcase %></p>
           <% elsif %>
             <% booking.status == "declined" %>
-            <p class="badge badge-warning" style="padding: 5px; margin-top: 8px"><%= booking.status.upcase %></p>
+            <p class="badge badge-secondary" style="padding: 5px; margin-top: 8px"><%= booking.status.upcase %></p>
           <% elsif %>
             <% booking.status == "cancelled" %>
-            <p class="badge badge-warning" style="padding: 5px; margin-top: 8px"><%= booking.status.upcase %></p>
+            <p class="badge badge-danger" style="padding: 5px; margin-top: 8px"><%= booking.status.upcase %></p>
           <% end %>
           <br>
         </div>
