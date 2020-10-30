@@ -2,24 +2,30 @@
   position: relative;
   background-color: white;
   width: 310px;
+  height: 340px;
+  margin-right: 4px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
   a {
     color: black;
     text-decoration: none;
   }
   h6 {
     color: black;
+    font-weight:bold;
+    font-size: 18px;
   }
   p {
     color: #484848;
+    margin-top: 5px;
+    margin-bottom: 7px;
   }
 }
 
 .index-card {
   background-color: white;
   width: 90%;
-  height: 320px;
+  height: 340px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;
@@ -30,10 +36,14 @@
   }
   h6 {
     color: black;
+    font-weight:bold;
+    font-size: 18px;
   }
   p {
     color: #484848;
     font-size: 10pt;
+    margin-top: 5px;
+    margin-bottom: 7px;
   }
 }
 
@@ -51,14 +61,7 @@
 .cards {
   width: 100%;
   overflow-x: scroll;
-  margin-bottom: 30px;
-}
-
-.card-rating{
-  padding-top: 15px;
-  padding-right: 10px;
-  width: 50%;
-  text-align: right;
+  padding-bottom: 30px;
 }
 
 .card-img {
@@ -72,4 +75,8 @@
   background-color: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
   border-radius: 8px;
+}
+
+.accordion-card {
+  background-color: white;
 }

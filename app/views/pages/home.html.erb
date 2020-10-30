@@ -1,11 +1,15 @@
 <div class="home-page">
   <div class="home-banner">
-    <h1>Browse over <%= @artists.length %> makeup artists</h1>
+    <h1>Browse over 1,000 makeup artists</h1>
     <div class="home-search">
-      <%= form_tag artists_path, method: :get, class: "in-line" do %>
+      <%= form_tag artists_path,
+      method: :get,
+      class: "in-line",
+      style: "background: white; border-radius: 6px; padding: 5px;" do %>
       <%= text_field_tag :query,
       params[:query],
       class: "location-form",
+      style: "border: none",
       placeholder: "Search by location"
       %>
       <%= submit_tag "Search", class: "btn btn-primary" %>
@@ -21,17 +25,13 @@
       <%= link_to artist_path(artist) do %>
         <div class="card ml-3">
           <%= cl_image_tag artist.photos.order("position")[0].key, height: 200, width: 400, gravity: :face, crop: :fill, class: "card-img-top fill-photo", style: "border-top-left-radius: 8px; border-top-right-radius: 8px;" %>
-          <div class="d-flex justify-content-between">
             <div class="pt-3 pl-3">
              <h6><%= artist.user.first_name %> <%= artist.user.last_name %></h6>
              <p><%= artist.category if artist.category %></p>
-            </div>
-            <div class="card-rating">
               <% artist.rating.times do %>
                <%= content_tag(:i, "", class: "fas fa-star rating") %>
               <% end %>
             </div>
-          </div>
           <div class="pl-3">
             <p><i class="fas fa-map-marker-alt fa-lg pr-1"></i> <%= artist.user.address %></p>
           </div>
@@ -42,28 +42,25 @@
 
   <hr></hr>
   <h5>Recently Added</h5>
-  <br>
-  <div class="cards d-flex">
-    <% @recently_added.each do |artist| %>
-      <%= link_to artist_path(artist) do %>
-        <div class="card ml-3">
-          <%= cl_image_tag artist.photos.order("position")[0].key, height: 200, width: 400, gravity: :face, crop: :fill, class: "card-img-top fill-photo", style: "border-top-left-radius: 8px; border-top-right-radius: 8px;" %>
-          <div class="d-flex justify-content-between">
-            <div class="pt-3 pl-3">
-             <h6><%= artist.user.first_name %> <%= artist.user.last_name %></h6>
-             <p><%= artist.category if artist.category %></p>
-            </div>
-            <div class="card-rating">
-              <% artist.rating.times do %>
-               <%= content_tag(:i, "", class: "fas fa-star rating") %>
-              <% end %>
+    <br>
+    <div class="cards d-flex">
+      <% @recently_added.each do |artist| %>
+        <%= link_to artist_path(artist) do %>
+          <div class="card ml-3">
+            <%= cl_image_tag artist.photos.order("position")[0].key, height: 200, width: 400, gravity: :face, crop: :fill, class: "card-img-top fill-photo", style: "border-top-left-radius: 8px; border-top-right-radius: 8px;" %>
+              <div class="pt-3 pl-3">
+               <h6><%= artist.user.first_name %> <%= artist.user.last_name %></h6>
+               <p><%= artist.category if artist.category %></p>
+                <% artist.rating.times do %>
+                 <%= content_tag(:i, "", class: "fas fa-star rating") %>
+                <% end %>
+              </div>
+            <div class="pl-3">
+              <p><i class="fas fa-map-marker-alt fa-lg pr-1"></i> <%= artist.user.address %></p>
             </div>
           </div>
-          <div class="pl-3">
-            <p><i class="fas fa-map-marker-alt fa-lg pr-1"></i> <%= artist.user.address %></p>
-          </div>
-        </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+
 </div>

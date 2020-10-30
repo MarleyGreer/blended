@@ -1,10 +1,21 @@
-<br>
-<%= simple_form_for @booking, url: {action: 'create'}, method: :post do |f| %>
-  <div style="display: block">
-  <h1> Services Selected </h1>
-    <% @booking.services_bookings.each do |f| %>
-        <ul> <%= "#{f.service.name} (qty: #{f.quantity})"  %> </ul>
+<div style="display=block" class="d-flex align-items-center justify-content-between p-3 bg-white">
+
+    <%= link_to :back do %>
+      <i class="fas fa-chevron-left"></i>
     <% end %>
+    <h6 id="headerdetails">select time</h6>
+<br>
+</div>
+<br>
+<div style="display: block" id="selecttime" class="container bottom-padding mt-3">
+<div class="d-flex justify-content-between bg-white p-2" style="border-radius: 20px 20px 0px 0px;">
+<%= simple_form_for @booking, url: {action: 'create'},  wrapper_mappings: {select: :floating_labels_select}, html: {method: :post, style: 'width: 100%'} do |f| %>
+  <div style="display: block">
+  <h6> Services Selected </h6>
+  <br>
+  <% @booking.services_bookings.each do |f| %>
+      <p class="quantity" style="width: 100%"> <%= "#{f.service.name} (qty: #{f.quantity})" %> </p>
+  <% end %>
   <%= f.fields_for :services_bookings do |s| %>
     <div style="display: flex">
     <%= s.hidden_field :service_id %>
@@ -13,16 +24,60 @@
     <br>
   <% end %>
   <br>
-  <ul> <%= "Duration - #{@booking.total_duration} minutes " %> </ul>
+  <p class="quantity" style="width: 100%"> <%= "Duration - #{@booking.total_duration} minutes " %> </p>
+  <p class="quantity" style="width: 100%"><%= "Booking Date - #{@booking.start_time.strftime('%d-%m-%Y')}" %></p>
   <br>
-  <h5> Select Time </h5>
+  <h6> Select Time </h6>
   <br>
     <%= f.hidden_field :artist_id %>
     <%= f.hidden_field :total_duration %>
-    <p><%= @booking.start_time.strftime('%d-%m-%Y') %></p>
- 
-  <%= f.input :start_time, collection: @timestest, disabled: @disabled %>
+  <%= f.input :start_time, label: false, id: "starttime", collection: @timestest, disabled: @disabled %>
   </div>
   <br>
-  <%= f.submit "Book" %>
-<% end %>
+  <button type="button" id="confirmbtn" class= 'btn book-btn'>Confirm</button>
+
+</div>
+</div>
+
+<br>
+<div style="display: none" id="confirmdetails" class="container bottom-padding mt-3">
+  <div class="d-flex justify-content-between bg-white p-2" style="border-radius: 20px 20px 0px 0px;">
+    <div style='display: block; width: 100%'>
+    <br>
+    <h6> Artist </h6>
+    <br>
+    <p> <%= @artist.user.first_name %> <%= @artist.user.last_name %> </p>
+    <br>
+    <br>
+    <h6> Services selected </h6>
+    <br>
+    <% @booking.services_bookings.each do |s| %>
+      <p><%= "- #{s.service.name} (#{s.quantity})" %></p>
+    <% end %>
+    <br>
+    <h6> Details</h6>
+    <br>
+    <% a = 0 %>
+    <% b = 0 %>
+    <% @booking.services_bookings.each do |s| %>
+      <% a = a + ( s.quantity * s.service.duration ) %>
+      <% b = b + ( s.quantity * s.service.price) %>
+    <% end %>
+    <p> - <%= a %> minutes </p>
+    <p> - $<%= b %> </p>
+    <div style="display: flex">
+    <p id="starttimedisplay"> </p>
+    <p><%= " - #{@booking.start_time.strftime('%A the %d %B, %y')}" %> </p>
+    </div>
+    <br>
+
+    <%= link_to 'Cancel', artists_path, class: "btn book-cancel", style: "margin-bottom: 16px" %>
+    <br>
+    <%= f.submit "Book", disabled: 'disabled', id: 'timesubmit', class: "btn book-btn", style: "width: 100%; padding: 10.5px" %>
+    <% end %>
+    </div>
+
+  <br>
+  <br>
+  </div>
+</div>

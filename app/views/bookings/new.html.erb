@@ -1,22 +1,33 @@
+<div class="d-flex align-items-center justify-content-between p-3 bg-white">
+
+    <%= link_to :back do %>
+      <i class="fas fa-chevron-left"></i>
+    <% end %>
+    <h6>select services</h6>
 <br>
-<%= form_with(model: @booking, url: {action: 'selectdate', id: @booking.artist_id}, html: {method: 'get'}, local: true) do |f| %>
+</div>
+
+<div class="container bottom-padding mt-3">
+<div class="d-flex justify-content-between bg-white p-2" style="border-radius: 20px 20px 0px 0px;">
+<%= form_with(model: @booking, url: {action: 'selectdate', id: @booking.artist_id}, html: {method: 'get', style: 'width: 100%; padding: 8px'}, local: true) do |f| %>
   <div style="display: block">
-  <h1> Select Services </h1>
   <br>
   <%= f.hidden_field :artist_id %>
+  <br>
+  <h6> Services </h6>
   <br>
   <%= f.fields_for :services_bookings do |s| %>
     <div style="display: flex">
     <%= s.label s.object.service.name, class: 'quantity' %>
     <%= s.hidden_field :service_id %>
-    <%= s.number_field :quantity, placeholder: 'Quantity', data: {duration: s.object.service.duration}, class: 'quantity input' %>
+    <%= s.number_field :quantity, placeholder: 'Quantity', data: {duration: s.object.service.duration}, class: 'quantity input quantity-input' %>
     </div>
     <br>
   <% end %>
   <br>
-  <h3> Duration <h3>
+  <h6> Duration <h6>
   <br>
-  <p id='duration' data-totalduration> Please select Services <p>
+  <p id='duration', style="width:100%", class='quantity', data-totalduration> Please select Services <p>
   <br>
   
   </div>
@@ -24,6 +35,8 @@
 
 
   <br>
-  <%= f.submit "Select Date" %>
+  <%= f.submit "Select Date", disabled: 'disabled', id: 'servicesubmit', class: "btn book-btn", style: "width: 100%; padding: 10.5px" %>
 
 <% end %>
+</div>
+</div>

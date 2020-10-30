@@ -1,14 +1,19 @@
-.btn-blended-primary {
-  border-color: #a278b5;
-  background-color: none;
-  color: #a278b5;
+.btn-primary {
+  background-color: #f6c3e5;
+  color: #74345e;
 }
 
-.btn-blended-primary:hover {
-  border-color: white;
-  background-color: #a278b5;
-  color: white;
-}
+// .btn-blended-primary {
+//   border-color: #a278b5;
+//   background-color: none;
+//   color: #a278b5;
+// }
+
+// .btn-blended-primary:hover {
+//   border-color: white;
+//   background-color: #a278b5;
+//   color: white;
+// }
 
 .btn-clear-filter {
   border-color: #f39cd1;
@@ -19,6 +24,31 @@
     border-color: #f6c3e5;
     color: #f6c3e5;
   }
+}
+
+.book-btn {
+  background-color: #f6c3e5;
+  color: #74345e;
+  font-weight: bold;
+  font-size: 18px;
+  width: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 5px;
+  box-shadow: 0 0px 4px rgba(0,0,0,0.2);
+}
+
+.book-cancel {
+  background-color: white;
+  color: #74345e;
+  border: 1px solid #f6c3e5;
+  font-weight: bold;
+  font-size: 18px;
+  width: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 5px;
+  box-shadow: 0 0px 4px rgba(0,0,0,0.2);
 }
 
 .btn-details {
@@ -45,5 +75,6 @@
   height: 60px;
   width: 60px;
   border-radius: 100%;
+  box-shadow: 0 0px 10px rgba(0,0,0,0.3);
   border: 0px;
 }

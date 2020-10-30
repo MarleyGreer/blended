@@ -2,12 +2,12 @@
   position: relative;
 }
 
-.panel-title::after {
+.panel-title::before {
   content: "+";
   margin-left:auto;
   margin-right:0;
 }
 
-.panel-title[aria-expanded="true"]::after {
+.panel-title[aria-expanded="true"]::before {
   content: "-";
 }
