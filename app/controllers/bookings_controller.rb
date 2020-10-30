@@ -90,7 +90,7 @@ class BookingsController < ApplicationController
     end
     @booking.total_duration = @total_duration
     @booking.start_time = Date.strptime(params[:booking][:start_time], '%d-%m-%Y').to_datetime
-    
+
     @times = []
     #starttime needs to be updated to reflect artist_start time currently its 9.00am
     @startday = @booking.start_time.wday
@@ -98,7 +98,7 @@ class BookingsController < ApplicationController
     #finalbooking needs to be updated to reflect artist_finish time currently its 6.00pm
 
     @finalbooking = DateTime.new(@booking.start_time.year,@booking.start_time.month,@booking.start_time.day, @endtimes[@startday].hour, @endtimes[@startday].min)
-    @endtime = @slottime + @total_duration.minutes 
+    @endtime = @slottime + @total_duration.minutes
 
     while @endtime <= @finalbooking do
       @times << ["#{@slottime.strftime('%H:%M')} - #{@endtime.strftime('%H:%M')}", @slottime]
@@ -131,7 +131,9 @@ class BookingsController < ApplicationController
       @booking.services_bookings.build(service_id: s[1][:service_id], quantity: s[1][:quantity])
     end
     if @booking.save
+      @chat = Chat.where(artist: current_user.artist, user: @artist.user).or(Chat.where(artist: @artist, user: current_user)).first if user_signed_in?
       redirect_to booking_path(@booking.id)
+
     else
       redirect_to new_user_session_path
     end
@@ -185,7 +187,7 @@ class BookingsController < ApplicationController
   def set_booking
 
     if params[:id] == "all"
-      @booking = Booking.all 
+      @booking = Booking.all
 
     else
       @booking = Booking.find(params[:id])

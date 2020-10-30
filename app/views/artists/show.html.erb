@@ -71,7 +71,8 @@
       <div style="display: flex; justify-content: space-between">
       <h6 style="margin-bottom: 16px;">Working Hours</h6>
       <div>
-      <% if @artist.working_hour.present? %>
+
+
       <% if current_user == @artist.user && @artist.working_hour.present? %>
         <%= link_to edit_working_hour_path(@artist.working_hour) do %>
           <i class="fas fa-pen-square rating ml-2"></i>
@@ -88,6 +89,8 @@
             <i class="far fa-plus-square ml-1 rating"></i> <small>Add working hours</small>
           <% end %>
       <% end %>
+
+      <% if @artist.working_hour.present? %>
       <table class="table table-borderless" style="width: 100%">
       <thead>
         <tr>
@@ -106,9 +109,10 @@
           <td class="tdright"><%= "-" if @artist.working_hour["#{day.strftime("%A").downcase}start_time"].nil? %><%= @artist.working_hour["#{day.strftime("%A").downcase}end_time"].strftime("%l:%M%P") if @artist.working_hour["#{day.strftime("%A").downcase}end_time"].present? %></td>
         </tr>
         <% end %>
-      </tbody>   
+      </tbody>
       </table>
-      <% end %>    
+      <% end %>
+
 
       <hr></hr>
       <h6 style="margin-bottom: 16px;">Reviews</h6>
