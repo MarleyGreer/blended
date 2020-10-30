@@ -4,8 +4,10 @@
   <% end %>
   <%= form_tag all_bookings_path, method: :get do %>
     <%= collection_select(:booking, :status, @bookings.uniq { |booking| booking.status }, :status, :status, @statusselect, html_options = { class: "category-filter", id: "status-selector", onchange: "this.form.submit()" }) %>
-      <%= link_to "Clear", all_bookings_path, class: "btn btn-clear-filter" %>
-  <% end %>
+      <%= link_to all_bookings_path do %>
+      <i class="fa fa-times cross" aria-hidden="true"></i>
+    <% end %>
+    <% end %>
 </div>
 
 <br>
