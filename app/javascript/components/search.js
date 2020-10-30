@@ -11,6 +11,22 @@ function togglesearch() {
             }
     });
   }
-}
+};
 
-export {togglesearch}
+
+$(document).on("click", '#byLocation', function() {
+    var locationbutton = document.getElementById('locationFilter');
+    var namebutton = document.getElementById('nameFilter');
+    locationbutton.style.display = "block";
+    namebutton.style.display = "none";
+});
+
+$(document).on("click", '#byName', function() {
+    var locationbutton = document.getElementById('locationFilter');
+    var namebutton = document.getElementById('nameFilter');
+    locationbutton.style.display = "none";
+    namebutton.style.display = "block";
+});
+
+
+export {togglesearch};

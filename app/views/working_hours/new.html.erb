@@ -17,7 +17,7 @@
         <%= simple_form_for [@artist, @working_hours] do |f| %>
         <h5> Monday </h5>
         <div style="display: flex; width: 100%; justify-content: space-between">
-        <%= f.input :mondaystart_time, label: false, wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
+        <%= f.input :mondaystart_time, as: :string, label: false, wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
         <p style="align-self: center">-</p>
         <%= f.input :mondayend_time, label: false, wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
         </div>

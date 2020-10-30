@@ -24,10 +24,10 @@ function datepicker() {
     var dates = getDates(startDate, endDate);
     var workinghours = document.getElementById('working_hours');
     var unavailable_days = [];
+    var holidaysunavailable = []
     
     if (workinghours != null) {
         var workinghours = JSON.parse(workinghours.dataset.workingHours);
-        var holidaysunavailable = []
         if (workinghours.holidays != null) {
         workinghours.holidays.forEach(item => {
             var a = new Date(item);
@@ -56,9 +56,18 @@ function datepicker() {
                 var datemonth = date.getUTCMonth();
                 var dateyear = date.getUTCFullYear();
                 var dmy = `${dateday}-${datemonth}-${dateyear}`;
-                return (unavailable_days.includes(date.getDay()) || holidaysunavailable.includes(dmy));
-            }
-        ],
+                if (unavailable_days != []) {
+                    if (unavailable_days.includes(date.getDay())) {
+                        return true;
+                    } else if (holidaysunavailable != []) {
+                        return (holidaysunavailable.includes(dmy))}
+                    else
+                        return false;
+                    }
+                    if (holidaysunavailable != []) {
+                        return (holidaysunavailable.includes(dmy))
+                    }
+                }]
         // onDayCreate: function(dObj, dStr, fp, dayElem) {
         //     var day = dayElem.dateObj.getDay();
         //     console.log(day)
@@ -69,8 +78,5 @@ function datepicker() {
         // }
     });
 }
-
-
-
 
 export { datepicker }

@@ -6,25 +6,28 @@
         <input type="text" placeholder="Search">
         <i class="fas fa-search" aria-hidden="true"></i>
     </div> -->
-
+    <div style="display: flex; justify-content: space-between; margin-bottom: 8px">
+    <button class="btn btn-details" id="byLocation" style="width:48%">By Location</button>
+    <button class="btn btn-details" id="byName" style="width:48%">By Name</button>
+    </div>
+    <div style="display: none" id="locationFilter">
     <%= form_tag artists_path, method: :get, class: "in-line" do %>
     <%= text_field_tag :query,
     params[:query],
     class: "location-form",
     placeholder: "Search location"
     %>
-    <%= submit_tag "Search", class: "btn btn-primary" %>
     <% end %>
-
+    </div>
+    <div style="display: none" id="nameFilter">
     <%= form_tag artists_path, method: :get, class: "in-line" do %>
     <%= text_field_tag :query_artist,
     params[:query_artist],
     class: "artist-form",
     placeholder: "Search name"
     %>
-    <%= submit_tag "Search", class: "btn btn-primary" %>
     <% end %>
-
+    </div>
   <!-- <div style="width: 90%; margin-top: 0px">
         <ul class="list-group list-group-horizontal">
           <button type="button" class="btn search-button" style="flex-grow: 1; margin: 8px">Artist</button>
