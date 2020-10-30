@@ -1,8 +1,22 @@
-<h1 class="header">New review</h1>
-<%= simple_form_for [@booking, @review] do |f| %>
-  <div class="container">
-    <%= f.input :content, label: 'Your review:' %>
-    <%= f.input :rating, :collection => [1, 2, 3, 4, 5], label: 'Rating' %>
-    <%= f.submit %>
+<div class="d-flex align-items-center justify-content-between p-3 bg-white">
+    <%= link_to details_booking_path(@booking) do %>
+    <i class="fas fa-chevron-left"></i>
   <% end %>
+
+  <h6 class = "text-center">leave a review</h6>
+  <%= link_to user_path(current_user) do %>
+    <%= cl_image_tag current_user.photo.key, height: 48, width: 48, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle" %>
+  <% end %>
+  </div>
+
+  <div class="container mt-4">
+    <div class="bg-white p-5" style="border-radius: 20px 20px 20px 20px;">
+        <%= simple_form_for [@booking, @review] do |f| %>
+          <%= f.input :content, label: 'Your review:' %>
+          <%= f.input :rating, :collection => [1, 2, 3, 4, 5], label: 'Rating' %>
+          <%= f.submit "Submit review", class: "btn btn-details", style: "width: 100%; margin-top: 10px" %>
+        <% end %>
+    </div>
 </div>
+
+
