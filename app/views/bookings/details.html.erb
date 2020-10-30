@@ -23,12 +23,13 @@
 
 <div class="booking-card">
 <div style="text-align: center">
+  <h5>Booking Details </h5>
   <% if @booking.user == current_user %>
   <%= link_to artist_path(@booking.artist) do  %>
-<%= cl_image_tag @booking.artist.user.photo.key, height: 100, width: 100, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mb-2" %>
+<%= cl_image_tag @booking.artist.user.photo.key, height: 100, width: 100, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle m-3" %>
   <% end %>
 <% else  %>
-<%= cl_image_tag @booking.user.photo.key, height: 100, width: 100, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mb-2" %>
+<%= cl_image_tag @booking.user.photo.key, height: 100, width: 100, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle m-3" %>
 <% end %>
 
 <br>
@@ -45,36 +46,39 @@
     <p class="badge badge-warning" style="padding: 5px; font-size: 16px;"><%= @booking.status.upcase %></p>
   <% end %>
   </div>
+  <div style="text-align: center;">
 
-  <br>Services selected:
-  <ul>
+  <%= @booking.start_time.strftime("%-l:%M%P") %> - <%= @booking.end_time.strftime("%-l:%M%P") %><br>
+  <%= @booking.start_time.strftime("#{@booking.start_time.day.ordinalize} of %B %Y") %>
+   <br><%= @booking.total_duration / 60  %> Hours <%=  @booking.total_duration % 60 %> Minutes
+</div>
+  <br><br>
+  <ul style="list-style: none;">
     <% @services_names_qty.each do |service| %>
      <li><%= service[0] %> x <%= service[1] %> people</li>
     <% end %>
   </ul>
-  <br>Start time: <%= @booking.start_time.strftime("%d %B %Y, %-l:%M%P") %>
-  <br>End time: <%= @booking.end_time.strftime("%d %B %Y, %-l:%M%P") %>
-  <br>Total duration (hr): <%= @booking.total_duration / 60 %>
-  <br>Total price: $<%= @booking.total_price %>
+
+    <strong><br>Total price: <%= @booking.total_price %></strong>
 
   <br><br>
   <% if @booking.artist.user == current_user && @booking.status == "pending" then %>
-    <%= link_to confirm_booking_path(@booking), method: :patch do %>
-    <i class="fa fa-check btn btn-outline-dark light-font" aria-hidden="true"> Accept </i>
+    <%= link_to confirm_booking_path(@booking), method: :patch, data: { confirm: 'Are you sure you wish to confirm this booking?' }  do %>
+    <i class="fa fa-check btn btn-warning " aria-hidden="true">  </i>
     <% end %>
 
-    <%= link_to decline_booking_path(@booking), method: :patch do  %>
-    <i class="fa fa-times btn btn-outline-dark light-font" aria-hidden="true"> Decline </i>
+    <%= link_to decline_booking_path(@booking), method: :patch, data: { confirm: 'Are you sure you wish to decline this booking?' }  do  %>
+    <i class="fa fa-times btn btn-warning " aria-hidden="true"> </i>
     <% end %>
   <% elsif @booking.artist.user == current_user && @booking.status == "confirmed" then %>
-    <%= link_to cancel_booking_path(@booking), method: :patch do  %>
-    <i class="fa fa-times btn btn-outline-dark light-font" aria-hidden="true"> Cancel   </i>
+    <%= link_to cancel_booking_path(@booking), method: :patch, data: { confirm: 'Are you sure you wish to cancel this booking?' } do  %>
+    <i class="fa fa-times btn btn-warning " aria-hidden="true"> </i>
     <% end %>
   <% else %>
   <% end %>
 
   <% if Time.now > @booking.end_time && @booking.reviews.count == 0 && @booking.user == current_user && @booking.status == "confirmed" %>
-  <%= link_to "Leave review", new_booking_review_path(@booking), class: "btn btn-outline-dark light-font", style: "width: 100%; margin-top: 16px" %>
+  <%= link_to "Leave review", new_booking_review_path(@booking), class: "btn btn-warning", style: "width: 100%; margin-top: 16px" %>
   <% end %>
 </div>
 

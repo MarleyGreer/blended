@@ -6,11 +6,17 @@
   <%= form_tag artists_path, method: :get do %>
     <%= collection_select(:artist, :category, @artists.uniq { |artist| artist.category }, :category, :category, @categoryselect, html_options = { class: "category-filter", id: "category-selector", onchange: "this.form.submit()" }) %>
     <% if params[:query].present? %>
-      <%= link_to "Clear", artists_path(params: { query: params[:query] }), class: "btn btn-clear-filter" %>
+      <%= link_to artists_path(params: { query: params[:query] }) do %>
+      <i class="fa fa-times cross" aria-hidden="true"></i>
+        <% end %>
     <% elsif params[:query_artist].present? %>
-      <%= link_to "Clear", artists_path(params: { query_artist: params[:query_artist] }), class: "btn btn-clear-filter" %>
+      <%= link_to artists_path(params: { query_artist: params[:query_artist] }) do %>
+      <i class="fa fa-times cross" aria-hidden="true"></i>
+        <% end %>
     <% else %>
-      <%= link_to "Clear", artists_path, class: "btn btn-clear-filter" %>
+      <%= link_to artists_path do %>
+        <i class="fa fa-times cross" aria-hidden="true"></i>
+        <% end %>
     <% end %>
     <%= hidden_field_tag :query, params[:query] %>
     <%= hidden_field_tag :query_artist, params[:query_artist] %>
