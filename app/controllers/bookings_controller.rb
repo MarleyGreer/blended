@@ -131,10 +131,23 @@ class BookingsController < ApplicationController
       @booking.services_bookings.build(service_id: s[1][:service_id], quantity: s[1][:quantity])
     end
     if @booking.save
-      @chat = Chat.where(artist: current_user.artist, user: @artist.user).or(Chat.where(artist: @artist, user: current_user)).first if user_signed_in?
-      redirect_to booking_path(@booking.id)
 
-    else
+      @chat = Chat.where(artist: current_user.artist, user: @artist.user).or(Chat.where(artist: @artist, user: current_user)).first if user_signed_in?
+      if @chat.nil?
+        @chat = Chat.new
+        @chat.user = current_user
+        @chat.artist = @booking.artist
+        @chat.save
+      end
+        @message = Message.new
+        @message.user = current_user
+        @message.chat = @chat
+        @message.chat.user_archive = false
+        @message.chat.artist_archive = false
+        @message.content = "A new booking has been made by #{@booking.user.first_name} for  #{@booking.start_time.strftime("%e %b %y")}, jump into your jobs to confirm it now!"
+        @message.save
+      redirect_to booking_path(@booking.id)
+      else
       redirect_to new_user_session_path
     end
   end
@@ -185,7 +198,6 @@ class BookingsController < ApplicationController
   private
 
   def set_booking
-
     if params[:id] == "all"
       @booking = Booking.all
 
