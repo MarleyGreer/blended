@@ -33,7 +33,7 @@
 
 <div class="chat-box shadow d-flex justify-content-between p-2 mb-2 align-content-center">
   <div class="d-flex">
-    <%= link_to chat_path(chat, anchor: "message-#{chat.messages.last.id}") do %>
+    <%= link_to chat_path(chat, anchor: "message-#{chat.messages.order('created_at').last.id}") do %>
     <%= cl_image_tag chat.artist.user.photo.key, height: 64, width: 64, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mr-1" %>
     <% end %>
       <div class="chat-content">
@@ -43,7 +43,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-          <%= link_to chat_path(chat, anchor: "message-#{chat.messages.last.id}"), class: "dropdown-item" do %>
+          <%= link_to chat_path(chat, anchor: "message-#{chat.messages.order('created_at').last.id}"), class: "dropdown-item" do %>
           <i class="fas fa-comment"></i> message
           <% end %>
 
@@ -64,20 +64,20 @@
           <% end %>
         </div>
       </div>
-        <p><%= chat.messages.last.content[0..40] %>
-         <% if chat.messages.last.content.length > 40 %>
+        <p><%= chat.messages.order('created_at').last.content[0..40] %>
+         <% if chat.messages.order('created_at').last.content.length > 40 %>
          ...
          <% end %>
       </p>
     </div>
       </div>
       <div class="message-time">
-      <% if Time.now - 86400 < chat.messages.last.created_at %>
-        <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%l %M %p") %></h6>
-      <% elsif Time.now - 86400 > chat.messages.last.created_at && Time.now - 604800 < chat.messages.last.created_at %>
-        <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%a") %></h6>
+      <% if Time.now - 86400 < chat.messages.order('created_at').last.created_at %>
+        <h6 class="text-right"><%= chat.messages.order('created_at').last.created_at.strftime("%l %M %p") %></h6>
+      <% elsif Time.now - 86400 > chat.messages.order('created_at').last.created_at && Time.now - 604800 < chat.messages.order('created_at').last.created_at %>
+        <h6 class="text-right"><%= chat.messages.order('created_at').last.created_at.strftime("%a") %></h6>
       <% else %>
-       <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%e %b %y") %></h6>
+       <h6 class="text-right"><%= chat.messages.order('created_at').last.created_at.strftime("%e %b %y") %></h6>
       <% end %>
 
 
@@ -91,7 +91,7 @@
   <!-- current_user.artist == chat.artist HTML -->
   <div class="chat-box d-flex justify-content-between p-2 mb-2 align-content-center">
     <div class="d-flex">
-    <%= link_to chat_path(chat, anchor: "message-#{chat.messages.last.id}") do %>
+    <%= link_to chat_path(chat, anchor: "message-#{chat.messages.order('created_at').last.id}") do %>
       <%= cl_image_tag chat.user.photo.key, height: 64, width: 64, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle mr-1" %>
     <% end %>
      <div class="chat-content">
@@ -101,7 +101,7 @@
        </button>
        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-    <%= link_to chat_path(chat, anchor: "message-#{chat.messages.last.id}"), class: "dropdown-item" do %>
+    <%= link_to chat_path(chat, anchor: "message-#{chat.messages.order('created_at').last.id}"), class: "dropdown-item" do %>
     <i class="fas fa-comment"></i> message
     <% end %>
 
@@ -129,20 +129,20 @@
      </div>
 
 
-      <p><%= chat.messages.last.content[0..40] %>
-        <% if chat.messages.last.content.length > 40 %>
+      <p><%= chat.messages.order('created_at').last.content[0..40] %>
+        <% if chat.messages.order('created_at').last.content.length > 40 %>
          ...
          <% end %>
        </p>
      </div>
        </div>
       <div class="message-time">
-      <% if Time.now - 86400 < chat.messages.last.created_at %>
-        <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%l %M %p") %></h6>
-      <% elsif Time.now - 86400 > chat.messages.last.created_at && Time.now - 604800 < chat.messages.last.created_at %>
-        <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%a") %></h6>
+      <% if Time.now - 86400 < chat.messages.order('created_at').last.created_at %>
+        <h6 class="text-right"><%= chat.messages.order('created_at').last.created_at.strftime("%l %M %p") %></h6>
+      <% elsif Time.now - 86400 > chat.messages.order('created_at').last.created_at && Time.now - 604800 < chat.messages.order('created_at').last.created_at %>
+        <h6 class="text-right"><%= chat.messages.order('created_at').last.created_at.strftime("%a") %></h6>
       <% else %>
-       <h6 class="text-right"><%= chat.messages.last.created_at.strftime("%e %b %y") %></h6>
+       <h6 class="text-right"><%= chat.messages.order('created_at').last.created_at.strftime("%e %b %y") %></h6>
       <% end %>
     </div>
   </div>

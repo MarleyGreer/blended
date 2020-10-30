@@ -146,7 +146,7 @@ class BookingsController < ApplicationController
         @message.chat.artist_archive = false
         @message.content = "A new booking has been made by #{@booking.user.first_name} for  #{@booking.start_time.strftime("%e %b %y")}, jump into your jobs to confirm it now!"
         @message.save
-      redirect_to booking_path(@booking.id)
+      redirect_to details_booking_path(@booking)
       else
       redirect_to new_user_session_path
     end
@@ -168,6 +168,7 @@ class BookingsController < ApplicationController
   def confirm
     @booking.status = "confirmed"
     @booking.save
+
     redirect_to details_booking_path(@booking)
   end
 
