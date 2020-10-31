@@ -19,7 +19,7 @@
 
 <div class="booking-card">
   <div style="text-align: center">
-    <h5>Booking Details </h5>
+    <br><h5>Booking Details</h5>
     <% if @booking.user == current_user %>
     <%= link_to artist_path(@booking.artist) do  %>
     <%= cl_image_tag @booking.artist.user.photo.key, height: 100, width: 100, gravity: :face, crop: :fill, radius: :max, class: "rounded-circle m-3" %>
@@ -46,10 +46,10 @@
     <%= @booking.start_time.strftime("#{@booking.start_time.day.ordinalize} of %B %Y") %>
     <br><%= @booking.total_duration / 60  %> Hours <%=  @booking.total_duration % 60 %> Minutes
 
-    <br>
+    <br><br>
 
     <% @services_names_qty.each do |service| %>
-     <%= service[0] %> x <%= service[1] %> people <br>
+     <%= service[0] %> x <%= service[1] %> <br>
     <% end %>
 
     <br><strong>Total price: $<%= @booking.total_price %></strong>
