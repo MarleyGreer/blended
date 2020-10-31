@@ -79,14 +79,13 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-clear-filter" data-dismiss="modal">Close</button>
-                <button type="button" id="addHoliday" class="btn btn-primary">Add Holidays</button>
+                <button type="button" id="addHoliday" class="btn btn-clear-filter">Add Holidays</button>
               </div>
             </div> 
           </div>  
         </div>
         <%= f.input :holidays, as: :hidden, :input_html => { id: "holidayhidden", value: @holidays} %>
-        <%= f.submit class: "btn book-btn"%>
+        <%= f.submit class: "btn btn-clear-filter"%>
       <% end %>
       </div>
     </div>
