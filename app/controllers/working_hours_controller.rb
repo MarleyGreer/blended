@@ -26,8 +26,8 @@ class WorkingHoursController < ApplicationController
 
     def edit
         @holidays = WorkingHour.find(params[:id]).holidays
-        @holidays.sort
-        @holidays = @holidays.join(", ")
+        @holidays.sort if @holidays
+        @holidays = @holidays.join(", ") if @holidays
         @artist = WorkingHour.find(params[:id]).artist
         @working_hours = WorkingHour.find(params[:id])
         
