@@ -73,8 +73,10 @@
               <div class="modal-body">
                 <h6> Holidays </h6>
                 <div id="holidayslist">
-                  <% @working_hours.holidays.each do |holiday| %>
-                    <p><%= holiday %> </p>
+                  <% if @working_hours.holidays %>
+                    <% @working_hours.holidays.each do |holiday| %>
+                      <p>- <%= holiday %> </p>
+                    <% end %>
                   <% end %>
                 </div>
               </div>
@@ -84,7 +86,7 @@
             </div> 
           </div>  
         </div>
-        <%= f.input :holidays, as: :hidden, :input_html => { id: "holidayhidden", value: @holidays} %>
+        <%= f.input :holidays, :input_html => { id: "holidayhidden", value: @holidays} %>
         <%= f.submit class: "btn btn-clear-filter"%>
       <% end %>
       </div>

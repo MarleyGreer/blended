@@ -26,8 +26,11 @@ class WorkingHoursController < ApplicationController
 
     def edit
         @holidays = WorkingHour.find(params[:id]).holidays
+        @holidays.sort
+        @holidays = @holidays.join(", ")
         @artist = WorkingHour.find(params[:id]).artist
         @working_hours = WorkingHour.find(params[:id])
+        
     end
 
     def update
@@ -65,6 +68,7 @@ class WorkingHoursController < ApplicationController
         params[:working_hour]['sundaystart_time(4i)'].present? ? @working_hours.sundaystart_time = "#{params[:working_hour]['sundaystart_time(4i)']}:#{params[:working_hour]['sundaystart_time(5i)']}" : @working_hours.sundaystart_time = nil 
         params[:working_hour]['sundaystart_time(4i)'].present? ? @working_hours.sundayend_time = "#{params[:working_hour]['sundayend_time(4i)']}:#{params[:working_hour]['sundayend_time(5i)']}" : @working_hours.sundayend_time = nil
         params[:working_hour]['holidays'].present? ? params[:working_hour]['holidays'].split(",").each {|x| @working_hours.holidays.push(x) if x.present? && x != "Invalid Date"}: @working_hours.holidays = []
+        
     end
 
 end
