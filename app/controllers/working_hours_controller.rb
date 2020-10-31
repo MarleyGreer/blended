@@ -12,6 +12,7 @@ class WorkingHoursController < ApplicationController
 
     def create
         @working_hours = WorkingHour.new
+        @holidays = @working_hours.holidays = []
         hours_params
         @working_hours.artist_id = params[:artist_id]
         @working_hours.save
@@ -63,7 +64,7 @@ class WorkingHoursController < ApplicationController
         params[:working_hour]['saturdaystart_time(4i)'].present? ? @working_hours.saturdayend_time = "#{params[:working_hour]['saturdayend_time(4i)']}:#{params[:working_hour]['saturdayend_time(5i)']}" :  @working_hours.saturdayend_time = nil 
         params[:working_hour]['sundaystart_time(4i)'].present? ? @working_hours.sundaystart_time = "#{params[:working_hour]['sundaystart_time(4i)']}:#{params[:working_hour]['sundaystart_time(5i)']}" : @working_hours.sundaystart_time = nil 
         params[:working_hour]['sundaystart_time(4i)'].present? ? @working_hours.sundayend_time = "#{params[:working_hour]['sundayend_time(4i)']}:#{params[:working_hour]['sundayend_time(5i)']}" : @working_hours.sundayend_time = nil
-        params[:working_hour]['holidays'].present? ? params[:working_hour]['holidays'].split(",").each {|x| @working_hours.holidays.push(x) if x.present? && x != "Invalid Date"}: @working_hours.holidays = nil
+        params[:working_hour]['holidays'].present? ? params[:working_hour]['holidays'].split(",").each {|x| @working_hours.holidays.push(x) if x.present? && x != "Invalid Date"}: @working_hours.holidays = []
     end
 
 end

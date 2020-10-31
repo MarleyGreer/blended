@@ -19,10 +19,12 @@ function addDuration() {
 
 function enablebutton() {
     $('.flatpickrdate').on("change", function() {
-        document.getElementById('timesubmit').disabled = false;
+        var timesubmit = document.getElementById('timesubmit');
+        if (timesubmit != null) {timesubmit.disabled = false};
     });
     $('#booking_start_time').on("change", function() {
-        document.getElementById('timesubmit').disabled = false;
+        var timesubmit = document.getElementById('timesubmit');
+        if (timesubmit != null) {timesubmit.disabled = false};
     });
 };
 
