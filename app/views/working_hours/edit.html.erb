@@ -55,8 +55,8 @@
         <%= f.input :sundayend_time, label: false, include_blank: true, disabled: (@working_hours.sundaystart_time.nil?), wrapper_html: {style: "flex-grow: 1"}, minute_step: 30, ampm: true %>
         </div>
         <%= f.input :not_working, label: "Don't work", as: :boolean, input_html: {checked:  (@working_hours.sundaystart_time.nil? ), id: "sunday", class: "disable" }, wrapper_html: {style: "align-self: center"} %>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#holidays">
-          Add Individual Holidays
+        <button type="button" class="btn btn-clear-filter " data-toggle="modal" data-target="#holidays">
+          Edit Individual Holidays
         </button>
         <div id="holidays" class="modal" tabindex="-1" aria-labelledby="holidaysLabel" aria-hidden="true">
           <div class="model-dialog">
@@ -68,17 +68,25 @@
                 </button>
               </div>
               <div class="modal-body">
-                <%= f.input :holiday, as: :string, input_html: {autocomplete: false, data: { holiday: @holidays}, id: 'holidaydate', class: 'flatpickrdate'} %>
+                <%= f.input :holiday, as: :string, label: "Add Holidays", input_html: {autocomplete: false, data: { holiday: @holidays}, id: 'holidaydate', class: 'flatpickrdate'} %>
+              </div>
+              <div class="modal-body">
+                <h6> Holidays </h6>
+                <div id="holidayslist">
+                  <% @working_hours.holidays.each do |holiday| %>
+                    <p><%= holiday %> </p>
+                  <% end %>
+                </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-clear-filter" data-dismiss="modal">Close</button>
                 <button type="button" id="addHoliday" class="btn btn-primary">Add Holidays</button>
               </div>
             </div> 
           </div>  
         </div>
-        <%= f.input :holidays, :input_html => { id: "holidayhidden", value: @holidays} %>
-        <%= f.submit class: "btn btn-warning"%>
+        <%= f.input :holidays, as: :hidden, :input_html => { id: "holidayhidden", value: @holidays} %>
+        <%= f.submit class: "btn book-btn"%>
       <% end %>
       </div>
     </div>
