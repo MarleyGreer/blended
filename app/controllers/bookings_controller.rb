@@ -144,7 +144,7 @@ class BookingsController < ApplicationController
         @message.chat = @chat
         @message.chat.user_archive = false
         @message.chat.artist_archive = false
-        @message.content = "A new booking has been made by #{@booking.user.first_name} for  #{@booking.start_time.strftime("%e %b %y")}, jump into your jobs to confirm it now!"
+        @message.content = "A new booking has been made by #{@booking.user.first_name} for  #{@booking.start_time.strftime("%e %b %y")}, jump into <a href='http://www.blendedmakeupapp.com/bookings/#{@booking.id}/details'> your jobs </a> to confirm it now!"
         @message.save
       redirect_to details_booking_path(@booking)
       else
